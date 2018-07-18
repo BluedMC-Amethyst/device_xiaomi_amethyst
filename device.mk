@@ -247,6 +247,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     CarrierConfigOverlayAmethyst \
     FrameworksOverlayAmethyst \
+    LineageDialerOverlayAmethyst \
     LineageSDKOverlayAmethyst \
     LineageSettingsOverlayAmethyst \
     NfcOverlayAmethyst \
