@@ -9,9 +9,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 # Project ID Quota
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-# Virtual A/B Compression
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_baseline.mk)
-
 # Dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
@@ -22,6 +19,8 @@ $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 
 # A/B
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -269,7 +268,6 @@ PRODUCT_PACKAGES += \
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
 
 PRODUCT_PACKAGES += \
     vendor_bt_firmware_mountpoint \
