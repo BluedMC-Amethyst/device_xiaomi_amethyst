@@ -37,6 +37,10 @@ PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 PRODUCT_PACKAGES += \
     android.hardware.boot-service.qti.recovery
 
+# Fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
+
 # Init
 PRODUCT_PACKAGES += \
     init.recovery.qcom.rc
