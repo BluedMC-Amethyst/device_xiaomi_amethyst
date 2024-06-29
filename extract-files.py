@@ -291,6 +291,11 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
+
+    (
+        'vendor/etc/media_codecs_volcano_v0.xml',
+    ): blob_fixup()
+        .regex_replace('.*media_codecs_(google_audio|google_telephony|google_video|vendor_audio).*\n', ''),
 }  # fmt: skip
 
 
