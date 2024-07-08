@@ -2054,9 +2054,6 @@ vendor/bin/hw/vendor.qti.media.c2audio@1.0-service
 vendor/etc/init/init.qti.media.rc
 vendor/etc/init/vendor.qti.media.c2@1.0-service.rc
 vendor/etc/init/vendor.qti.media.c2audio@1.0-service.rc
-vendor/etc/media_codecs_google_c2.xml
-vendor/etc/media_codecs_google_c2_audio.xml
-vendor/etc/media_codecs_google_c2_video.xml
 vendor/etc/seccomp_policy/c2audio.vendor.base-arm.policy
 vendor/etc/seccomp_policy/c2audio.vendor.base-arm64.policy
 vendor/etc/seccomp_policy/c2audio.vendor.ext-arm.policy
