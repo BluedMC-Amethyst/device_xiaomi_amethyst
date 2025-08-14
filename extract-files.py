@@ -301,6 +301,9 @@ blob_fixups: blob_fixups_user_type = {
             'libaudioroute.so',
             'libaudioroute-v34.so'
     ),
+
+    'vendor/bin/pnscr': blob_fixup()
+        .add_needed('libbase_shim.so'),
 }  # fmt: skip
 
 
