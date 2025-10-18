@@ -44,6 +44,7 @@ PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
 # Boot control
 PRODUCT_PACKAGES += \
+    android.hardware.boot-service.qti \
     android.hardware.boot-service.qti.recovery
 
 # Fastbootd
