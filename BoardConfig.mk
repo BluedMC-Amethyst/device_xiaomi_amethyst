@@ -139,6 +139,8 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Sepolicy
+include device/qcom/sepolicy_vndr/SEPolicy.mk
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
