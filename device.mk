@@ -12,6 +12,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_basel
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
 
+# Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -55,6 +58,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
 
+PRODUCT_PACKAGES += \
+    vendor_bt_firmware_mountpoint \
+    vendor_dsp_mountpoint \
+    vendor_firmware_mnt_mountpoint
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
@@ -64,6 +72,12 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
     update_verifier
+
+# WiFi
+PRODUCT_PACKAGES += \
+    firmware_wlanmdsp.otaupdate_symlink \
+    firmware_wlan_mac.bin_symlink \
+    firmware_WCNSS_qcom_cfg.ini_symlink
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/amethyst/amethyst-vendor.mk)
