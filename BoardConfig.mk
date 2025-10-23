@@ -5,6 +5,7 @@
 
 DEVICE_PATH := device/xiaomi/amethyst
 
+BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # A/B
@@ -151,6 +152,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2026-01-01
 
 # Sepolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk

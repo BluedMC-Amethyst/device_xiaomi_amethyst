@@ -104,6 +104,8 @@ PRODUCT_PACKAGES += \
     IPACM_Filter_cfg.xml
 
 # Init
+$(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):init_xiaomi_amethyst)
+
 PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.qcom \
@@ -146,6 +148,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media/media_codecs_performance_volcano_v0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_volcano_v0.xml \
+    $(LOCAL_PATH)/configs/media/media_codecs_volcano_v0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_volcano_v0.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles_volcano_amethyst_v0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_volcano_amethyst_v0.xml \
+    $(LOCAL_PATH)/configs/media/video_system_specs.json:$(TARGET_COPY_OUT_VENDOR)/etc/media_volcano_v0/video_system_specs.json
 
 # Memtrack
 PRODUCT_PACKAGES += \
