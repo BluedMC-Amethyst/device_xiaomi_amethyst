@@ -587,7 +587,7 @@ service fan_control_turn_off /vendor/bin/fan_service 0
 on boot && property:ro.product.system.manufacturer=Android
     setprop debug.sf.set_idle_timer_ms 0
 
-service vendor.sensors-hal-multihal /vendor/bin/hw/android.hardware.sensors-service.multihal
+service vendor.sensors-hal-multihal /vendor/bin/hw/android.hardware.sensors-service.xiaomi-multihal
     override
     class hal
     user system
