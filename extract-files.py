@@ -19,6 +19,7 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
+    'device/xiaomi/amethyst',
     'hardware/qcom-caf/sm8650',
     'hardware/qcom-caf/wlan',
     'hardware/xiaomi',
