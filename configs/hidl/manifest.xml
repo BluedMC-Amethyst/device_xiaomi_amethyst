@@ -99,16 +99,6 @@
         <transport>hwbinder</transport>
         <fqname>@1.0::ISlaService/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>vendor.xiaomi.hidl.minet</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IMiNetService/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.xiaomi.hidl.miwill</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IMiwillService/default</fqname>
-    </hal>
     <hal format="aidl">
         <name>vendor.xiaomi.hardware.fx.tunnel</name>
         <version>1</version>
