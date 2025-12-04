@@ -146,6 +146,13 @@ $(foreach display_id, 4630946480857061762 4630946958764744578 463094703339071091
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
+# Euicc
+PRODUCT_PACKAGES += \
+    XiaomiEuicc
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
+
 # Fastbootd
 PRODUCT_PACKAGES += \
     fastbootd
