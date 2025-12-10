@@ -1,0 +1,7 @@
+# All unpinned blobs below are extracted from amethyst OS3.0.4.0.WOPMIXM
+
+# Kernel
+vendor/bin/init.qti.write.sh
+vendor/bin/system_dlkm_modprobe.sh
+vendor/bin/vendor_modprobe.sh
+vendor/etc/init/hw/init.qti.kernel.rc

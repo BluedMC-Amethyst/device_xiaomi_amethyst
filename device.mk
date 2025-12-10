@@ -105,10 +105,29 @@ PRODUCT_PACKAGES += \
 
 # Init
 PRODUCT_PACKAGES += \
-    fstab.qcom
+    charger_fw_fstab.qti \
+    fstab.qcom \
+    ueventd-odm.rc \
+    ueventd.qcom.rc
 
 PRODUCT_PACKAGES += \
-    init.recovery.qcom.rc
+    init.qcom.factory.rc \
+    init.qcom.rc \
+    init.recovery.qcom.rc \
+    init.target.rc
+
+PRODUCT_PACKAGES += \
+    init.class_main.sh \
+    init.kernel.post_boot-memory.sh \
+    init.kernel.post_boot-volcano.sh \
+    init.kernel.post_boot-volcano_2_2_1.sh \
+    init.kernel.post_boot-volcano_3_2_1.sh \
+    init.kernel.post_boot-volcano_default_4_3_1.sh \
+    init.kernel.post_boot.sh \
+    init.qcom.class_core.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.sh
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
