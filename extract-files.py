@@ -331,6 +331,16 @@ blob_fixups: blob_fixups_user_type = {
             'android.hardware.vibrator-V1-ndk_platform.so',
             'android.hardware.vibrator-V1-ndk_prebuilt.so'
     ),
+
+    (
+        'vendor/lib64/libVoiceSdk.so',
+        'vendor/lib64/libcapiv2uvvendor.so',
+        'vendor/lib64/liblistensoundmodel2vendor.so',
+    ): blob_fixup()
+        .replace_needed(
+            'libtensorflowlite_c.so',
+            'libtensorflowlite_c_vendor.so',
+    ),
 }  # fmt: skip
 
 
