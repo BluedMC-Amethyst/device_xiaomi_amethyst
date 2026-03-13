@@ -543,8 +543,8 @@ service ufs_ffu_service /vendor/bin/sh /vendor/bin/ufs_ffu.sh
 on property:sys.boot_completed=1
     start ufs_ffu_service
 
-    # Set thermal mode to tgame
-    write /sys/devices/virtual/thermal/thermal_message/sconfig 18
+    # Set thermal mode to mgame
+    write /sys/devices/virtual/thermal/thermal_message/sconfig 19
 
 # add sniffer and tcpdump output
 service vendor.tcpdump /vendor/bin/tcpdump -i any -W 3 -C 5 -s 134 -w /data/vendor/wlan_logs/tcpdump.pcap -Z system
