@@ -1,0 +1,13 @@
+# Audio
+audio.offload.min.duration.secs=30
+
+# Media
+media.stagefright.audio.deep=true
+
+# Radio
+persist.vendor.radio.enable_temp_dds=true
+persist.vendor.radio.hidl_dev_service=true
+
+# RKPD
+remote_provisioning.enable_rkpd=true
+remote_provisioning.hostname=remoteprovisioning.googleapis.com

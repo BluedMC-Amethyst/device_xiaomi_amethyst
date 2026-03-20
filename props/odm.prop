@@ -1,0 +1,88 @@
+# Audio
+persist.vendor.audio.effectimplenter=dolby
+persist.vendor.audio.spf_restart=true
+ro.vendor.audio.aw.monitor=true
+ro.vendor.audio.camera.loopback.support=false
+ro.vendor.audio.elus.enable=true
+ro.vendor.audio.elus.gyrp.disturbance_avoidance=true
+ro.vendor.audio.elus.proximity.speakermode=true
+ro.vendor.audio.record.customized.support=true
+ro.vendor.audio.us.proximity=true
+ro.vendor.audio.us.proximity_waitfornegative_feature=true
+ro.vendor.soundtrigger.dfs.support=1
+vendor.audio.compress_capture.aac.cut_off_freq=24000
+vendor.audio.cpu.sched=31
+vendor.audio.cpu.sched.cpus=8
+vendor.audio.cpu.sched.cpuset.af=255
+vendor.audio.cpu.sched.cpuset.at=255
+vendor.audio.cpu.sched.cpuset.hb=255
+vendor.audio.cpu.sched.cpuset.he=255
+vendor.audio.cpu.sched.cpuset.hso=255
+vendor.audio.cpu.sched.onlyfast=false
+vendor.audio.mic.status=off
+vendor.audio.rt.mode.onlyfast=false
+vendor.audio.rt.mode=19
+vendor.audio.ultrasound.stoplatency=60
+vendor.audio.ultrasound.usync=100
+
+# Camera
+debug.config.video.p3.encode.support=true
+debug.config.video.p3.decode.support=true
+ro.camerax.extensions.enabled=false
+ro.camera.disableJpegR=true
+ro.camera.disableHeicUltraHDR=true
+
+# DisplayFeature
+persist.vendor.dc_backlight.enable=false
+ro.vendor.display.adaptive_hdr.enable=true
+ro.vendor.display.bl_lut_calib.enable=false
+ro.vendor.display.darkmode_dither.enable=true
+ro.vendor.display.kernel_recoder_enable=false
+ro.vendor.display.mi_calib.enable=true
+ro.vendor.display.nature_mode.enable=false
+ro.vendor.display.standard_d75_enable=true
+ro.vendor.display.update_dbi_by_temperature=true
+ro.vendor.histogram.enable=true
+ro.vendor.localhbm.enable=true
+ro.vendor.sre.enable=true
+
+# DRM
+vendor.wv.oemcrypto.debug.enable_prov40=true
+
+# FW Detect
+ro.vendor.qti.va_odm.support=1
+
+# Graphics
+debug.sf.set_idle_timer_ms=1100
+ro.surface_flinger.enable_frame_rate_override=false
+vendor.display.boost_cpu_layer_number_threshold=10
+vendor.display.disable_3d_adaptive_tm=1
+vendor.display.disable_cwb_idle_fallback=1
+vendor.display.disable_idle_scaling_layers=1
+vendor.display.disable_llcc_during_aod=1
+vendor.display.disable_sdr_dimming=0
+vendor.display.disable_stc_dimming=1
+vendor.display.enable_hdr10_gpu_target=0
+vendor.display.idle_time=0
+vendor.display.support_function_timer=0
+vendor.display.support_video_mode_30hz_aod=0
+
+# Media
+ro.odm.build.media_performance_class=0
+ro.vendor.media_performance_class=0
+
+# Radio
+ro.telephony.default_network=33,33
+persist.vendor.radio.dynamic_sar=1
+
+# SSR
+persist.vendor.ssr.restart_level=ALL_ENABLE
+
+# Sensors
+persist.vendor.sensor.deviceorient=true
+persist.vendor.sensor.mischeck=true
+persist.vendor.sensor.onetrack=true
+persist.vendor.debug.collision.dfx=true
+
+# Thermal
+persist.vendor.tracking.dfs=true
