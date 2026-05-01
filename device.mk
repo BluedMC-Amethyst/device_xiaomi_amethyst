@@ -228,6 +228,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
+# Overlay
+PRODUCT_PACKAGES += \
+    CarrierConfigOverlayAmethyst \
+    FrameworksOverlayAmethyst \
+    NfcOverlayAmethyst \
+    SecureElementOverlayAmethyst \
+    SettingsOverlayAmethyst \
+    SettingsProviderOverlayAmethyst \
+    SystemUIOverlayAmethyst \
+    TelephonyOverlayAmethyst \
+    WifiOverlayAmethyst
+
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
