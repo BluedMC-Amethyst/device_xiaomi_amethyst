@@ -123,6 +123,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
+# Display
+$(foreach display_id, 4630946480857061762 4630946958764744578 4630947033390710914, \
+    $(eval PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/configs/display/displayconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_$(display_id).xml \
+    ))
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
