@@ -1,6 +1,9 @@
 # CNE
 persist.vendor.cne.feature=1
 
+# Device
+ro.product.mod_device=amethyst_global
+
 # GNSS
 persist.sys.gps.selfRecovery=3
 persist.vendor.overlay.izat.optin=rro

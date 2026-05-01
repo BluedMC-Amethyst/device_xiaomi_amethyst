@@ -84,6 +84,10 @@ persist.vendor.sensor.mischeck=true
 persist.vendor.sensor.onetrack=true
 persist.vendor.debug.collision.dfx=true
 
+# SKU properties
+ro.product.property_source_order=odm,product,vendor,system_ext,system
+import /odm/etc/${ro.boot.hwc}_amethyst_build.prop
+
 # Thermal
 persist.vendor.tracking.dfs=true
 

@@ -1,0 +1,12 @@
+# Bluetooth
+bluetooth.device.default_name=Redmi Note 14 Pro+
+
+# Device
+ro.product.odm.brand=Redmi
+ro.product.odm.device=amethyst
+ro.product.odm.model=24115RA8EC
+ro.product.odm.marketname=Redmi Note 14 Pro+
+ro.product.odm.mod_device=amethyst
+
+# USB
+vendor.usb.product_string=Redmi Note 14 Pro+

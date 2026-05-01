@@ -198,8 +198,6 @@ PRODUCT_PACKAGES += \
     IPACM_Filter_cfg.xml
 
 # Init
-$(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):init_xiaomi_amethyst)
-
 PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.qcom \
@@ -298,6 +296,10 @@ PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/power/config/volcano/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 $(call soong_config_set,qtipower,mode_ext_lib,//$(LOCAL_PATH):libpowermode-ext-amethyst)
+
+# Properties
+PRODUCT_PACKAGES += \
+    amethyst_sku_properties
 
 # QSPA
 PRODUCT_PACKAGES += \

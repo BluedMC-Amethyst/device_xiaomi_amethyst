@@ -1,0 +1,9 @@
+prebuilt_etc {
+    name: "amethyst_sku_properties",
+    srcs: [
+        "IN_amethyst_build.prop",
+        "GL_amethyst_build.prop",
+        "CN_amethyst_build.prop",
+    ],
+    device_specific: true,
+}
