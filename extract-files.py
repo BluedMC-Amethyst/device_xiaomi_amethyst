@@ -179,7 +179,6 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/com.qti.camx.chiiqutils.so',
         'vendor/lib64/com.qti.chiusecaseselector.so',
         'vendor/lib64/com.qti.feature2.afbrckt.so',
-        'vendor/lib64/com.qti.feature2.anchorsync.so',
         'vendor/lib64/com.qti.feature2.derivedoffline.so',
         'vendor/lib64/com.qti.feature2.demux.so',
         'vendor/lib64/com.qti.feature2.fusion.so',
@@ -233,7 +232,6 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libmmcamera_mfnr.so',
         'vendor/lib64/libmmcamera_pdpc.so',
         'vendor/lib64/libpostprocinfo.so',
-        'vendor/lib64/libsimulation.so',
         'vendor/lib64/vendor.qti.hardware.camera.aon-service-impl.so',
         'vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so',
         'vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so',
@@ -266,7 +264,11 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libprocessgroup_shim.so'),
 
     'vendor/lib64/libmicamera_hal_core.so': blob_fixup()
-        .add_needed('libui_shim.so'),
+        .add_needed('libui_shim.so')
+        .replace_needed(
+            'libtinyxml2.so',
+            'libtinyxml2-v34.so'
+    ),
 
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so')
@@ -347,6 +349,44 @@ blob_fixups: blob_fixups_user_type = {
             'libprotobuf-cpp-full.so',
             'libprotobuf-cpp-full-21.7.so'
     ),
+
+    (
+        'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl',
+        'odm/lib64/camera/plugins/com.xiaomi.plugin.anchor.so',
+        'odm/lib64/hw/displayfeature.default.so',
+        'vendor/bin/hw/vendor.qti.camera.provider-service_64',
+        'vendor/bin/hw/vendor.qti.hardware.display.composer-service',
+        'vendor/bin/poweropt-service',
+        'vendor/lib64/libaodoptfeature.so',
+        'vendor/lib64/libapengine.so',
+        'vendor/lib64/libaudiocloudctrl.so',
+        'vendor/lib64/libdpps.so',
+        'vendor/lib64/liblearningmodule.so',
+        'vendor/lib64/libmicamera_aidl_provider.so',
+        'vendor/lib64/libpowercore.so',
+        'vendor/lib64/libpsmoptfeature.so',
+        'vendor/lib64/libsnapdragoncolor-manager.so',
+        'vendor/lib64/libstandbyfeature.so',
+        'vendor/lib64/libvideooptfeature.so',
+    ): blob_fixup()
+        .replace_needed(
+            'libtinyxml2.so',
+            'libtinyxml2-v34.so'
+    ),
+
+    (
+        'vendor/lib64/com.qti.feature2.anchorsync.so',
+        'vendor/lib64/libsimulation.so',
+    ): blob_fixup()
+        .replace_needed(
+            'android.hardware.graphics.allocator-V1-ndk.so',
+            'android.hardware.graphics.allocator-V2-ndk.so',
+    )
+        .replace_needed(
+            'libtinyxml2.so',
+            'libtinyxml2-v34.so'
+    ),
+
 }  # fmt: skip
 
 
