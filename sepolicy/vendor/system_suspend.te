@@ -1,0 +1,3 @@
+allow system_suspend_server vendor_hal_keymint_strongbox:binder transfer;
+allow system_suspend_server batterysecret:binder transfer;
+

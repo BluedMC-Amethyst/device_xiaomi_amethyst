@@ -1,0 +1,83 @@
+# Battery
+genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/typec/port0/data_role u:object_r:vendor_sysfs_battery_supply:s0
+
+# Display
+genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint/fingerdown u:object_r:vendor_sysfs_displayfeature:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint/actpower u:object_r:vendor_sysfs_displayfeature:s0
+
+# Extcon sysfs
+genfscon sysfs /devices/platform/soc/soc:spf_core_platform/soc:spf_core_platform:lpass-cdc/wcd937x-codec/extcon                 u:object_r:sysfs_extcon:s0
+
+# Fingerprint
+genfscon sysfs /devices/virtual/touch/touch_dev/fod_press_status u:object_r:vendor_sysfs_touch:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/gesture_single_tap_state u:object_r:sysfs_tp_fodstatus:s0
+genfscon sysfs /devices/virtual/touch/touch_dev u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:fingerprint_goodix u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_touch u:object_r:sysfs_wakeup:s0
+
+# Touchfeature
+genfscon proc /tp_fw_version u:object_r:proc_tp_file:s0
+genfscon proc /tp_lockdown_info u:object_r:proc_tp_lockdown:s0
+genfscon proc /tp_lockdown_info_1 u:object_r:proc_tp_lockdown:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/abnormal_event u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/clicktouch_raw u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/ear_sensor u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/ear_sensor_data u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/enable_touch_delta u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/enable_touch_raw u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/hold_sensor u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/palm_sensor u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/palm_sensor_data u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/suspend_state u:object_r:sysfs_touch_suspend:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_active_status u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_doze_analysis u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_finger_status u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_ic_buffer u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_irq_no u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_sensor_ctrl u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_cmd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_cmd_ready u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_downthd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_dump u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_dump_data u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_ic_cmd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_ic_cmd_data u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_islandthd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_mem_notify u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_movethd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_noisefilter u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_preset_point u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_rx_num u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_smooth u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_testmode u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_testresult u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_tx_num u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_upthd u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_x_resolution u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/touch_thp_y_resolution u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/update_rawdata u:object_r:sysfs_touch_hostprocess:s0
+
+# Wakeup
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-005a/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300:pwrkey-bark/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300:pwrkey-resin-bark/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/8804000.sdhci/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/894000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/898000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/888000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_1_geni_se/a98000.qcom,qup_uart/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:qcom,dsi-display-primary/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:fingerprint_goodix/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_wifi_gpio/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:fingerprint_fpc/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:jingshang_mdm/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:tiantong_mdm/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:xiaomi_hall/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:mi_t1_chip/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/synaptics_tcm.0/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/goodix_ts.0/wakeup u:object_r:sysfs_wakeup:s0
+
+

@@ -101,9 +101,6 @@ BOARD_BOOTCONFIG := \
     androidboot.hypervisor.protected_vm.supported=true \
     androidboot.vendor.qspa=true
 
-BOARD_BOOTCONFIG += \
-    androidboot.selinux=permissive
-
 # Kernel (prebuilt)
 PREBUILT_PATH := $(DEVICE_PATH)-kernel
 TARGET_NO_KERNEL_OVERRIDE := true
@@ -190,6 +187,7 @@ VENDOR_SECURITY_PATCH := 2026-01-01
 
 # Sepolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Verified Boot
 BOARD_AVB_ENABLE := true

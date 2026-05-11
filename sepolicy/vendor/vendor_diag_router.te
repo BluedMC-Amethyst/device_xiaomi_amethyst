@@ -1,0 +1,1 @@
+allow vendor_diag_router vendor_modem_data_file:dir { search };

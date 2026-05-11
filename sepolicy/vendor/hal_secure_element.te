@@ -1,0 +1,5 @@
+allow hal_secure_element_default nfc_device:chr_file { ioctl open read write };
+allow hal_secure_element_default vendor_dmabuf_qseecom_heap_device:chr_file { ioctl open read };
+binder_call(hal_secure_element_default, vendor_hal_keymint_strongbox)
+
+allow hal_secure_element_default init_service_status_prop:file { read };

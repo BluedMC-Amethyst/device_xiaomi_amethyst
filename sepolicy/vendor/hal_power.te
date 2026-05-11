@@ -1,0 +1,7 @@
+allow hal_power_default touchfeature_device:chr_file { open read write ioctl };
+allowxperm hal_power_default touchfeature_device:chr_file ioctl { 0x5400-0x54ff };
+
+allow hal_power_default device:dir r_dir_perms;
+allow hal_power_default vendor_sysfs_touch:dir search;
+allow hal_power_default vendor_sysfs_touch:file rw_file_perms;
+allow hal_power_default sysfs_touch_hostprocess:file rw_file_perms;

@@ -1,0 +1,75 @@
+type vendor_hal_fingerprint_service_xiaomi, hal_service_type, protected_service, service_manager_type;
+
+add_service(hal_fingerprint_default, vendor_hal_fingerprint_service_xiaomi)
+hal_client_domain(hal_fingerprint_default, hal_power)
+hal_server_domain(hal_fingerprint_default, hal_fingerprint)
+
+binder_call(hal_fingerprint_default, system_server)
+binder_call(hal_fingerprint_default, surfaceflinger)
+binder_call(hal_fingerprint_default, hal_power_default)
+binder_call(hal_fingerprint_default, vendor_hal_displayfeature_xiaomi_default)
+binder_call(hal_fingerprint_default, hal_graphics_composer_default)
+binder_call(hal_fingerprint_default, hal_touchfeature_xiaomi_default)
+get_prop(hal_fingerprint_default, vendor_panel_info_prop)
+set_prop(hal_fingerprint_default, vendor_fp_info_prop)
+set_prop(hal_fingerprint_default, vendor_fp_prop)
+set_prop(hal_fingerprint_default, vendor_displayfeature_prop)
+wakelock_use(hal_fingerprint_default)
+
+allowxperm hal_fingerprint_default vendor_displayfeature_device:chr_file ioctl { 0x0000-0xffff };
+allowxperm hal_fingerprint_default touchfeature_device:chr_file ioctl { 0x0000-0xffff };
+
+allow hal_fingerprint_default self:capability { sys_nice };
+allow hal_fingerprint_default self:capability2 { block_suspend wake_alarm };
+allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default sysfs_wake_lock:file rw_file_perms;
+allow hal_fingerprint_default vendor_displayfeature_device:chr_file { ioctl open read write map getattr };
+allow hal_fingerprint_default touchfeature_device:chr_file { ioctl open read write map getattr };
+allow hal_fingerprint_default device:dir r_dir_perms;
+allow hal_fingerprint_default sysfs:dir r_dir_perms;
+allow hal_fingerprint_default sysfs:file rw_file_perms;
+allow hal_fingerprint_default sysfs:lnk_file { read getattr };
+allow hal_fingerprint_default sysfs_wakeup:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_wakeup:file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_touch:dir r_dir_perms;
+allow hal_fingerprint_default vendor_sysfs_touch:file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_displayfeature:dir r_dir_perms;
+allow hal_fingerprint_default vendor_sysfs_displayfeature:file rw_file_perms;
+allow hal_fingerprint_default sysfs_touch_hostprocess:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_touch_hostprocess:file rw_file_perms;
+allow hal_fingerprint_default sysfs_touch_suspend:file rw_file_perms;
+allow hal_fingerprint_default sysfs_tp_fodstatus:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_tp_fodstatus:file rw_file_perms;
+allow hal_fingerprint_default sysfs_tp_fodstatus:chr_file r_file_perms;
+allow hal_fingerprint_default sysfs_leds:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_leds:file rw_file_perms;
+allow hal_fingerprint_default mnt_vendor_file:dir search;
+allow hal_fingerprint_default vendor_fingerprint_data_file:dir create_dir_perms;
+allow hal_fingerprint_default vendor_fingerprint_data_file:file create_file_perms;
+allow hal_fingerprint_default vendor_fingerprint_data_file_fpdump:dir create_dir_perms;
+allow hal_fingerprint_default vendor_fingerprint_data_file_fpdump:file create_file_perms;
+allow hal_fingerprint_default vendor_fingerprint_device:chr_file rwx_file_perms;
+allow hal_fingerprint_default sysfs_rtc:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_rtc:file rw_file_perms;
+allow hal_fingerprint_default system_server:fd use;
+allow hal_fingerprint_default surfaceflinger:fd use;
+allow hal_fingerprint_default hal_power_hwservice:hwservice_manager find;
+allow hal_fingerprint_default vendor_hal_displayfeature_xiaomi_service:service_manager find;
+allow hal_fingerprint_default vendor_hal_perf_default:binder call;
+allow hal_fingerprint_default vendor_hal_perf_hwservice:hwservice_manager find;
+allow hal_fingerprint_default hal_touchfeature_xiaomi_service:service_manager find;
+allow hal_fingerprint_default input_device:dir r_dir_perms;
+allow hal_fingerprint_default input_device:chr_file rwx_file_perms;
+allow hal_fingerprint_default self:qipcrtr_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
+allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_devicetree_soc:dir r_dir_perms;
+allow hal_fingerprint_default vendor_sysfs_devicetree_soc:file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_graphics:dir r_dir_perms;
+allow hal_fingerprint_default vendor_sysfs_graphics:file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_spss:dir search;
+allow hal_fingerprint_default vendor_sysfs_spss:file { open read };
+allow hal_fingerprint_default vendor_system_prop:file { getattr map open read };
+allow hal_fingerprint_default vendor_dmabuf_qseecom_heap_device:chr_file rw_file_perms;
+allow hal_fingerprint_default vendor_dmabuf_qseecom_ta_heap_device:chr_file rw_file_perms;

@@ -1,0 +1,2 @@
+binder_call(system_server, vendor_hal_displayfeature_xiaomi_default)
+
