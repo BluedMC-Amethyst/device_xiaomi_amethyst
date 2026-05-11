@@ -1,32 +1,55 @@
 /*
  * Copyright (C) 2024 The LineageOS Project
+ * Copyright (C) 2026 LumineDroid
  *
  * SPDX-License-Identifier: Apache-2.0
  */
 
 #define LOG_TAG "UdfpsHandler.amethyst"
 
+#include "UdfpsHandler.h"
+
 #include <aidl/android/hardware/biometrics/fingerprint/BnFingerprint.h>
 #include <android-base/logging.h>
 #include <android-base/unique_fd.h>
-
-#include <poll.h>
-#include <sys/ioctl.h>
-#include <fstream>
-#include <thread>
-
 #include <display/drm/mi_disp.h>
 
-#include "UdfpsHandler.h"
+#include <atomic>
+#include <chrono>
+#include <fstream>
+#include <mutex>
+#include <poll.h>
+#include <sys/ioctl.h>
+#include <thread>
 
+#define TOUCH_DEV_PATH "/dev/xiaomi-touch"
+#define TOUCH_MAGIC 0x54
 #define CMD_DATA_BUF_SIZE 256
 
-#define COMMON_DATA_CMD 0
-#define SELECT_TOUCH_ID 3
-#define SET_CUR_VALUE 0
+#define IOCTL_IDX_COMMON_DATA 0
+#define IOCTL_IDX_SELECT_TOUCH 3
 
-#define Touch_Fod_Enable 10
-#define THP_FOD_DOWNUP_CTL 1001
+#define TOUCH_MODE_FOD_ENABLE 10
+#define TOUCH_MODE_FOD_DOWNUP_CTL 1001
+#define TOUCH_MODE_FOD_COORD 0x5403
+
+#define FOD_COORD_X 61000
+#define FOD_COORD_Y 243700
+
+typedef struct {
+  int8_t touch_id;
+  uint8_t cmd;
+  uint16_t mode;
+  uint16_t data_len;
+  int32_t data_buf[CMD_DATA_BUF_SIZE];
+} touch_base;
+
+#define TOUCH_IOC_SELECT_TOUCH_ID _IOW(TOUCH_MAGIC, IOCTL_IDX_SELECT_TOUCH, int)
+#define TOUCH_IOC_COMMON_DATA                                                  \
+  _IOW(TOUCH_MAGIC, IOCTL_IDX_COMMON_DATA, touch_base)
+
+#define DISP_FEATURE_PATH "/dev/mi_display/disp_feature"
+#define DISP_POWER_ON 1
 
 #define COMMAND_NIT 10
 #define PARAM_NIT_FOD 1
@@ -36,263 +59,351 @@
 #define PARAM_FOD_PRESSED 1
 #define PARAM_FOD_RELEASED 0
 
-#define FOD_STATUS_OFF 0
-#define FOD_STATUS_ON 1
-
-#define TOUCH_DEV_PATH "/dev/xiaomi-touch"
-#define TOUCH_MAGIC 0x54
-
-#define DISP_FEATURE_PATH "/dev/mi_display/disp_feature"
-
 #define FOD_PRESS_STATUS_PATH "/sys/class/touch/touch_dev/fod_press_status"
 
-typedef struct {
-    int8_t touch_id;
-    uint8_t cmd;
-    uint16_t mode;
-    uint16_t data_len;
-    int32_t data_buf[CMD_DATA_BUF_SIZE];
-} touch_base;
-
-#define TOUCH_IOC_SELECT_TOUCH_ID _IOW(TOUCH_MAGIC, SELECT_TOUCH_ID, int)
-#define TOUCH_IOC_COMMON_DATA _IOW(TOUCH_MAGIC, COMMON_DATA_CMD, touch_base)
+#define SHIELD_DURATION_SCREEN_ON_MS 400
+#define SHIELD_DURATION_AUTH_END_MS 1000
+#define HBM_SETTLE_DELAY_MS 28
+#define CLEANUP_INITIAL_DELAY_MS 40
+#define CLEANUP_PULSE_HOLD_MS 20
 
 using ::aidl::android::hardware::biometrics::fingerprint::AcquiredInfo;
 
 namespace {
 
+static disp_base kDisplayPrimary = {.flag = 0, .disp_id = MI_DISP_PRIMARY};
+
 static bool readBool(int fd) {
-    char c;
-    int rc;
-
-    rc = lseek(fd, 0, SEEK_SET);
-    if (rc) {
-        LOG(ERROR) << "failed to seek fd, err: " << rc;
-        return false;
-    }
-
-    rc = read(fd, &c, sizeof(char));
-    if (rc != 1) {
-        LOG(ERROR) << "failed to read bool from fd, err: " << rc;
-        return false;
-    }
-
-    return c != '0';
+  char c;
+  lseek(fd, 0, SEEK_SET);
+  return (read(fd, &c, sizeof(c)) == 1) && (c != '0');
 }
 
-static disp_event_resp* parseDispEvent(int fd) {
-    static char event_data[1024] = {0};
-    ssize_t size;
-
-    memset(event_data, 0x0, sizeof(event_data));
-    size = read(fd, event_data, sizeof(event_data));
-    if (size < 0) {
-        LOG(ERROR) << "read fod event failed";
-        return nullptr;
-    }
-
-    if (size < sizeof(struct disp_event)) {
-        LOG(ERROR) << "Invalid event size " << size << ", expect at least "
-                   << sizeof(struct disp_event);
-        return nullptr;
-    }
-
-    return (struct disp_event_resp*)&event_data[0];
+static disp_event_resp *parseDispEvent(int fd) {
+  static char buf[1024];
+  memset(buf, 0, sizeof(buf));
+  ssize_t n = read(fd, buf, sizeof(buf));
+  if (n < static_cast<ssize_t>(sizeof(disp_event)))
+    return nullptr;
+  return reinterpret_cast<disp_event_resp *>(buf);
 }
 
-struct disp_base displayBasePrimary = {
-        .flag = 0,
-        .disp_id = MI_DISP_PRIMARY,
-};
-
-touch_base touchDataPrimary = {
-        .touch_id = MI_DISP_PRIMARY,
-        .cmd = SET_CUR_VALUE,
-        .mode = 0,
-        .data_len = 1,
-        .data_buf = {},
-};
-
-}  // anonymous namespace
+} // namespace
 
 class XiaomiAmethystUdfpsHandler : public UdfpsHandler {
-  public:
-    void init(fingerprint_device_t* device) {
-        mDevice = device;
-        touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
-        disp_fd_ = android::base::unique_fd(open(DISP_FEATURE_PATH, O_RDWR));
+public:
+  void init(fingerprint_device_t *device) override {
+    mDevice = device;
+    mAuthActive = false;
+    mScreenOn = true;
+    mUnlockTransition = false;
+    mFodModeActive = false;
+    mLastHbmValue = -1;
 
-        // Thread to notify fingeprint hwmodule about fod presses
-        std::thread([this]() {
-            int fd = open(FOD_PRESS_STATUS_PATH, O_RDONLY);
-            if (fd < 0) {
-                LOG(ERROR) << "failed to open " << FOD_PRESS_STATUS_PATH << " , err: " << fd;
-                return;
-            }
+    touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
+    disp_fd_ = android::base::unique_fd(open(DISP_FEATURE_PATH, O_RDWR));
 
-            struct pollfd fodPressStatusPoll = {
-                    .fd = fd,
-                    .events = POLLERR | POLLPRI,
-                    .revents = 0,
-            };
+    sendFodCoordinates();
+    startFodPressThread();
+    startDispEventThread();
+  }
 
-            while (true) {
-                int rc = poll(&fodPressStatusPoll, 1, -1);
-                if (rc < 0) {
-                    LOG(ERROR) << "failed to poll " << FOD_PRESS_STATUS_PATH << ", err: " << rc;
-                    continue;
-                }
+  void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/,
+                    float /*major*/) override {
+    if (mUnlockTransition)
+      return;
 
-                bool pressed = readBool(fd);
-                mDevice->extCmd(mDevice, COMMAND_FOD_PRESS_STATUS,
-                                pressed ? PARAM_FOD_PRESSED : PARAM_FOD_RELEASED);
+    mCleanupGeneration++;
 
-                // Request HBM
-                struct disp_local_hbm_req displayLhbmRequest = {
-                        .base = displayBasePrimary,
-                        .local_hbm_value = pressed ? LHBM_TARGET_BRIGHTNESS_WHITE_1000NIT
-                                              : LHBM_TARGET_BRIGHTNESS_OFF_FINGER_UP,
-                };
-                ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_LOCAL_HBM, &displayLhbmRequest);
-            }
-        }).detach();
+    if (mAuthActive)
+      return;
 
-        // Thread to listen for fod ui changes
-        std::thread([this]() {
-            android::base::unique_fd fd(open(DISP_FEATURE_PATH, O_RDWR));
-            if (fd < 0) {
-                LOG(ERROR) << "failed to open " << DISP_FEATURE_PATH << " , err: " << fd;
-                return;
-            }
+    mAuthActive = true;
 
-            // Register for FOD events
-            struct disp_event_req displayEventRequest = {
-                    .base = displayBasePrimary,
-                    .type = MI_DISP_EVENT_FOD,
-            };
-            if (ioctl(fd.get(), MI_DISP_IOCTL_REGISTER_EVENT, &displayEventRequest) < 0) {
-                LOG(ERROR) << "failed to register FOD event";
-                return;
-            }
-
-            struct pollfd dispEventPoll = {
-                    .fd = fd.get(),
-                    .events = POLLIN,
-                    .revents = 0,
-            };
-
-            while (true) {
-                int rc = poll(&dispEventPoll, 1, -1);
-                if (rc < 0) {
-                    LOG(ERROR) << "failed to poll " << DISP_FEATURE_PATH << ", err: " << rc;
-                    continue;
-                }
-
-                struct disp_event_resp* response = parseDispEvent(fd);
-                if (response == nullptr) {
-                    continue;
-                }
-
-                if (response->base.type != MI_DISP_EVENT_FOD) {
-                    LOG(ERROR) << "unexpected display event: " << response->base.type;
-                    continue;
-                }
-
-                int value = response->data[0];
-                LOG(DEBUG) << "received data: " << std::bitset<8>(value);
-
-                bool localHbmUiReady = value & LOCAL_HBM_UI_READY;
-
-                mDevice->extCmd(mDevice, COMMAND_NIT,
-                                localHbmUiReady ? PARAM_NIT_FOD : PARAM_NIT_NONE);
-            }
-        }).detach();
+    if (!mFodModeActive) {
+      sendFodCoordinates();
+      setFodStatus(true);
     }
 
-    void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
-        LOG(INFO) << __func__;
-        // Ensure touchscreen is aware of the press state, ideally this is not needed
-        setFingerDown(true);
+    setFpStatus(1);
+    setFingerDown(true);
+    updateHbm(true);
+    mDevice->extCmd(mDevice, COMMAND_FOD_PRESS_STATUS, PARAM_FOD_PRESSED);
+  }
+
+  void onFingerUp() override {
+    if (!mAuthActive)
+      return;
+
+    mAuthActive = false;
+    mLastHbmValue = -1;
+
+    updateHbm(false);
+    setFingerDown(false);
+    mDevice->extCmd(mDevice, COMMAND_FOD_PRESS_STATUS, PARAM_FOD_RELEASED);
+    forceDeepClean(/*isCancel=*/false);
+  }
+
+  void onAcquired(int32_t result, int32_t vendorCode) override {
+    if (result == 0 || vendorCode == 23) {
+      if (!mScreenOn) {
+        activateShield(SHIELD_DURATION_AUTH_END_MS);
+        onFingerUp();
+      }
+      return;
     }
 
-    void onFingerUp() {
-        LOG(INFO) << __func__;
-        // Ensure touchscreen is aware of the press state, ideally this is not needed
-        setFingerDown(false);
+    switch (static_cast<AcquiredInfo>(result)) {
+    case AcquiredInfo::GOOD:
+    case AcquiredInfo::PARTIAL:
+    case AcquiredInfo::INSUFFICIENT:
+    case AcquiredInfo::SENSOR_DIRTY:
+    case AcquiredInfo::TOO_SLOW:
+    case AcquiredInfo::TOO_FAST:
+      onFingerUp();
+      break;
+    default:
+      break;
     }
+  }
 
-    void onAcquired(int32_t result, int32_t vendorCode) {
-        LOG(INFO) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
-        switch (static_cast<AcquiredInfo>(result)) {
-            case AcquiredInfo::GOOD:
-            case AcquiredInfo::PARTIAL:
-            case AcquiredInfo::INSUFFICIENT:
-            case AcquiredInfo::SENSOR_DIRTY:
-            case AcquiredInfo::TOO_SLOW:
-            case AcquiredInfo::TOO_FAST:
-            case AcquiredInfo::TOO_DARK:
-            case AcquiredInfo::TOO_BRIGHT:
-            case AcquiredInfo::IMMOBILE:
-            case AcquiredInfo::LIFT_TOO_SOON:
-                {
-                    struct disp_local_hbm_req displayLhbmRequest = {
-                        .base = displayBasePrimary,
-                        .local_hbm_value = LHBM_TARGET_BRIGHTNESS_OFF_FINGER_UP,
-                    };
-                    ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_LOCAL_HBM, &displayLhbmRequest);
-                    break;
-                }
-            default:
-                break;
+  void cancel() override {
+    mAuthActive = false;
+    mLastHbmValue = -1;
+
+    updateHbm(false);
+    setFingerDown(false);
+    setFpStatus(0);
+    if (mScreenOn)
+      setFodStatus(false);
+
+    mDevice->extCmd(mDevice, COMMAND_FOD_PRESS_STATUS, PARAM_FOD_RELEASED);
+    activateShield(SHIELD_DURATION_AUTH_END_MS);
+    forceDeepClean(/*isCancel=*/true);
+  }
+
+private:
+  fingerprint_device_t *mDevice;
+  android::base::unique_fd touch_fd_;
+  android::base::unique_fd disp_fd_;
+
+  std::atomic<bool> mAuthActive;
+  std::atomic<bool> mScreenOn;
+  std::atomic<bool> mUnlockTransition;
+  std::atomic<bool> mFodModeActive{false};
+  std::atomic<int> mCleanupGeneration{0};
+  std::atomic<int> mShieldGeneration{0};
+
+  int mLastHbmValue;
+  std::mutex mHbmMutex;
+
+  void startFodPressThread() {
+    std::thread([this]() {
+      int fd = open(FOD_PRESS_STATUS_PATH, O_RDONLY);
+      if (fd < 0) {
+        LOG(ERROR) << "Failed to open fod_press_status";
+        return;
+      }
+
+      pollfd pfd = {.fd = fd, .events = POLLERR | POLLPRI};
+
+      while (true) {
+        if (poll(&pfd, 1, -1) < 0)
+          continue;
+
+        bool pressed = readBool(fd);
+
+        if (!mScreenOn || !mAuthActive)
+          continue;
+        if (!pressed && !mUnlockTransition)
+          onFingerUp();
+      }
+    }).detach();
+  }
+
+  void startDispEventThread() {
+    std::thread([this]() {
+      android::base::unique_fd fd(open(DISP_FEATURE_PATH, O_RDWR));
+
+      disp_event_req fodEvt = {.base = kDisplayPrimary,
+                               .type = MI_DISP_EVENT_FOD};
+      ioctl(fd.get(), MI_DISP_IOCTL_REGISTER_EVENT, &fodEvt);
+
+      disp_event_req pwrEvt = {.base = kDisplayPrimary,
+                               .type = MI_DISP_EVENT_POWER};
+      ioctl(fd.get(), MI_DISP_IOCTL_REGISTER_EVENT, &pwrEvt);
+
+      pollfd pfd = {.fd = fd.get(), .events = POLLIN};
+
+      while (true) {
+        if (poll(&pfd, 1, -1) < 0)
+          continue;
+
+        disp_event_resp *resp = parseDispEvent(fd.get());
+        if (!resp)
+          continue;
+
+        if (resp->base.type == MI_DISP_EVENT_FOD) {
+          handleFodEvent(resp);
+        } else if (resp->base.type == MI_DISP_EVENT_POWER) {
+          handlePowerEvent(resp);
+        }
+      }
+    }).detach();
+  }
+
+  void handleFodEvent(disp_event_resp *resp) {
+    bool uiReady = resp->data[0] & LOCAL_HBM_UI_READY;
+    mDevice->extCmd(mDevice, COMMAND_NIT,
+                    uiReady ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+  }
+
+  void handlePowerEvent(disp_event_resp *resp) {
+    bool screenOn = (resp->data[0] == DISP_POWER_ON);
+    bool wasScreenOn = mScreenOn.exchange(screenOn);
+
+    if (screenOn) {
+      if (!wasScreenOn)
+        activateShield(SHIELD_DURATION_SCREEN_ON_MS);
+      if (!mAuthActive) {
+        setFodStatus(false);
+        forceDeepClean(/*isCancel=*/true);
+      }
+    } else {
+      sendFodCoordinates();
+      setFodStatus(true);
+    }
+  }
+
+  void sendFodCoordinates() {
+    touch_base coord = {
+        .mode = TOUCH_MODE_FOD_COORD,
+        .data_len = 2,
+        .data_buf = {FOD_COORD_X, FOD_COORD_Y},
+    };
+    ioctl(touch_fd_.get(), TOUCH_IOC_COMMON_DATA, &coord);
+  }
+
+  void setFodStatus(bool enable) {
+    mFodModeActive = enable;
+
+    ioctl(touch_fd_.get(), TOUCH_IOC_SELECT_TOUCH_ID, MI_DISP_PRIMARY);
+
+    touch_base data = {
+        .mode = TOUCH_MODE_FOD_ENABLE,
+        .data_len = 1,
+        .data_buf = {enable ? 1 : 0},
+    };
+    ioctl(touch_fd_.get(), TOUCH_IOC_COMMON_DATA, &data);
+  }
+
+  void setFingerDown(bool pressed) {
+    ioctl(touch_fd_.get(), TOUCH_IOC_SELECT_TOUCH_ID, MI_DISP_PRIMARY);
+
+    touch_base data = {
+        .mode = TOUCH_MODE_FOD_DOWNUP_CTL,
+        .data_len = 1,
+        .data_buf = {pressed ? 1 : 0},
+    };
+    ioctl(touch_fd_.get(), TOUCH_IOC_COMMON_DATA, &data);
+  }
+
+  void setFpStatus(int status) {
+    disp_feature_req req = {
+        .base = kDisplayPrimary,
+        .feature_id = DISP_FEATURE_FP_STATUS,
+        .feature_val = static_cast<__s32>(status),
+    };
+    ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_FEATURE, &req);
+  }
+
+  void updateHbm(bool enable) {
+    std::lock_guard<std::mutex> lock(mHbmMutex);
+
+    int target = enable ? LHBM_TARGET_BRIGHTNESS_WHITE_1000NIT
+                        : LHBM_TARGET_BRIGHTNESS_OFF_FINGER_UP;
+
+    if (target != 0 && mLastHbmValue == target)
+      return;
+
+    disp_local_hbm_req req = {
+        .base = kDisplayPrimary,
+        .local_hbm_value = static_cast<uint32_t>(target),
+    };
+    ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_LOCAL_HBM, &req);
+    mLastHbmValue = target;
+
+    if (enable)
+      std::this_thread::sleep_for(
+          std::chrono::milliseconds(HBM_SETTLE_DELAY_MS));
+  }
+
+  void activateShield(int durationMs) {
+    mUnlockTransition = true;
+    int currentGen = ++mShieldGeneration;
+
+    std::thread([this, currentGen, durationMs]() {
+      std::this_thread::sleep_for(std::chrono::milliseconds(durationMs));
+      if (mShieldGeneration == currentGen)
+        mUnlockTransition = false;
+    }).detach();
+  }
+
+  void forceDeepClean(bool isCancel) {
+    int currentGen = ++mCleanupGeneration;
+
+    std::thread([this, currentGen, isCancel]() {
+      using namespace std::chrono_literals;
+
+      auto aborted = [&]() {
+        return mAuthActive || (mCleanupGeneration != currentGen);
+      };
+
+      std::this_thread::sleep_for(
+          std::chrono::milliseconds(CLEANUP_INITIAL_DELAY_MS));
+      if (aborted())
+        return;
+
+      setFpStatus(0);
+      if (mScreenOn && isCancel)
+        setFodStatus(false);
+
+      static constexpr int kDelays[] = {40, 60, 100, 150, 250, 350, 500};
+
+      for (int delay : kDelays) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+        if (aborted())
+          return;
+
+        setFpStatus(1);
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(CLEANUP_PULSE_HOLD_MS));
+
+        if (aborted()) {
+          setFpStatus(0);
+          return;
         }
 
-        /* vendorCode
-         * 21: waiting for finger
-         * 22: finger down
-         * 23: finger up
-         */
-        if (vendorCode == 21) {
-            setFodStatus(FOD_STATUS_ON);
+        mLastHbmValue = -1;
+        updateHbm(false);
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(CLEANUP_PULSE_HOLD_MS));
+        if (aborted())
+          return;
+
+        setFpStatus(0);
+        if (mScreenOn && (isCancel || delay >= 350)) {
+          setFodStatus(false);
         }
-    }
-
-    void cancel() {
-        LOG(INFO) << __func__;
-    }
-
-  private:
-    fingerprint_device_t* mDevice;
-    android::base::unique_fd touch_fd_;
-    android::base::unique_fd disp_fd_;
-
-    void setFodStatus(int value) {
-        ioctl(touch_fd_.get(), TOUCH_IOC_SELECT_TOUCH_ID, MI_DISP_PRIMARY);
-        touch_base data = {
-            .mode = Touch_Fod_Enable,
-            .data_buf = {value},
-        };
-        ioctl(touch_fd_.get(), TOUCH_IOC_COMMON_DATA, &data);
-    }
-
-    void setFingerDown(bool pressed) {
-        ioctl(touch_fd_.get(), TOUCH_IOC_SELECT_TOUCH_ID, MI_DISP_PRIMARY);
-        touch_base data = {
-            .mode = THP_FOD_DOWNUP_CTL,
-            .data_buf = {pressed ? 1 : 0},
-        };
-        ioctl(touch_fd_.get(), TOUCH_IOC_COMMON_DATA, &data);
-    }
+      }
+    }).detach();
+  }
 };
 
-static UdfpsHandler* create() {
-    return new XiaomiAmethystUdfpsHandler();
-}
-
-static void destroy(UdfpsHandler* handler) {
-    delete handler;
-}
+static UdfpsHandler *create() { return new XiaomiAmethystUdfpsHandler(); }
+static void destroy(UdfpsHandler *h) { delete h; }
 
 extern "C" UdfpsHandlerFactory UDFPS_HANDLER_FACTORY = {
-        .create = create,
-        .destroy = destroy,
+    .create = create,
+    .destroy = destroy,
 };
