@@ -546,6 +546,9 @@ on property:sys.boot_completed=1
     # Set thermal mode to mgame
     write /sys/devices/virtual/thermal/thermal_message/sconfig 19
 
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
 # add sniffer and tcpdump output
 service vendor.tcpdump /vendor/bin/tcpdump -i any -W 3 -C 5 -s 134 -w /data/vendor/wlan_logs/tcpdump.pcap -Z system
     class main
