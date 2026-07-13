@@ -357,7 +357,6 @@ blob_fixups: blob_fixups_user_type = {
         'odm/lib64/hw/displayfeature.default.so',
         'vendor/bin/hw/vendor.qti.camera.provider-service_64',
         'vendor/bin/hw/vendor.qti.hardware.display.composer-service',
-        'vendor/bin/poweropt-service',
         'vendor/lib64/libaodoptfeature.so',
         'vendor/lib64/libapengine.so',
         'vendor/lib64/libaudiocloudctrl.so',
