@@ -225,7 +225,6 @@ vendor.media.target_variant=_volcano_v0
 vendor.netflix.bsp_rev=Q7635-39449-1
 
 # Power
-ro.vendor.extension_library=libqti-perfd-client.so
 ro.vendor.perf-hal.ver=3.0
 ro.vendor.perf.scroll_opt=1
 
