@@ -5,8 +5,7 @@ bluetooth.device.default_name=Redmi Note 14 Pro+ 5G
 ro.product.odm.brand=Redmi
 ro.product.odm.device=amethyst
 ro.product.odm.model=24115RA8EI
-ro.product.odm.marketname=Redmi Note 14 Pro+ 5G
-ro.product.odm.mod_device=amethyst_in
+ro.product.odm.name=amethyst_in
 
 # USB
 vendor.usb.product_string=Redmi Note 14 Pro+ 5G

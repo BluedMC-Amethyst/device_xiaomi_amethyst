@@ -73,6 +73,10 @@ DEVICE_MANIFEST_FILE := \
     hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa.xml \
     hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa_extn.xml
 
+# HWUI
+HWUI_COMPILE_FOR_PERF := true
+TARGET_USES_VULKAN := true
+
 # Kernel
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_RAMDISK_USE_LZ4 := true
