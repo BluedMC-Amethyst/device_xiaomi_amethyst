@@ -81,5 +81,6 @@ genfscon sysfs /devices/platform/synaptics_tcm.0/wakeup u:object_r:sysfs_wakeup:
 genfscon sysfs /devices/platform/goodix_ts.0/wakeup u:object_r:sysfs_wakeup:s0
 
 # Charger
-genfscon sysfs /class/power_supply/battery/constant_charge_current    u:object_r:vendor_sysfs_power_supply:s0
-genfscon sysfs /class/qcom-battery/fastchg_mode    u:object_r:vendor_sysfs_power_supply:s0
+genfscon sysfs /class/qcom-battery/fastchg_mode                     u:object_r:vendor_sysfs_power_supply:s0
+genfscon proc /sys/kernel/deny_new_usb                              u:object_r:proc_deny_new_usb:s0
+genfscon sysfs /class/power_supply/battery/constant_charge_current  u:object_r:vendor_sysfs_power_supply:s0
