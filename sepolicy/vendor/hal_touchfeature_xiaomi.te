@@ -50,6 +50,7 @@ allow hal_touchfeature_xiaomi_default vendor_bsp_data_log_file:dir create_dir_pe
 allow hal_touchfeature_xiaomi_default vendor_bsp_data_log_file:file create_file_perms;
 allow hal_touchfeature_xiaomi_default vendor_data_touchreport_file:dir { add_name read remove_name search watch write };
 allow hal_touchfeature_xiaomi_default vendor_data_touchreport_file:file { create getattr open read rename setattr unlink write };
+allow hal_touchfeature_xiaomi_default vendor_hal_perf2_service:service_manager find;
 allow hal_touchfeature_xiaomi_default vendor_hal_perf_default:binder call;
 allow hal_touchfeature_xiaomi_default vendor_hal_perf_hwservice:hwservice_manager find;
 allow hal_touchfeature_xiaomi_default vendor_touchfeature_prop:file { getattr open read };
