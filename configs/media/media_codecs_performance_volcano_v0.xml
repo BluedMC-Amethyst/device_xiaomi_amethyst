@@ -190,4 +190,5 @@
              <Limit name="measured-frame-rate-720x480" range="8-15" />
         </MediaCodec>
     </Encoders>
+    <Include href="media_codecs_dolby_audio.xml" />
 </MediaCodecs>
