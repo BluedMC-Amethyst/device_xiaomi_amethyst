@@ -309,9 +309,14 @@ on post-fs-data
 
     chmod 0666 /dev/mi_sw_sync
     restorecon /dev/mi_sw_sync
-# MIUI ADD: Performance_BoostFramework
+
+    # MIUI ADD: Performance_BoostFramework
     chown system system /sys/module/perf_helper/mimd/mimdtrigger
-# END Performance_BoostFramework
+    # END Performance_BoostFramework
+
+    # Bypass Charging Node
+    chown system system /sys/class/qcom-battery/charge_control_en
+    chmod 0660 /sys/class/qcom-battery/charge_control_en
 
 on early-boot
     # Enable WLAN cold boot calibration
@@ -389,6 +394,13 @@ on boot
     chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger_interval
     chmod 664 /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger
     #END Memory_CLD
+
+    # HyperCharge
+    chown system system /sys/class/power_supply/battery/constant_charge_current
+    chmod 0664 /sys/class/power_supply/battery/constant_charge_current
+
+    chown system system /sys/class/qcom-battery/fastchg_mode
+    chmod 0664 /sys/class/qcom-battery/fastchg_mode
     
 # MIUI ADD: Modem_SingleSim
 on property:ro.miui.singlesim=1

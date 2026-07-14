@@ -79,7 +79,7 @@ ro.camera.enableCamera1MaxZsl=1
 ro.camerax.extensions.enabled=true
 
 # Charging Speed
-persist.vendor.region.charger=EU
+persist.vendor.region.charger=UA
 persist.vendor.accelerate.charge=true
 
 # DPM

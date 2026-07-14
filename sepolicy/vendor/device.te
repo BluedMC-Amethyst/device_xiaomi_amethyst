@@ -19,3 +19,6 @@ type aac_richtap_dev_device, dev_type;
 
 # mbuh
 type vendor_diag_router, domain;
+
+# Battery
+type vendor_sysfs_qcom_battery, fs_type, sysfs_type;

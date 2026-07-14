@@ -1,2 +1,7 @@
 binder_call(system_server, vendor_hal_displayfeature_xiaomi_default)
 
+
+# Hypercharge
+allow system_server vendor_sysfs_battery_supply:file { getattr open read };
+allow system_server vendor_sysfs_power_supply:file { read write open setattr getattr };
+allow system_server vendor_sysfs_power_supply:dir search;
