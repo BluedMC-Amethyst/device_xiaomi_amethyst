@@ -488,13 +488,13 @@
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForColocation",
-            "Value": "0",
+            "Value": "35",
             "Duration": 150
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForBoost",
-            "Value": "0",
+            "Value": "51",
             "Duration": 150
         },
         {
@@ -506,7 +506,7 @@
         {
             "PowerHint": "LAUNCH",
             "Node": "procSysWaltSchedBoost",
-            "Value": "2",
+            "Value": "1",
             "Duration": 2000
         },
         {
