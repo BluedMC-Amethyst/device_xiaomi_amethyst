@@ -5,5 +5,3 @@ allow hal_power_default device:dir r_dir_perms;
 allow hal_power_default vendor_sysfs_touch:dir search;
 allow hal_power_default vendor_sysfs_touch:file rw_file_perms;
 allow hal_power_default sysfs_touch_hostprocess:file rw_file_perms;
-
-rw_dir_file(hal_power_default, proc)
