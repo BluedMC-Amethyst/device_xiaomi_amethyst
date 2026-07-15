@@ -28,15 +28,8 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lineageos.settings.autohbm.AutoHbmActivity;
-import org.lineageos.settings.autohbm.AutoHbmTileService;
-import org.lineageos.settings.autohbm.HbmTileService;
-
-import org.lineageos.settings.thermal.ThermalSettingsActivity;
-import org.lineageos.settings.thermal.ThermalTileService;
-
-import org.lineageos.settings.powertools.PowerProfileTileService;
-import org.lineageos.settings.powertools.PowertoolsActivity;
+import org.lineageos.settings.charge.ChargeTileService;
+import org.lineageos.settings.charge.ChargeActivity;
 
 import org.lineageos.settings.hypercharge.HyperChargeTileService;
 import org.lineageos.settings.hypercharge.HyperChargeSettingsActivity;
@@ -51,10 +44,7 @@ public final class TileHandlerActivity extends Activity {
     private static final Map<String, Class<?>> TILE_ACTIVITY_MAP = new HashMap<>();
 
     static {
-        TILE_ACTIVITY_MAP.put(AutoHbmTileService.class.getName(), AutoHbmActivity.class);
-        TILE_ACTIVITY_MAP.put(HbmTileService.class.getName(), AutoHbmActivity.class);
-        TILE_ACTIVITY_MAP.put(ThermalTileService.class.getName(), ThermalSettingsActivity.class);
-        TILE_ACTIVITY_MAP.put(PowerProfileTileService.class.getName(), PowertoolsActivity.class);
+        TILE_ACTIVITY_MAP.put(ChargeTileService.class.getName(), ChargeActivity.class);
         TILE_ACTIVITY_MAP.put(HyperChargeTileService.class.getName(), HyperChargeSettingsActivity.class);
     }
 
