@@ -43,14 +43,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.i(TAG, "Received intent: " + intent.getAction());
-        switch (intent.getAction()) {
-            case Intent.ACTION_LOCKED_BOOT_COMPLETED:
-                handleLockedBootCompleted(context);
-                break;
-            case Intent.ACTION_BOOT_COMPLETED:
-                handleBootCompleted(context);
-                break;
-        }
 
         PreferenceManager.setDefaultValues(context, R.xml.hypercharge_settings, false);
 
@@ -71,17 +63,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to start HyperChargeService on boot", e);
-        }
-    }
-
-    private void handleLockedBootCompleted(Context context) {
-        if (DEBUG) Log.i(TAG, "Handling locked boot completed.");
-        try {
-            // Start necessary services
-            startServices(context);
-
-        } catch (Exception e) {
-            Log.e(TAG, "Error during locked boot completed processing", e);
         }
     }
 }
