@@ -447,7 +447,3 @@ $(call inherit-product, vendor/xiaomi/amethyst/amethyst-vendor.mk)
 # Xiaomi Parts
 PRODUCT_PACKAGES += \
     XiaomiParts
-
-# Euicc
-PRODUCT_PACKAGES += \
-    XiaomiEuicc
