@@ -3,7 +3,6 @@ genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qco
 
 # Charger
 genfscon sysfs /class/qcom-battery/fastchg_mode u:object_r:vendor_sysfs_power_supply:s0
-genfscon proc /sys/kernel/deny_new_usb u:object_r:proc_deny_new_usb:s0
 genfscon sysfs /class/power_supply/battery/constant_charge_current u:object_r:vendor_sysfs_power_supply:s0
 
 # Display
