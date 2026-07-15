@@ -84,6 +84,21 @@
         	android:resource="@string/charge_bypass_summary" />
 	    </activity>
 
+        <!-- Bypass Charge QS Tile -->
+        <service
+            android:name=".charge.ChargeTileService"
+            android:label="@string/charge_bypass_title"
+            android:icon="@drawable/ic_bypass_charge_enabled"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
         <!-- Clear Speaker -->
         <activity
             android:name=".speaker.ClearSpeakerActivity" 

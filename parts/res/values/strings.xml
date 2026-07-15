@@ -26,9 +26,9 @@
     <string name="tile_off">Off</string>
 
     <!-- Bypass Charge Strings -->
-     <string name="bypass_charge_tile_label">Bypass Charge</string>
-     <string name="bypass_charge_tile_enabled_subtitle">Bypass charging is enabled</string>
-     <string name="bypass_charge_tile_disabled_subtitle">Bypass charging is disabled</string>
+    <string name="bypass_charge_tile_label">Bypass Charge</string>
+    <string name="bypass_charge_tile_enabled_subtitle">Bypass charging is enabled</string>
+    <string name="bypass_charge_tile_disabled_subtitle">Bypass charging is disabled</string>
 
     <!-- Clear Speaker -->
    <string name="clear_speaker_title">Clear speaker</string>
