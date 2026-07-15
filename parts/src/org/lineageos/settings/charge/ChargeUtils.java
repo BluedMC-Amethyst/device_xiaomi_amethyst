@@ -27,7 +27,6 @@ public class ChargeUtils {
 
     private static final String TAG = "ChargeUtils";
     public static final String BYPASS_CHARGE_NODE = "/sys/class/qcom-battery/charge_control_en";
-    public static final String BYPASS_CHARGE_NODE_TWO = "/sys/class/qcom-battery/input_suspend";
     private static final String PREF_BYPASS_CHARGE = "bypass_charge";
 
     // Bypass modes
@@ -43,8 +42,7 @@ public class ChargeUtils {
     public boolean isBypassChargeEnabled() {
         try {
             String value = FileUtils.readOneLine(BYPASS_CHARGE_NODE);
-            String valueTwo = FileUtils.readOneLine(BYPASS_CHARGE_NODE_TWO);
-            return (value != null && value.equals("1")) || (valueTwo != null && valueTwo.equals("1"));
+            return value != null && value.equals("1");
         } catch (Exception e) {
             Log.e(TAG, "Failed to read bypass charge status", e);
             return false;
@@ -54,7 +52,6 @@ public class ChargeUtils {
     public void enableBypassCharge(boolean enable) {
         try {
             FileUtils.writeLine(BYPASS_CHARGE_NODE, enable ? "1" : "0");
-            FileUtils.writeLine(BYPASS_CHARGE_NODE_TWO, enable ? "1" : "0");
             mSharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply();
         } catch (Exception e) {
             Log.e(TAG, "Failed to write bypass charge status", e);
@@ -72,6 +69,6 @@ public class ChargeUtils {
     }
     
     public boolean isBypassChargeSupported() {
-        return isNodeAccessible(BYPASS_CHARGE_NODE) && isNodeAccessible(BYPASS_CHARGE_NODE_TWO);
+        return isNodeAccessible(BYPASS_CHARGE_NODE);
     }
 }
