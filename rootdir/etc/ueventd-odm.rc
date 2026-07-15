@@ -78,3 +78,12 @@ subsystem mi_display
 
 #launch boost
 /dev/launch_boost	0660	system	system
+
+# Charger
+/sys/class/qcom-battery     input_suspend            0660    system  system
+
+# Bypass Charging Control
+/sys/class/qcom-battery     charge_control_en        0660    system  system
+
+# Charging Speed Control
+/sys/class/power_supply/battery     constant_charge_current    0660    system  system
