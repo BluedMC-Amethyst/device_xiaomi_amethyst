@@ -2,8 +2,12 @@
 genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/typec/port0/data_role u:object_r:vendor_sysfs_battery_supply:s0
 
 # Charger
+
 genfscon sysfs /class/qcom-battery/fastchg_mode u:object_r:vendor_sysfs_power_supply:s0
+
+
 genfscon sysfs /class/power_supply/battery/constant_charge_current u:object_r:vendor_sysfs_power_supply:s0
+
 
 # Display
 genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint/fingerdown u:object_r:vendor_sysfs_displayfeature:s0
