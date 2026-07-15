@@ -34,8 +34,6 @@ import android.view.Display.HdrCapabilities;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
-import org.lineageos.settings.thermal.ThermalUtils;
-import org.lineageos.settings.powertools.PowerProfileTileService;
 import org.lineageos.settings.hypercharge.HyperChargeService;
 import org.lineageos.settings.Constants;
 public class BootCompletedReceiver extends BroadcastReceiver {
