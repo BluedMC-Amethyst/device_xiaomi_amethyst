@@ -25,5 +25,10 @@ public class Constants {
     public static final String NODE_FASTCHG_MODE = "/sys/class/qcom-battery/fastchg_mode";
 
     public static final String CHARGE_LIMIT_120W = "22000000";
+    public static final String CHARGE_LIMIT_90W = "16500000";
+    public static final String CHARGE_LIMIT_67W = "12300000";
+    public static final String CHARGE_LIMIT_50W = "9200000";
     public static final String CHARGE_LIMIT_33W = "6000000";
+    public static final String CHARGE_LIMIT_18W = "3300000";
+    public static final String CHARGE_LIMIT_10W = "1800000";
 }

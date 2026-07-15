@@ -16,12 +16,13 @@
 -->
 <resources>
     <string-array name="hypercharge_limit_entries">
-        <item>120W (Unlimited)</item>
-        <item>90W (Fast)</item>
-        <item>67W (Balanced)</item>
-        <item>50W (Cool)</item>
-        <item>33W (Battery Saver)</item>
-        <item>30W (Slow/Safe)</item>
+        <item>120W (Ultra Fast)</item>
+        <item>90W (Super Fast)</item>
+        <item>67W (Turbo)</item>
+        <item>50W (Fast)</item>
+        <item>33W (Quick)</item>
+        <item>18W (Standard)</item>
+        <item>10W (Slow)</item>
     </string-array>
 
     <string-array name="hypercharge_limit_values">
@@ -30,6 +31,7 @@
         <item>12300000</item>
         <item>9200000</item>
         <item>6000000</item>
-        <item>5500000</item>
+        <item>3300000</item>
+        <item>1800000</item>
     </string-array>
 </resources>

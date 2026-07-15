@@ -33,10 +33,14 @@ public class ChargeUtils {
     public static final int BYPASS_DISABLED = 0;
     public static final int BYPASS_ENABLED = 1;
 
+    private Context mContext;
     private SharedPreferences mSharedPrefs;
+    private static ChargeUtils sInstance;
 
     public ChargeUtils(Context context) {
-        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        // Use application context to avoid leaking Activity/Service contexts
+        mContext = context.getApplicationContext();
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     public boolean isBypassChargeEnabled() {
@@ -51,8 +55,12 @@ public class ChargeUtils {
 
     public void enableBypassCharge(boolean enable) {
         try {
-            FileUtils.writeLine(BYPASS_CHARGE_NODE, enable ? "1" : "0");
-            mSharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply();
+            boolean ok = FileUtils.writeLine(BYPASS_CHARGE_NODE, enable ? "1" : "0");
+            if (ok) {
+                mSharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply();
+            } else {
+                Log.e(TAG, "Failed to write bypass charge status (writeLine returned false)");
+            }
         } catch (Exception e) {
             Log.e(TAG, "Failed to write bypass charge status", e);
         }
@@ -61,7 +69,7 @@ public class ChargeUtils {
     public boolean isNodeAccessible(String node) {
         try {
             String value = FileUtils.readOneLine(node);
-            return true;
+            return value != null;
         } catch (Exception e) {
             Log.e(TAG, "Node " + node + " not accessible", e);
             return false;
@@ -70,5 +78,12 @@ public class ChargeUtils {
     
     public boolean isBypassChargeSupported() {
         return isNodeAccessible(BYPASS_CHARGE_NODE);
+    }
+
+    public static synchronized ChargeUtils getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new ChargeUtils(context);
+        }
+        return sInstance;
     }
 }

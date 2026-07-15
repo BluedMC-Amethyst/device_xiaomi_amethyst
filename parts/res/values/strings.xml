@@ -25,6 +25,11 @@
     <string name="tile_on">On</string>
     <string name="tile_off">Off</string>
 
+    <!-- Bypass Charge Strings -->
+     <string name="bypass_charge_tile_label">Bypass Charge</string>
+     <string name="bypass_charge_tile_enabled_subtitle">Bypass charging is enabled</string>
+     <string name="bypass_charge_tile_disabled_subtitle">Bypass charging is disabled</string>
+
     <!-- Clear Speaker -->
    <string name="clear_speaker_title">Clear speaker</string>
    <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
@@ -43,8 +48,9 @@
     <string name="hypercharge_speed_67w">67W</string>
     <string name="hypercharge_speed_50w">50W</string>
     <string name="hypercharge_speed_33w">33W</string>
-    <string name="hypercharge_speed_30w">30W</string>
-    
+    <string name="hypercharge_speed_18w">18W</string>
+    <string name="hypercharge_speed_10w">10W</string>
+
     <string name="hypercharge_description_title">About HyperCharge Control</string>
     <string name="hypercharge_description_summary">HyperCharge (120W) provides extreme charging speeds but generates significant heat, which can accelerate battery wear and reduce long-term lifespan. \n\n• ON (120W): Service is stopped — the kernel controls charging at full factory speed.\n• ON (other speed): Service enforces your selected speed limit.\n• OFF: Service runs and enforces a 33W protection limit to reduce battery wear and heat.\n\nNote: This service only intervenes when a Xiaomi HyperCharge power brick is detected.</string>
     
