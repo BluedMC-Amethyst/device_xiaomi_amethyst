@@ -1,0 +1,5 @@
+# Hypercharge and Bypass Charging
+allow devicesettings_app vendor_sysfs_battery_supply:file rw_file_perms;
+allow devicesettings_app vendor_sysfs_battery_supply:dir search;
+allow devicesettings_app vendor_sysfs_power_supply:file rw_file_perms;
+allow devicesettings_app vendor_sysfs_power_supply:dir search;
