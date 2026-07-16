@@ -7,3 +7,10 @@ runtime_resource_overlay {
     name: "FrameworksOverlayAmethyst",
     vendor: true,
 }
+
+runtime_resource_overlay {
+    name: "FrameworkOverlayAmethystGLEsim",
+    manifest: "AndroidManifestGLEsim.xml",
+    resource_dirs: ["res-Esim"],
+    vendor: true,
+}
