@@ -447,3 +447,5 @@ $(call inherit-product, vendor/xiaomi/amethyst/amethyst-vendor.mk)
 # Xiaomi Parts
 PRODUCT_PACKAGES += \
     XiaomiParts
+
+-include vendor/lineage-priv/keys/keys.mk
