@@ -450,4 +450,5 @@ $(call inherit-product, vendor/xiaomi/amethyst/amethyst-vendor.mk)
 PRODUCT_PACKAGES += \
     XiaomiParts
 
+# Rom signing
 -include vendor/lineage-priv/keys/keys.mk
