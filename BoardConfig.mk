@@ -74,6 +74,7 @@ DEVICE_MANIFEST_FILE += \
     hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa_extn.xml
 
 # HWUI
+HWUI_COMPILE_FOR_PERF := true
 TARGET_USES_VULKAN := true
 
 # Kernel
