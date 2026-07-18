@@ -441,13 +441,13 @@
             "PowerHint": "AUDIO_LAUNCH",
             "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
             "Value": "2092000",
-            "Duration": 1500
+            "Duration": 1000
         },
         {
             "PowerHint": "AUDIO_LAUNCH",
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
             "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
-            "Duration": 1500
+            "Duration": 1000
         },
         {
             "PowerHint": "INTERACTION",
@@ -506,56 +506,56 @@
         {
             "PowerHint": "LAUNCH",
             "Node": "procSysWaltSchedBoost",
-            "Value": "2",
-            "Duration": 2000
+            "Value": "1",
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
             "Value": "2092000",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
             "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveHighFreq",
             "Value": "1708800",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy4WaltAdaptiveHighFreq",
             "Value": "1612800",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy7WaltAdaptiveHighFreq",
             "Value": "1766400",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveLowFreq",
             "Value": "1228800",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy4WaltAdaptiveLowFreq",
             "Value": "1056000",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy7WaltAdaptiveLowFreq",
             "Value": "1209600",
-            "Duration": 2000
+            "Duration": 1200
         },
         {
             "PowerHint": "EXPENSIVE_RENDERING",
@@ -814,6 +814,162 @@
             "Node": "devCpuctlBackgroundCpuShares",
             "Value": "512",
             "Duration": 1000
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
+            "Value": "0:0 1:0 2:0 3:0 4:480000 5:480000 6:480000 7:0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "procSysWaltSchedBoost",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
+            "Value": "1",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltRtgBoostFreq",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
+            "Value": "547000",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuCpu0CoreCtlOfflineDelayMs",
+            "Value": "20",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrSampleMs",
+            "Value": "33",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrIoPercent",
+            "Value": "100",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHistMemory",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltHispeedLoad",
+            "Value": "99",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "devCpuctlBackgroundCpuShares",
+            "Value": "512",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "devCpuctlTopAppCpuShares",
+            "Value": "4096",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
+            "Value": "0:0 1:0 2:0 3:0 4:480000 5:480000 6:480000 7:0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "procSysWaltSchedBoost",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
+            "Value": "1",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltRtgBoostFreq",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
+            "Value": "547000",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuCpu0CoreCtlOfflineDelayMs",
+            "Value": "20",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrSampleMs",
+            "Value": "33",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrIoPercent",
+            "Value": "100",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHistMemory",
+            "Value": "0",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltHispeedLoad",
+            "Value": "99",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "devCpuctlBackgroundCpuShares",
+            "Value": "512",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "devCpuctlTopAppCpuShares",
+            "Value": "4096",
+            "Duration": 0
         }
     ]
 }
