@@ -84,3 +84,6 @@ genfscon sysfs /devices/platform/soc/soc:mi_t1_chip/wakeup u:object_r:sysfs_wake
 genfscon sysfs /devices/platform/synaptics_tcm.0/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/goodix_ts.0/wakeup u:object_r:sysfs_wakeup:s0
 
+# Walt
+genfscon proc /sys/walt u:object_r:proc_walt:s0
+

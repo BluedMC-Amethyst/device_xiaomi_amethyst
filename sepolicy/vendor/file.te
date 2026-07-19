@@ -25,3 +25,6 @@ type vendor_ins_vendor_data_file, data_file_type, file_type;
 
 # Charger
 type vendor_sysfs_power_supply, fs_type, sysfs_type;
+
+# Walt
+type proc_walt, fs_type, proc_type;
