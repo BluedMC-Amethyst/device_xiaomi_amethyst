@@ -131,9 +131,6 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load.recovery))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(RAMDISK_MODULES_PATH)/modules.blocklist
 
-# MiuiCamera
--include device/xiaomi/amethyst-miuicamera/BoardConfig.mk
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
@@ -246,3 +243,6 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
 include vendor/xiaomi/amethyst/BoardConfigVendor.mk
+
+# MiuiCamera
+-include device/xiaomi/amethyst-miuicamera/BoardConfig.mk
