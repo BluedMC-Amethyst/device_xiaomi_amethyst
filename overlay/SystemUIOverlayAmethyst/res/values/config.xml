@@ -23,10 +23,17 @@
          far break points. A sensor value less than this is considered "near". -->
     <item name="proximity_sensor_threshold" translatable="false" format="float" type="dimen">5</item>
 
+    <!-- Preferred max refresh rate at keyguard, if supported by the display. -->
+    <integer name="config_keyguardMaxRefreshRate">60</integer>
+
     <!-- Bottom margin size when fingerprint in display is active -->
     <dimen name="keyguard_indication_margin_bottom">6dp</dimen>
 
     <!-- Should we vibrate on an icon animation of the shelf. This should only be active if the
           vibrator is capable of subtle vibrations -->
      <bool name="config_vibrateOnIconAnimation">true</bool>
+
+    <!-- Show 5G toggle in internet dialog when available -->
+    <bool name="config_supportsVONR">true</bool>
+
 </resources>

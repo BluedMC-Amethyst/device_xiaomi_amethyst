@@ -838,4 +838,37 @@
     <!-- Default value for fp screen off unlock toggle, it only works for the devices that support
          fp screen off unlock-->
     <bool name="config_screen_off_udfps_default_on">true</bool>
+
+     <!-- Whether device has turbo power charging support -->
+    <bool name="config_hasTurboPowerCharger">true</bool>
+
+    <!-- Path to fast charging status file to detect whether an oem fast charger is active -->
+    <string name="config_oemFastChargerStatusPath" translatable="false">/sys/class/qcom-battery/fastchg_mode</string>
+    
+    <!-- Smart 5G -->
+    <bool name="config_supportSmart5G">true</bool>
+
+    <!--Useful if you want to improve signal reception -->
+    <bool name="config_ignoreRssnrSignalLevel">true</bool>
+
+    <!-- Power Management: Specifies whether to decouple the interactive state of the
+         device from the display on/off state.
+         When false, setInteractive(..., true) will be called before the display is turned on
+         and setInteractive(..., false) will be called after the display is turned off.
+         This mode provides best compatibility for devices that expect the interactive
+         state to be tied to the display state.
+         When true, setInteractive(...) will be called independently of whether the display
+         is being turned on or off.  This mode enables the power manager to reduce
+         clocks and disable the touch controller while the display is on.
+         This resource should be set to "true" when a doze component has been specified
+         to maximize power savings but not all devices support it.
+         Refer to power.h for details.
+    -->
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+
+
+    <!-- If not empty, sets the AVC codec profile level used for the internal screen recorder.
+    Possible values: 3, 3.1, 3.2, 4, 4.1, 4.2 -->
+    <string name="config_screenRecorderAVCProfileLevel" translatable="false">3.1</string>
+
 </resources>

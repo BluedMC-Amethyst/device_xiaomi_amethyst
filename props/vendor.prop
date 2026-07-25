@@ -150,7 +150,10 @@ debug.sf.set_idle_timer_ms=500
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.treat_170m_as_sRGB=1
 debug.sf.use_phase_offsets_as_durations=1
+debug.sf.defer_refresh_rate_when_off=1
+persist.mm.enable.prefetch=true
 graphics.gpu.profiler.support=true
+debug.sf.enable_egl_image_tracker=0
 persist.sys.sf.color_mode=0
 persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=256
@@ -202,6 +205,7 @@ vendor.gatekeeper.is_security_level_spu=0
 # Media
 debug.stagefright.c2inputsurface=-1
 vendor.media.omx=0
+debug.sdm.support_writeback=0
 
 # Media configs
 ro.media.xml_variant.profiles=_volcano_amethyst_v0
