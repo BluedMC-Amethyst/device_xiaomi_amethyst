@@ -243,6 +243,8 @@ ro.vendor.radio.build_region=global
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
 ro.vendor.sensors.xiaomi.udfps=true
+ro.vendor.sensors.xiaomi.single_tap=true
+ro.vendor.sensors.xiaomi.double_tap=true
 
 # SSR
 ro.vendor.vm.ssr.enable=false
