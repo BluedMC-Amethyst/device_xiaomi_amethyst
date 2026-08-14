@@ -14,6 +14,7 @@ genfscon sysfs /devices/platform/soc/soc:spf_core_platform/soc:spf_core_platform
 
 # Fingerprint
 genfscon sysfs /devices/virtual/touch/touch_dev/fod_press_status u:object_r:vendor_sysfs_touch:s0
+genfscon sysfs /devices/virtual/touch/touch_dev/gesture_single_tap_state u:object_r:sysfs_tp_fodstatus:s0
 genfscon sysfs /devices/virtual/touch/touch_dev u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:fingerprint_goodix u:object_r:sysfs_wakeup:s0
