@@ -34,7 +34,7 @@ ro.hwui.texture_cache_size=72
 # Media
 media.stagefright.thumbnail.prefer_hw_codecs=true
 ro.media.recorder-max-base-layer-fps=60
-ro.media.xml_variant.profiles=_volcano_v0
+ro.media.xml_variant.profiles=_volcano_amethyst_v0
 
 # QTI
 ro.vendor.qti.va_aosp.support=1
