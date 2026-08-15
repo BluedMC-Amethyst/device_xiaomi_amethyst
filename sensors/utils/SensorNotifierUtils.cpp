@@ -27,3 +27,32 @@ bool readBool(int fd) {
     }
     return c != '0';
 }
+
+disp_event_resp* parseDispEvent(int fd) {
+    disp_event header;
+    ssize_t headerSize = read(fd, &header, sizeof(header));
+    if (headerSize < static_cast<ssize_t>(sizeof(header))) {
+        LOG(ERROR) << "unexpected display event header size: " << headerSize;
+        return nullptr;
+    }
+    struct disp_event_resp* response =
+            reinterpret_cast<struct disp_event_resp*>(malloc(header.length));
+    if (response == nullptr) {
+        LOG(ERROR) << "failed to allocate memory for disp_event_resp";
+        return nullptr;
+    }
+    response->base = header;
+    int dataLength = response->base.length - sizeof(response->base);
+    if (dataLength < 0) {
+        LOG(ERROR) << "invalid data length: " << response->base.length;
+        free(response);
+        return nullptr;
+    }
+    ssize_t dataSize = read(fd, &response->data, dataLength);
+    if (dataSize < dataLength) {
+        LOG(ERROR) << "unexpected display event data size: " << dataSize;
+        free(response);
+        return nullptr;
+    }
+    return response;
+}
