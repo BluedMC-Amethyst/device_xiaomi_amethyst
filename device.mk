@@ -319,6 +319,7 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors-service.xiaomi-multihal \
+    sensor-notifier \
     sensors.dynamic_sensor_hal \
     sensors.xiaomi.v2
 

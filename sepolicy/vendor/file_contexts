@@ -75,6 +75,7 @@
 
 # Sensors
 /vendor/bin/hw/android\.hardware\.sensors-service\.xiaomi-multihal                                                   u:object_r:hal_sensors_default_exec:s0
+/(vendor|system/vendor)/bin/sensor-notifier u:object_r:vendor_sensor_notifier_exec:s0
 
 # SNPE / AI / ML
 /(vendor|odm)/data/model/seg_quantized\.serialized\.8650\.pertensor_512_cls3r\.bin u:object_r:same_process_hal_file:s0
