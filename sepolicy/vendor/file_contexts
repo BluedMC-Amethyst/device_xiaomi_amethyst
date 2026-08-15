@@ -7,7 +7,7 @@
 
 # Battery
 /(vendor|system/vendor)/bin/batterysecret u:object_r:batterysecret_exec:s0
-/sys/class/qcom-battery(/.*)?            u:object_r:sysfs_batteryinfo:s0
+/sys/class/qcom-battery(/.*)?            u:object_r:vendor_sysfs_battery_supply:s0
 /sys/class/power_supply/battery/constant_charge_current            u:object_r:vendor_sysfs_power_supply:s0
 
 # Camera

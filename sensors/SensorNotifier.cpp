@@ -41,8 +41,8 @@ Result SensorNotifier::initializeSensorQueue(std::string typeAsString, bool wake
 
     auto it = std::find_if(sensorList.begin(), sensorList.end(),
                            [&typeAsString, &wakeup](const SensorInfo& sensor) {
-                               return (sensor.typeAsString == typeAsString) &&
-                                      ((sensor.flags & SensorFlagBits::WAKE_UP) == (wakeup ? SensorFlagBits::WAKE_UP : static_cast<SensorFlagBits>(0)));
+                               bool isWakeUp = (sensor.flags & static_cast<uint32_t>(SensorFlagBits::WAKE_UP)) != 0;
+                               return (sensor.typeAsString == typeAsString) && (isWakeUp == wakeup);
                            });
 
     if (it != sensorList.end()) {

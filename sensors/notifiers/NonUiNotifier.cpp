@@ -10,11 +10,11 @@
 
 #include <android-base/logging.h>
 #include <android-base/unique_fd.h>
-#include <linux/xiaomi_touch.h>
 #include <poll.h>
 #include <sys/ioctl.h>
 
 #include "SensorNotifierUtils.h"
+#include "xiaomi_touch.h"
 
 static const std::string kTouchDevice = "/dev/xiaomi-touch";
 
