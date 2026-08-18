@@ -458,13 +458,9 @@ on boot
     chown system system /sys/class/qcom-battery/fastchg_mode
     chmod 0664 /sys/class/qcom-battery/fastchg_mode
     
-# MIUI ADD: Modem_SingleSim
-on property:ro.miui.singlesim=1
-    setprop persist.radio.multisim.config "ssss"
-
-on property:ro.miui.singlesim=0
+# Modem_SingleSim
+on property:ro.miui.singlesim=*
     setprop persist.radio.multisim.config "dsds"
-# END Modem_SingleSim
 
 on init && property:ro.boot.mode=charger
     wait_for_prop vendor.all.modules.ready 1
