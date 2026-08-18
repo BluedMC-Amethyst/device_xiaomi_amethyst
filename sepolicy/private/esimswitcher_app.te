@@ -15,7 +15,6 @@ allow esimswitcher_app {
     network_management_service
     radio_service
     registry_service
-    subscription_service
     telephony_service
     uimode_service
     voiceinteraction_service
