@@ -324,17 +324,6 @@ on early-boot
     verity_update_state
 
 on boot
-    chown system system /sys/class/touch/touch_dev/fod_longpress_gesture_enabled
-    chmod 0660 /sys/class/touch/touch_dev/fod_longpress_gesture_enabled
-    chown system system /sys/class/touch/touch_dev/gesture_single_tap_enabled
-    chmod 0660 /sys/class/touch/touch_dev/gesture_single_tap_enabled
-    chown system system /sys/class/touch/touch_dev/gesture_single_tap_state
-    chmod 0664 /sys/class/touch/touch_dev/gesture_single_tap_state
-    chown system system /sys/class/touch/touch_dev/gesture_double_tap_enabled
-    chmod 0660 /sys/class/touch/touch_dev/gesture_double_tap_enabled
-    chown system system /sys/class/touch/touch_dev/gesture_double_tap_state
-    chmod 0664 /sys/class/touch/touch_dev/gesture_double_tap_state
-
     write /dev/cpuset/audio-app/cpus 0-7
     # Add a cpuset for the camera daemon
     # We want all cores for camera
