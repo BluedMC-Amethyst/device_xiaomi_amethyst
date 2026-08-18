@@ -7,20 +7,33 @@
 #include <aidl/android/hardware/power/BnPower.h>
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <display/drm/mi_disp.h>
-#include <linux/xiaomi_touch.h>
 #include <sys/ioctl.h>
 
+#define CMD_DATA_BUF_SIZE 256
+#define COMMON_DATA_CMD 0
+#define SELECT_TOUCH_ID 3
+#define SET_CUR_VALUE 0
+#define TOUCH_DOUBLETAP_MODE 14
+#define TOUCH_MAGIC 0x54
 #define TOUCH_DEV_PATH "/dev/xiaomi-touch"
-#define TOUCH_MAGIC 'T'
-#define TOUCH_IOC_SET_CUR_VALUE _IO(TOUCH_MAGIC, SET_CUR_VALUE)
+#define TOUCH_ID 0
+
+typedef struct {
+    int8_t   touch_id;
+    uint8_t  cmd;
+    uint16_t mode;
+    uint16_t data_len;
+    int32_t  data_buf[CMD_DATA_BUF_SIZE];
+} touch_data;
+
+#define TOUCH_IOC_COMMON_DATA _IOW(TOUCH_MAGIC, COMMON_DATA_CMD, touch_data)
+#define TOUCH_IOC_SELECT_TOUCH_ID _IOW(TOUCH_MAGIC, SELECT_TOUCH_ID, int)
 
 namespace aidl {
-namespace google {
+namespace android {
 namespace hardware {
 namespace power {
 namespace impl {
-namespace pixel {
 
 using ::aidl::android::hardware::power::Mode;
 
@@ -38,13 +51,15 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
     switch (type) {
         case Mode::DOUBLE_TAP_TO_WAKE: {
             int fd = open(TOUCH_DEV_PATH, O_RDWR);
-            if (fd >= 0) {
-                int buf[MAX_BUF_SIZE] = {MI_DISP_PRIMARY, Touch_Doubletap_Mode, enabled ? 1 : 0};
-                ioctl(fd, TOUCH_IOC_SET_CUR_VALUE, &buf);
-                close(fd);
-            } else {
-                LOG(ERROR) << "Failed to open " << TOUCH_DEV_PATH;
-            }
+            ioctl(fd, TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID);
+            touch_data data = {};
+            data.touch_id = TOUCH_ID;
+            data.cmd = SET_CUR_VALUE;
+            data.mode = TOUCH_DOUBLETAP_MODE;
+            data.data_len = 1;
+            data.data_buf[0] = enabled ? 1 : 0;
+            ioctl(fd, TOUCH_IOC_COMMON_DATA, &data);
+            close(fd);
             return true;
         }
         default:
@@ -52,9 +67,8 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
     }
 }
 
-}  // namespace pixel
 }  // namespace impl
 }  // namespace power
 }  // namespace hardware
-}  // namespace google
+}  // namespace android
 }  // namespace aidl
