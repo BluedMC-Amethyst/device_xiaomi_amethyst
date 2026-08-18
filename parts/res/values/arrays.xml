@@ -29,4 +29,24 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="hypercharge_limit_entries">
+        <item>120W (Ultra Fast)</item>
+        <item>90W (Very Fast)</item>
+        <item>67W (Fast)</item>
+        <item>50W</item>
+        <item>33W</item>
+        <item>18W</item>
+        <item>10W (Standard)</item>
+    </string-array>
+
+    <string-array name="hypercharge_limit_values">
+        <item>22000000</item>
+        <item>16500000</item>
+        <item>12300000</item>
+        <item>9200000</item>
+        <item>6000000</item>
+        <item>3300000</item>
+        <item>1800000</item>
+    </string-array>
 </resources>

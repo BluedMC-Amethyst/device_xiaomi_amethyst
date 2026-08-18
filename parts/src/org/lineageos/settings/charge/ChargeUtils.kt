@@ -61,7 +61,7 @@ class ChargeUtils(context: Context) {
 
     companion object {
         private const val TAG = "ChargeUtils"
-        const val BYPASS_CHARGE_NODE = "/sys/class/qcom-battery/input_suspend"
+        const val BYPASS_CHARGE_NODE = "/sys/class/qcom-battery/charge_control_en"
         private const val PREF_BYPASS_CHARGE = "bypass_charge"
     }
 }

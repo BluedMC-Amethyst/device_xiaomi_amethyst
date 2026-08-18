@@ -62,7 +62,9 @@ import androidx.compose.ui.unit.sp
 import org.lineageos.settings.R
 import org.lineageos.settings.corecontrol.CoreControlActivity
 import org.lineageos.settings.charge.ChargeActivity
+import org.lineageos.settings.hypercharge.HyperChargeSettingsActivity
 import org.lineageos.settings.kernelmanager.KernelManagerActivity
+import org.lineageos.settings.kprofiles.KprofilesSettingsActivity
 import org.lineageos.settings.gpumanager.GpuManagerActivity
 import org.lineageos.settings.saturation.SaturationActivity
 import org.lineageos.settings.refreshrate.RefreshSettingsActivity
@@ -87,11 +89,14 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
     val kernelManager = AmethystFeature("Kernel Manager", "Advanced system tuning", R.drawable.ic_kernel_manager, KernelManagerActivity::class.java)
     val gpuManager = AmethystFeature("GPU Manager", "Peak graphics performance", R.drawable.ic_gpu_manager, GpuManagerActivity::class.java)
     val thermalEngine = AmethystFeature("Thermal Engine", "Pro-active heat management", R.drawable.ic_thermal_settings, ThermalComposeActivity::class.java)
+    val systemFeatures = listOf(coreControl, kernelManager, gpuManager, thermalEngine)
     val carouselFeatures = listOf(
-        AmethystFeature("Display Labs", "Color & Saturation", R.drawable.ic_saturation_tile, SaturationActivity::class.java),
-        AmethystFeature("Clear Speaker", "Sonic dust removal", R.drawable.ic_clear_speaker, ClearSpeakerActivity::class.java),
+        AmethystFeature("Display Labs", "Color and saturation", R.drawable.ic_saturation_tile, SaturationActivity::class.java),
+        AmethystFeature("Clear Speaker", "Speaker cleaning utility", R.drawable.ic_clear_speaker, ClearSpeakerActivity::class.java),
         AmethystFeature("Smooth Display", "Per-app refresh rates", R.drawable.ic_refresh_default, RefreshSettingsActivity::class.java),
-        AmethystFeature("Bypass Charge", "Direct power delivery", R.drawable.ic_charge, ChargeActivity::class.java)
+        AmethystFeature("Bypass Charge", "Direct power delivery", R.drawable.ic_charge, ChargeActivity::class.java),
+        AmethystFeature("HyperCharge", "Charging speed control", R.drawable.ic_charge, HyperChargeSettingsActivity::class.java),
+        AmethystFeature("KProfiles", "Kernel performance profiles", R.drawable.ic_kprofiles, KprofilesSettingsActivity::class.java)
     )
 
     val carouselState = rememberCarouselState { carouselFeatures.size }
@@ -150,33 +155,14 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
                 }
 
                 StaggeredAnimatedItem(index = 1, isVisible = isVisible, modifier = Modifier.fillMaxWidth()) {
-                    Row(
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .height(IntrinsicSize.Max),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.Top
+                            .padding(horizontal = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Column(
-                            modifier = Modifier.weight(1f),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            GroupedFeatureCard(listOf(gpuManager), context)
-                            GroupedFeatureCard(listOf(thermalEngine), context)
-                        }
-                        
-                        Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                        ) {
-                            GroupedFeatureCard(
-                                features = listOf(coreControl, kernelManager), 
-                                context = context,
-                                modifier = Modifier.fillMaxHeight(),
-                                stretchHeight = true
-                            )
+                        systemFeatures.forEach { feature ->
+                            GroupedFeatureCard(listOf(feature), context)
                         }
                     }
                 }
@@ -318,7 +304,7 @@ private fun CollapsingHeader(
                     }
             ) {
                 Text(
-                    text = "GARNET PARTS",
+                    text = "AMETHYST PARTS",
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.Black,
                         letterSpacing = 2.sp
@@ -422,7 +408,7 @@ fun HeroBanner(scrollValue: Int = 0) {
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
-                    "RN 13 PRO 5G /\nPOCO X6 5G",
+                    "XIAOMI AMETHYST",
                     style = MaterialTheme.typography.headlineSmall.copy(
                         fontWeight = FontWeight.Black,
                         lineHeight = 28.sp,

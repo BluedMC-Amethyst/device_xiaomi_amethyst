@@ -33,8 +33,10 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Display.HdrCapabilities;
 
+import org.lineageos.settings.Constants;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
+import org.lineageos.settings.hypercharge.HyperChargeService;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.IS_SUPPORTED;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.KPROFILES_AUTO_KEY;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.KPROFILES_AUTO_NODE;
@@ -54,6 +56,28 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.i(TAG, "Received intent: " + intent.getAction());
+        
+        PreferenceManager.setDefaultValues(context, R.xml.hypercharge_settings, false);
+
+        try {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            boolean isHyperChargeEnabled = prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, true);
+
+            // Note: We use a try-catch here as well just in case boot happens before UI sanitization
+            String currentLimit;
+            try {
+                currentLimit = prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W);
+            } catch (ClassCastException e) {
+                currentLimit = Constants.CHARGE_LIMIT_120W;
+            }
+
+            if (!isHyperChargeEnabled || !Constants.CHARGE_LIMIT_120W.equals(currentLimit)) {
+                context.startService(new Intent(context, HyperChargeService.class));
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to start HyperChargeService on boot", e);
+        }
+
         switch (intent.getAction()) {
             case Intent.ACTION_LOCKED_BOOT_COMPLETED:
                 handleLockedBootCompleted(context);

@@ -116,11 +116,17 @@
             android:permission="ThermalService">
         </service>
             
-        <!-- Thermal Profiles tile service -->
+        <!-- Bypass Charging -->
+        <activity
+            android:name=".charge.ChargeActivity"
+            android:label="@string/charge_bypass_title"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:exported="false" />
+
         <service
-            android:name=".thermal.ThermalTileService"
-            android:label="@string/thermal_title"
-            android:icon="@drawable/ic_thermal_settings"
+            android:name=".charge.ChargeTileService"
+            android:label="@string/charge_bypass_title"
+            android:icon="@drawable/ic_bypass_charge_enabled"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>
@@ -128,12 +134,36 @@
             </intent-filter>
         </service>
 
-        <!-- Bypass Charging -->
+        <!-- HyperCharge Settings, Service and Tile -->
         <activity
-            android:name=".charge.ChargeActivity"
-            android:label="@string/charge_bypass_title"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:name=".hypercharge.HyperChargeSettingsActivity"
+            android:label="@string/hypercharge_title"
+            android:theme="@style/Theme.SubSettingsBase.Expressive"
             android:exported="false" />
+
+        <service
+            android:name=".hypercharge.HyperChargeService"
+            android:exported="false" />
+
+        <service
+            android:name=".hypercharge.HyperChargeTileService"
+            android:label="@string/hypercharge_tile_label"
+            android:icon="@drawable/ic_qs_hypercharge_on"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- Tile Handler helper activity -->
+        <activity
+            android:name=".TileHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
+        </activity>
 
         <!-- Core Control -->
         <activity

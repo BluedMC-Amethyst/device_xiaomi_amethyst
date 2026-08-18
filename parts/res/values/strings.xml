@@ -157,6 +157,27 @@
     <string name="amethyst_parts_title">Amethyst Parts</string>
     <string name="amethyst_parts_summary">System is Yours</string>
     <string name="amethyst_parts_description">Your central hub for advanced hardware controls. Fine-tune performance, display, battery, and kernel settings to optimize your device experience</string>
+
+    <!-- Bypass Charging Tile -->
+    <string name="bypass_charge_tile_label">Bypass Charging</string>
+    <string name="bypass_charge_tile_enabled_subtitle">Active</string>
+    <string name="bypass_charge_tile_disabled_subtitle">Inactive</string>
+
+    <!-- HyperCharge Settings and Tile -->
+    <string name="hypercharge_title">HyperCharge</string>
+    <string name="hypercharge_main_switch_title">Enable HyperCharge</string>
+    <string name="hypercharge_settings_category">Charging Limit Configuration</string>
+    <string name="hypercharge_limit_title">Set Current Limit</string>
+    <string name="hypercharge_description_title">About HyperCharge</string>
+    <string name="hypercharge_description_summary">Xiaomi HyperCharge allows extremely fast charging by dynamically adjusting current up to 120W (22000mA). Lowering the limit can reduce heat and extend battery health.</string>
+    <string name="hypercharge_tile_label">HyperCharge</string>
+    <string name="hypercharge_speed_120w">120W (Max)</string>
+    <string name="hypercharge_speed_90w">90W</string>
+    <string name="hypercharge_speed_67w">67W</string>
+    <string name="hypercharge_speed_50w">50W</string>
+    <string name="hypercharge_speed_33w">33W</string>
+    <string name="hypercharge_speed_18w">18W</string>
+    <string name="hypercharge_speed_10w">10W</string>
     
     <!-- Kprofiles -->
     <string name="kprofiles_title">KProfiles</string>
