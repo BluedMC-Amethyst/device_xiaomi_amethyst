@@ -25,39 +25,154 @@
     <string name="tile_on">On</string>
     <string name="tile_off">Off</string>
 
-    <!-- Bypass Charge Strings -->
-    <string name="bypass_charge_tile_label">Bypass Charge</string>
-    <string name="bypass_charge_tile_enabled_subtitle">Bypass charging is enabled</string>
-    <string name="bypass_charge_tile_disabled_subtitle">Bypass charging is disabled</string>
+    <!-- Thermal Profiles -->
+    <string name="thermal_title">Thermal profiles</string>
+    <string name="thermal_enable">Use thermal profiles</string>
+    <string name="thermal_summary">Per-app thermal profile configuration</string>
+    <string name="thermal_apps_title">Apps</string>
+    <string name="thermal_loading">Loading...</string>
+    <string name="thermal_default">Default</string>
+    <string name="thermal_benchmark">Benchmark</string>
+    <string name="thermal_browser">Browser</string>
+    <string name="thermal_camera">Camera</string>
+    <string name="thermal_dialer">Dialer</string>
+    <string name="thermal_gaming">Gaming</string>
+    <string name="thermal_navigation">Navigation</string>
+    <string name="thermal_streaming">Streaming</string>
+    <string name="thermal_video">Video</string>
+    <string name="thermal_reset">Reset to defaults</string>
+    <string name="thermal_reset_message">Are you sure you want to reset thermal profile for all apps?</string>
+
+    <!-- Per-app refresh rate -->
+    <string name="refresh_title">Per-app refresh rate</string>
+    <string name="refresh_summary">Set the maximum refresh rate for a specific application</string>
+    <string name="refresh_default">Default</string>
+    <string name="refresh_60">60Hz</string>
+    <string name="refresh_90">90Hz</string>
+    <string name="refresh_120">120Hz</string>
+    <string name="refresh_60_land">60Hz on Landscape</string>
+    <string name="refresh_90_land">90Hz on Landscape</string>
+    <string name="refresh_120_land">120Hz on Landscape</string>
 
     <!-- Clear Speaker -->
-   <string name="clear_speaker_title">Clear speaker</string>
-   <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
-   <string name="clear_speaker_description">Run this feature once or twice if you find that your speaker is lightly blocked by dust. Set media volume to maximum.\n\nIf the speaker is blocked heavily, run this feature 2-5 times while shaking your device with the speaker facing downwards.</string>
+    <string name="clear_speaker_title">Clear speaker</string>
+    <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
+    <string name="clear_speaker_description">Run this feature once or twice if you find that your
+          speaker is lightly blocked by dust. Set media volume to maximum.\n\nIf the speaker is
+          blocked heavily, run this feature 2-5 times while shaking your device with the speaker
+          facing downwards.</string>
 
-    <!-- HyperCharge Strings -->
-    <string name="hypercharge_title">120W HyperCharge</string>
-    <string name="hypercharge_tile_label">HyperCharge</string>
-    <string name="hypercharge_main_switch_title">Enable 120W HyperCharge</string>
-    <string name="hypercharge_settings_category">Charging Configuration</string>
-    <string name="hypercharge_limit_title">Charging Speed Limit</string>
+    <!-- Saturation -->
+    <string name="saturation_title">Display Saturation</string>
+    <string name="saturation_summary">Control the saturation level of the display</string>
+    <string name="saturation_footer_summary">Changing the color mode in display settings will
+          override the saturation level, requiring it to be reapplied.</string>
 
-    <!-- HyperCharge QS Tile speed subtitles -->
-    <string name="hypercharge_speed_120w">120W</string>
-    <string name="hypercharge_speed_90w">90W</string>
-    <string name="hypercharge_speed_67w">67W</string>
-    <string name="hypercharge_speed_50w">50W</string>
-    <string name="hypercharge_speed_33w">33W</string>
-    <string name="hypercharge_speed_18w">18W</string>
-    <string name="hypercharge_speed_10w">10W</string>
+    <!-- Image preview -->
+    <string name="image_preview_content_description">Preview</string>
+    <string name="image_preview_next_page_content_description">Next</string>
+    <string name="image_preview_previous_page_content_description">Previous</string>
 
-    <string name="hypercharge_description_title">About HyperCharge Control</string>
-    <string name="hypercharge_description_summary">HyperCharge (120W) provides extreme charging speeds but generates significant heat, which can accelerate battery wear and reduce long-term lifespan. \n\n• ON (120W): Service is stopped — the kernel controls charging at full factory speed.\n• ON (other speed): Service enforces your selected speed limit.\n• OFF: Service runs and enforces a 33W protection limit to reduce battery wear and heat.\n\nNote: This service only intervenes when a Xiaomi HyperCharge power brick is detected.</string>
-    
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong
+          tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
     <!-- Charge bypass strings -->
     <string name="charge_bypass_title">Bypass charging</string>
     <string name="charge_bypass_summary">Enable direct charging, bypassing battery</string>
     <string name="charge_bypass_warning">Warning: Bypass charging may cause increased device temperature or battery damage. Use with caution.</string>
     <string name="charge_bypass_unavailable">Bypass charging is not supported on this device</string>
+
+    <!-- Core Control -->
+    <string name="core_control_title">Core Control</string>
+    <string name="core_control_summary">Manually enable or disable individual CPU cores</string>
+    <string name="core_control_description">Advanced CPU control. Turning off cores may save battery or thermal load, but may affect performance and stability.\n\nAt least two little cores must remain online at all times.</string>
+    <string name="core_0">Core 0</string>
+    <string name="core_1">Core 1</string>
+    <string name="core_2">Core 2</string>
+    <string name="core_3">Core 3</string>
+    <string name="core_4">Core 4</string>
+    <string name="core_5">Core 5</string>
+    <string name="core_6">Core 6 (Big)</string>
+    <string name="core_7">Core 7 (Big)</string>
+
+    <!-- Kernel Manager -->
+    <string name="kernel_manager_title">Kernel Manager</string>
+    <string name="kernel_manager_summary">Manage CPU frequencies, governor and KProfiles</string>
+    <string name="cpu_governor_title">CPU Governor</string>
+    <string name="cpu_governor_summary">Current: %s</string>
+    <string name="cpu_min_freq_title">Minimum Frequency</string>
+    <string name="cpu_max_freq_title">Maximum Frequency</string>
+    <string name="efficiency_cluster_title">Efficiency Cluster</string>
+    <string name="performance_cluster_title">Performance Cluster</string>
+    <string name="kernel_info_category">Information</string>
+    <string name="kernel_info_title">About Kernel Manager</string>
+    <string name="kernel_info_summary">Manage CPU governor, KProfiles and frequency scaling for all CPU clusters. Changes may affect performance and battery life.</string>
+    <string name="apply_settings">Apply Settings</string>
+    <string name="apply_on_boot_title">Apply on Boot</string>
+    <string name="apply_on_boot_summary">Automatically apply these settings when the device boots</string>
+    <string name="reset_settings">Reset to Default</string>
+    <string name="settings_applied">Settings applied successfully</string>
+    <string name="settings_reset">Settings reset to default</string>
+    <string name="kernel_value_unavailable">Unavailable</string>
+
+    <!-- GPU Manager -->
+    <string name="gpu_manager_title">GPU Manager</string>
+    <string name="gpu_manager_summary">Manage GPU frequencies and power settings</string>
+    <string name="gpu_governor_title">GPU Governor</string>
+    <string name="gpu_governor_summary">Current: %s</string>
+    <string name="gpu_freq_title">GPU Frequencies</string>
+    <string name="gpu_min_freq_title">Minimum Frequency</string>
+    <string name="gpu_max_freq_title">Maximum Frequency</string>
+    <string name="gpu_current_freq_title">Current Frequency</string>
+    <string name="gpu_power_title">Power Settings</string>
+    <string name="gpu_force_clk_on_title">Force Clock On</string>
+    <string name="gpu_force_clk_on_summary">Keep GPU clock always on</string>
+    <string name="gpu_force_bus_on_title">Force Bus On</string>
+    <string name="gpu_force_bus_on_summary">Keep GPU bus always on</string>
+    <string name="gpu_force_rail_on_title">Force Rail On</string>
+    <string name="gpu_force_rail_on_summary">Keep GPU power rail always on</string>
+    <string name="gpu_force_no_nap_title">Force No Nap</string>
+    <string name="gpu_force_no_nap_summary">Disable GPU napping between frames</string>
+    <string name="gpu_bus_split_title">Bus Split</string>
+    <string name="gpu_bus_split_summary">Enable GPU bus splitting</string>
+    <string name="gpu_thermal_title">Thermal Status</string>
+    <string name="gpu_thermal_pwrlevel_title">Thermal Power Level</string>
+    <string name="gpu_thermal_pwrlevel_summary">Current thermal power level</string>
+    <string name="gpu_temp_title">GPU Temperature</string>
+    <string name="gpu_info_title">GPU Information</string>
+    <string name="gpu_model_title">GPU Model</string>
+    <string name="gpu_busy_percentage_title">GPU Load</string>
+    <string name="gpu_reset_count_title">Reset Count</string>
+    <string name="gpu_preempt_count_title">Preemption Count</string>
+    <string name="gpu_info_category">GPU Information</string>
+    <string name="gpu_settings_category">GPU Settings</string>
+    <string name="gpu_advanced_category">Advanced Settings</string>
+    <string name="gpu_info_summary">Manage GPU frequency scaling and power settings. Changes may affect performance and battery life.</string>
+
+    <!-- Amethyst Parts -->
+    <string name="amethyst_parts_title">Amethyst Parts</string>
+    <string name="amethyst_parts_summary">System is Yours</string>
+    <string name="amethyst_parts_description">Your central hub for advanced hardware controls. Fine-tune performance, display, battery, and kernel settings to optimize your device experience</string>
+    
+    <!-- Kprofiles -->
+    <string name="kprofiles_title">KProfiles</string>
+    <string name="kprofiles_summary">Managing Kernelspace profiles to achieve balancing in terms of battery backup and performance</string>
+    <string name="kprofiles_auto_title">Use Auto KProfiles</string>
+    <string name="kprofiles_auto_summary">Automatically switch to battery mode when device screen turns off and back to default profile when screen turns on</string>
+    <string name="kprofiles_modes_title">KProfiles Modes</string>
+    <string name="kprofiles_modes_none">None</string>
+    <string name="kprofiles_modes_battery">Battery</string>
+    <string name="kprofiles_modes_balanced">Balanced</string>
+    <string name="kprofiles_modes_performance">Performance</string>
+    <string name="kprofiles_not_supported">KProfiles is not currently supported by the kernel</string>
+    <string name="kprofiles_modes_description" translatable="false"><xliff:g id="description">%s</xliff:g></string>
+    <string name="kprofiles_modes_none_description">Regulate and manage in-kernel activities in a profile-oriented manner to achieve balance in terms of battery backup and performance accordingly</string>
+    <string name="kprofiles_modes_battery_description">Battery Mode:\nSkip all userspace and/or in-kernel boosts, reduces gpu scaling frequency</string>
+    <string name="kprofiles_modes_balanced_description">Balanced Mode:\nTips the balance between battery and performance modes</string>
+    <string name="kprofiles_modes_performance_description">Performance Mode:\nMaximize all boosts, increases gpu scaling frequency to its max</string>
 
 </resources>

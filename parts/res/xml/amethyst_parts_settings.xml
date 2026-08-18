@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/amethyst_parts_title">
+
+    <Preference
+        android:key="core_control"
+        android:title="@string/core_control_title"
+        android:summary="@string/core_control_summary"
+        android:icon="@drawable/ic_cpu" />
+
+    <Preference
+        android:key="bypass_charge"
+        android:title="@string/charge_bypass_title"
+        android:summary="@string/charge_bypass_summary"
+        android:icon="@drawable/ic_charge" />
+
+    <Preference
+        android:key="clear_speaker_pref"
+        android:title="@string/clear_speaker_title"
+        android:icon="@drawable/ic_clear_speaker"
+        android:summary="@string/clear_speaker_summary"/>
+
+    <Preference
+        android:key="gpu_manager"
+        android:title="@string/gpu_manager_title"
+        android:summary="@string/gpu_manager_summary"
+        android:icon="@drawable/ic_gpu_manager" />
+
+    <Preference
+        android:key="kernel_manager"
+        android:title="@string/kernel_manager_title"
+        android:summary="@string/kernel_manager_summary"
+        android:icon="@drawable/ic_kernel_manager" />
+
+    <Preference
+        android:key="thermal_enable"
+        android:title="@string/thermal_title"
+        android:summary="@string/thermal_summary"
+        android:icon="@drawable/ic_thermal_settings" />
+        
+    <Preference
+        android:key="saturation"
+        android:title="@string/saturation_title"
+        android:summary="@string/saturation_summary"
+        android:icon="@drawable/ic_saturation_tile" />
+        
+    <Preference
+        android:key="refreshrate"
+        android:title="@string/refresh_title"
+        android:summary="@string/refresh_summary"
+        android:icon="@drawable/ic_refresh_default" />
+        
+    <com.android.settingslib.widget.FooterPreference
+        android:key="footer"
+        android:title="@string/amethyst_parts_description"
+        android:selectable="false" />
+        
+</PreferenceScreen>
