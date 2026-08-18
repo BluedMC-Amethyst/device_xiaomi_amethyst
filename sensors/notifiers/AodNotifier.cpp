@@ -88,11 +88,13 @@ void AodNotifier::notify() {
         int rc = poll(&dispEventPoll, 1, -1);
         if (rc < 0) {
             LOG(ERROR) << "failed to poll " << kDispFeatureDevice << ", err: " << rc;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
             continue;
         }
 
         struct disp_event_resp* response = parseDispEvent(disp_fd_.get());
         if (response == nullptr) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
             continue;
         }
 

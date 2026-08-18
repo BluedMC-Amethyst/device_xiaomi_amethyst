@@ -29,30 +29,25 @@ bool readBool(int fd) {
 }
 
 disp_event_resp* parseDispEvent(int fd) {
-    disp_event header;
-    ssize_t headerSize = read(fd, &header, sizeof(header));
-    if (headerSize < static_cast<ssize_t>(sizeof(header))) {
-        LOG(ERROR) << "unexpected display event header size: " << headerSize;
+    char buf[1024];
+    memset(buf, 0, sizeof(buf));
+    ssize_t n = read(fd, buf, sizeof(buf));
+    if (n < static_cast<ssize_t>(sizeof(disp_event))) {
         return nullptr;
     }
+
+    disp_event_resp* resp = reinterpret_cast<disp_event_resp*>(buf);
+    if (resp->base.length < sizeof(disp_event) || resp->base.length > sizeof(buf)) {
+        return nullptr;
+    }
+
     struct disp_event_resp* response =
-            reinterpret_cast<struct disp_event_resp*>(malloc(header.length));
+            reinterpret_cast<struct disp_event_resp*>(malloc(resp->base.length));
     if (response == nullptr) {
         LOG(ERROR) << "failed to allocate memory for disp_event_resp";
         return nullptr;
     }
-    response->base = header;
-    int dataLength = response->base.length - sizeof(response->base);
-    if (dataLength < 0) {
-        LOG(ERROR) << "invalid data length: " << response->base.length;
-        free(response);
-        return nullptr;
-    }
-    ssize_t dataSize = read(fd, &response->data, dataLength);
-    if (dataSize < dataLength) {
-        LOG(ERROR) << "unexpected display event data size: " << dataSize;
-        free(response);
-        return nullptr;
-    }
+
+    memcpy(response, buf, resp->base.length);
     return response;
 }
