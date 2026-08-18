@@ -110,6 +110,8 @@ public:
 
   void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/,
                     float /*major*/) override {
+    if (mAuthSuccess)
+      return;
     if (mUnlockTransition)
       return;
 
@@ -182,10 +184,25 @@ public:
     forceDeepClean(/*isCancel=*/true);
   }
 
+  void onAuthenticationSucceeded() override {
+    mAuthSuccess = true;
+    onFingerUp();
+    std::thread([this]() {
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      mAuthSuccess = false;
+    }).detach();
+  }
+
+  void onAuthenticationFailed() override {
+    onFingerUp();
+  }
+
 private:
   fingerprint_device_t *mDevice;
   android::base::unique_fd touch_fd_;
   android::base::unique_fd disp_fd_;
+
+  std::atomic<bool> mAuthSuccess{false};
 
   std::atomic<bool> mAuthActive;
   std::atomic<bool> mScreenOn;

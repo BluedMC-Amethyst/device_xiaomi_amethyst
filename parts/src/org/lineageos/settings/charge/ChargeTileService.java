@@ -52,7 +52,7 @@ public class ChargeTileService extends TileService {
         // Toggle the master switch via ChargeUtils.
         boolean enabled = mSharedPrefs.getBoolean(KEY_BYPASS_CHARGE, false);
         boolean newState = !enabled;
-        ChargeUtils.getInstance(this).enableBypassCharge(newState);
+        new ChargeUtils(this).enableBypassCharge(newState);
         Log.d(TAG, "Bypass charge switch toggled to: " + newState);
         updateTile();
     }

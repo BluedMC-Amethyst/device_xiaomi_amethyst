@@ -17,6 +17,11 @@
 package org.lineageos.settings;
 
 public class Constants {
+
+    // Saturation
+    public static final String KEY_SATURATION = "saturation";
+    public static final String KEY_SATURATION_PREVIEW = "saturation_preview";
+
     // HyperCharge
     public static final String KEY_HYPERCHARGE_STATUS = "hypercharge_status";
     public static final String KEY_HYPERCHARGE_LIMIT = "hypercharge_limit";
@@ -31,4 +36,5 @@ public class Constants {
     public static final String CHARGE_LIMIT_33W = "6000000";
     public static final String CHARGE_LIMIT_18W = "3300000";
     public static final String CHARGE_LIMIT_10W = "1800000";
+
 }

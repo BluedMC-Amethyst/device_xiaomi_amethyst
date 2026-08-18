@@ -28,3 +28,21 @@ allow system_app vendor_sysfs_qcom_battery:dir r_dir_perms;
 allow system_app vendor_sysfs_qcom_battery:dir search;
 allow system_app vendor_sysfs_usb_supply:file r_file_perms;
 allow system_app vendor_sysfs_usb_supply:dir r_dir_perms;
+
+# Core Control
+allow system_app vendor_sysfs_corecontrol:dir search;
+allow system_app vendor_sysfs_corecontrol:file { getattr open read write };
+
+# Kernel Manager
+allow system_app sysfs_devices_system_cpu:file { open read write };
+allow system_app sysfs_devices_system_cpu:dir search;
+
+# GPU Manager
+allow system_app sysfs_kgsl:file { getattr open read write };
+allow system_app sysfs_kgsl:dir search;
+allow system_app vendor_sysfs_kgsl_gpuclk:file { getattr open read write };
+allow system_app vendor_sysfs_kgsl_gpuclk:dir search;
+allow system_app sysfs_kgsl:lnk_file read;
+
+# Allow KProfiles to be adjusted by a system app
+allow system_app sysfs_kprofiles:file rw_file_perms;

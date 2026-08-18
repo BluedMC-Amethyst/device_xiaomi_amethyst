@@ -1,3 +1,9 @@
+//
+// Copyright (C) 2021 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
 cc_library_static {
     name: "libpowermode-ext-amethyst",
     defaults: [
@@ -9,5 +15,9 @@ cc_library_static {
     ],
     shared_libs: [
         "libbase",
+        "libbinder_ndk",
+    ],
+    header_libs: [
+        "generated_kernel_headers",
     ],
 }

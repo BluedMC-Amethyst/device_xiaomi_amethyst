@@ -3,13 +3,24 @@ typeattribute esimswitcher_app mlstrustedsubject;
 
 app_domain(esimswitcher_app)
 
-allow esimswitcher_app activity_service:service_manager find;
-allow esimswitcher_app activity_task_service:service_manager find;
-allow esimswitcher_app audio_service:service_manager find;
-allow esimswitcher_app netstats_service:service_manager find;
-allow esimswitcher_app radio_service:service_manager find;
-allow esimswitcher_app voiceinteraction_service:service_manager find;
+allow esimswitcher_app {
+    activity_service
+    activity_task_service
+    audio_service
+    autofill_service
+    content_capture_service
+    device_policy_service
+    gpu_service
+    netstats_service
+    network_management_service
+    radio_service
+    registry_service
+    uimode_service
+    voiceinteraction_service
+}:service_manager find;
 
 allow esimswitcher_app system_app_data_file:dir create_dir_perms;
 allow esimswitcher_app system_app_data_file:file create_file_perms;
 allow esimswitcher_app system_app_data_file:lnk_file create_file_perms;
+allow esimswitcher_app radio_data_file:dir create_dir_perms;
+allow esimswitcher_app radio_data_file:file create_file_perms;
