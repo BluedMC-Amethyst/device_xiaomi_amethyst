@@ -1,0 +1,3 @@
+# Allow esimswitcher_app to find vendor services
+allow esimswitcher_app vendor_hal_qspmhal_service:service_manager find;
+allow esimswitcher_app qcrilmsgtunnel_service:service_manager find;
