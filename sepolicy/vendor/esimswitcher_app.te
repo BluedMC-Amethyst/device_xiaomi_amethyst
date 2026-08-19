@@ -1,2 +1,1 @@
-# Allow esimswitcher_app to find vendor services
-allow esimswitcher_app vendor_hal_qspmhal_service:service_manager find;
+typeattribute esimswitcher_app vendor_hal_qspmhal_client;

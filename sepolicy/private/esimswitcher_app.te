@@ -1,6 +1,3 @@
-type esimswitcher_app, domain;
-typeattribute esimswitcher_app mlstrustedsubject;
-
 app_domain(esimswitcher_app)
 
 allow esimswitcher_app {
