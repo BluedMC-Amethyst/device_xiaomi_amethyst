@@ -19,7 +19,6 @@ package org.lineageos.settings.amethystparts
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.view.HapticFeedbackConstants
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -34,24 +33,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
-import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
-import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -78,34 +72,28 @@ data class AmethystFeature(
     val activityClass: Class<*>
 )
 
-val PremiumCardShape = RoundedCornerShape(32.dp)
+val PremiumCardShape = RoundedCornerShape(28.dp)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AmethystDashboard(onBackPressed: () -> Unit) {
     val context = LocalContext.current
-    val view = LocalView.current
-    val coreControl = AmethystFeature("Core Control", "Optimized CPU management", R.drawable.ic_cpu, CoreControlActivity::class.java)
-    val kernelManager = AmethystFeature("Kernel Manager", "Advanced system tuning", R.drawable.ic_kernel_manager, KernelManagerActivity::class.java)
-    val gpuManager = AmethystFeature("GPU Manager", "Peak graphics performance", R.drawable.ic_gpu_manager, GpuManagerActivity::class.java)
-    val thermalEngine = AmethystFeature("Thermal Engine", "Pro-active heat management", R.drawable.ic_thermal_settings, ThermalComposeActivity::class.java)
-    val systemFeatures = listOf(coreControl, kernelManager, gpuManager, thermalEngine)
-    val carouselFeatures = listOf(
-        AmethystFeature("Display Labs", "Color and saturation", R.drawable.ic_saturation_tile, SaturationActivity::class.java),
-        AmethystFeature("Clear Speaker", "Speaker cleaning utility", R.drawable.ic_clear_speaker, ClearSpeakerActivity::class.java),
-        AmethystFeature("Smooth Display", "Per-app refresh rates", R.drawable.ic_refresh_default, RefreshSettingsActivity::class.java),
-        AmethystFeature("Bypass Charge", "Direct power delivery", R.drawable.ic_charge, ChargeActivity::class.java),
-        AmethystFeature("HyperCharge", "Charging speed control", R.drawable.ic_charge, HyperChargeSettingsActivity::class.java),
-        AmethystFeature("KProfiles", "Kernel performance profiles", R.drawable.ic_kprofiles, KprofilesSettingsActivity::class.java)
+
+    val performanceFeatures = listOf(
+        AmethystFeature("Core Control", "CPU core activation & onlining", R.drawable.ic_cpu, CoreControlActivity::class.java),
+        AmethystFeature("Kernel Manager", "Governor & triple-cluster scaling", R.drawable.ic_kernel_manager, KernelManagerActivity::class.java),
+        AmethystFeature("GPU Manager", "Graphics clock & power tuning", R.drawable.ic_gpu_manager, GpuManagerActivity::class.java),
+        AmethystFeature("Thermal Engine", "Per-app thermal profile profiles", R.drawable.ic_thermal_settings, ThermalComposeActivity::class.java)
     )
 
-    val carouselState = rememberCarouselState { carouselFeatures.size }
-    
-    LaunchedEffect(carouselState) {
-        snapshotFlow { carouselState.currentItem }.collect {
-            view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
-        }
-    }
+    val utilityFeatures = listOf(
+        AmethystFeature("Display Labs", "Screen color mode & saturation", R.drawable.ic_saturation_tile, SaturationActivity::class.java),
+        AmethystFeature("Clear Speaker", "High-frequency speaker cleaning", R.drawable.ic_clear_speaker, ClearSpeakerActivity::class.java),
+        AmethystFeature("Smooth Display", "Per-app display refresh rates", R.drawable.ic_refresh_default, RefreshSettingsActivity::class.java),
+        AmethystFeature("Bypass Charge", "Direct power delivery without battery heat", R.drawable.ic_charge, ChargeActivity::class.java),
+        AmethystFeature("HyperCharge", "Custom charging current & speed limit", R.drawable.ic_charge, HyperChargeSettingsActivity::class.java),
+        AmethystFeature("KProfiles", "In-kernel automated performance profiles", R.drawable.ic_kprofiles, KprofilesSettingsActivity::class.java)
+    )
 
     val darkTheme = isSystemInDarkTheme()
     val colorScheme = when {
@@ -146,7 +134,7 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
                     .verticalScroll(scrollState),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
                 
                 StaggeredAnimatedItem(index = 0, isVisible = isVisible) {
                     Box(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -154,22 +142,36 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
                     }
                 }
 
-                StaggeredAnimatedItem(index = 1, isVisible = isVisible, modifier = Modifier.fillMaxWidth()) {
+                // Performance Engine Section
+                StaggeredAnimatedItem(index = 1, isVisible = isVisible) {
+                    Text(
+                        "PERFORMANCE ENGINE",
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            fontWeight = FontWeight.Bold, 
+                            letterSpacing = 2.sp
+                        ),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                StaggeredAnimatedItem(index = 2, isVisible = isVisible, modifier = Modifier.fillMaxWidth()) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        systemFeatures.forEach { feature ->
-                            GroupedFeatureCard(listOf(feature), context)
+                        performanceFeatures.forEach { feature ->
+                            DashboardFeatureCard(feature, context)
                         }
                     }
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                StaggeredAnimatedItem(index = 2, isVisible = isVisible) {
+                // System Utilities Section
+                StaggeredAnimatedItem(index = 3, isVisible = isVisible) {
                     Text(
                         "SYSTEM UTILITIES",
                         modifier = Modifier.padding(horizontal = 24.dp),
@@ -181,26 +183,20 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
                     )
                 }
 
-                StaggeredAnimatedItem(index = 3, isVisible = isVisible) {
-                    HorizontalMultiBrowseCarousel(
-                        state = carouselState,
-                        preferredItemWidth = 190.dp,
-                        itemSpacing = 16.dp,
-                        contentPadding = PaddingValues(horizontal = 16.dp),
+                StaggeredAnimatedItem(index = 4, isVisible = isVisible, modifier = Modifier.fillMaxWidth()) {
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(240.dp)
-                    ) { index ->
-                        val feature = carouselFeatures[index]
-                        CarouselFeatureItem(
-                            feature = feature, 
-                            context = context,
-                            modifier = Modifier.maskClip(PremiumCardShape)
-                        )
+                            .padding(horizontal = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        utilityFeatures.forEach { feature ->
+                            DashboardFeatureCard(feature, context)
+                        }
                     }
                 }
                 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(28.dp))
             }
         }
     }
@@ -328,7 +324,6 @@ private fun CollapsingHeader(
     }
 }
 
-
 @Composable
 fun HeroBanner(scrollValue: Int = 0) {
     val infiniteTransition = rememberInfiniteTransition(label = "hero_banner")
@@ -447,216 +442,86 @@ fun HeroBanner(scrollValue: Int = 0) {
 }
 
 @Composable
-fun GroupedFeatureCard(
-    features: List<AmethystFeature>, 
-    context: Context, 
-    modifier: Modifier = Modifier, 
-    stretchHeight: Boolean = false
-) {
-    val isGrouped = features.size > 1 
-    val cardBgColor = if (isGrouped) {
-        MaterialTheme.colorScheme.surfaceVariant
-    } else {
-        MaterialTheme.colorScheme.surfaceContainer
-    }
-
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = cardBgColor,
-            contentColor = MaterialTheme.colorScheme.onSurface
-        ),
-        shape = PremiumCardShape,
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        val columnModifier = if (stretchHeight) Modifier.fillMaxSize() else Modifier
-        Column(modifier = columnModifier) {
-            features.forEachIndexed { index, feature ->
-                val itemShape = when {
-                    !isGrouped -> PremiumCardShape
-                    index == 0 -> RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
-                    index == features.size - 1 -> RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 32.dp, bottomEnd = 32.dp)
-                    else -> RoundedCornerShape(4.dp)
-                }
-
-                if (stretchHeight) {
-                    FeatureItemContent(
-                        feature = feature, 
-                        context = context, 
-                        isGrouped = isGrouped, 
-                        shape = itemShape,
-                        modifier = Modifier.weight(1f).fillMaxWidth()
-                    )
-                } else {
-                    FeatureItemContent(
-                        feature = feature, 
-                        context = context, 
-                        isGrouped = isGrouped, 
-                        shape = itemShape,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                
-                if (index < features.size - 1) {
-                    HorizontalDivider(
-                        modifier = Modifier.padding(horizontal = 22.dp),
-                        thickness = 1.dp,
-                        color = if (isGrouped) MaterialTheme.colorScheme.outline else MaterialTheme.colorScheme.outlineVariant
-                    )
-                }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CarouselFeatureItem(
-    feature: AmethystFeature, 
+fun DashboardFeatureCard(
+    feature: AmethystFeature,
     context: Context,
     modifier: Modifier = Modifier
 ) {
-    val isGrouped = false
-
     Card(
         onClick = { context.startActivity(Intent(context, feature.activityClass)) },
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxWidth(),
         shape = PremiumCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(20.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            FeatureIcon(feature.iconRes, isGrouped)
-            
-            Column {
-                Text(
-                    text = feature.title,
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.Black,
-                        letterSpacing = 0.5.sp
-                    ),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Spacer(modifier = Modifier.height(6.dp))
-                Text(
-                    text = feature.summary,
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        lineHeight = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    ),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-            
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                ArrowBubble(isGrouped)
-            }
-        }
-    }
-}
-
-@Composable
-fun FeatureItemContent(
-    feature: AmethystFeature, 
-    context: Context, 
-    isGrouped: Boolean = false,
-    shape: Shape,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .clip(shape)
-            .clickable { context.startActivity(Intent(context, feature.activityClass)) }
-            .padding(horizontal = 22.dp, vertical = 20.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        FeatureIcon(feature.iconRes, isGrouped)
-        Spacer(modifier = Modifier.height(18.dp))
-        Text(
-            text = feature.title,
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.Black,
-                letterSpacing = 1.sp
-            )
-        )
-        Spacer(modifier = Modifier.height(6.dp))
-        Text(
-            text = feature.summary,
-            style = MaterialTheme.typography.bodySmall.copy(
-                lineHeight = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        )
-        Spacer(modifier = Modifier.height(18.dp))
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 18.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            ArrowBubble(isGrouped)
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                FeatureIcon(feature.iconRes)
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = feature.title,
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.5.sp
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = feature.summary,
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontWeight = FontWeight.Normal,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            ArrowBubble()
         }
     }
 }
 
 @Composable
-private fun FeatureIcon(iconRes: Int, isGrouped: Boolean = false) {
-    val targetBgColor = if (isGrouped) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.primary
-    val iconTint = if (isGrouped) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainer
-    
-    val cornerRadius by animateDpAsState(
-        targetValue = if (isGrouped) 28.dp else 16.dp,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy, 
-            stiffness = Spring.StiffnessLow
-        ),
-        label = "shape_morph"
-    )
-
-    val animatedBgColor by animateColorAsState(
-        targetValue = targetBgColor,
-        animationSpec = tween(300),
-        label = "bg_color_morph"
-    )
-
+private fun FeatureIcon(iconRes: Int) {
     Box(
         modifier = Modifier
-            .size(56.dp)
+            .size(48.dp)
             .background(
-                color = animatedBgColor,
-                shape = RoundedCornerShape(cornerRadius) 
+                color = MaterialTheme.colorScheme.surfaceContainerHighest,
+                shape = RoundedCornerShape(16.dp)
             ),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             painter = painterResource(id = iconRes),
             contentDescription = null,
-            modifier = Modifier.size(28.dp),
-            tint = iconTint
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }
 
 @Composable
-private fun ArrowBubble(isGrouped: Boolean = false) {
-    val bgColor = if (isGrouped) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.primary
-    val iconTint = if (isGrouped) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.surfaceContainer
-
+private fun ArrowBubble() {
     Box(
         modifier = Modifier
-            .size(38.dp)
+            .size(36.dp)
             .background(
-                color = bgColor,
+                color = MaterialTheme.colorScheme.surfaceContainerHighest,
                 shape = CircleShape
             ),
         contentAlignment = Alignment.Center
@@ -665,7 +530,7 @@ private fun ArrowBubble(isGrouped: Boolean = false) {
             imageVector = Icons.Default.ArrowForward,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = iconTint
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
@@ -679,12 +544,12 @@ fun StaggeredAnimatedItem(
 ) {
     val alpha by animateFloatAsState(
         targetValue = if (isVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 600, delayMillis = index * 100, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 500, delayMillis = index * 80, easing = FastOutSlowInEasing),
         label = "alpha_$index"
     )
     val translateY by animateDpAsState(
-        targetValue = if (isVisible) 0.dp else 40.dp,
-        animationSpec = tween(durationMillis = 600, delayMillis = index * 100, easing = FastOutSlowInEasing),
+        targetValue = if (isVisible) 0.dp else 30.dp,
+        animationSpec = tween(durationMillis = 500, delayMillis = index * 80, easing = FastOutSlowInEasing),
         label = "translateY_$index"
     )
 

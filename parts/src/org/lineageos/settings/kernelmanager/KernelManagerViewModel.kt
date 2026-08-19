@@ -28,6 +28,9 @@ data class KernelState(
     val perfAvailableFreqs: List<String> = emptyList(),
     val perfMinFreq: String = "",
     val perfMaxFreq: String = "",
+    val primeAvailableFreqs: List<String> = emptyList(),
+    val primeMinFreq: String = "",
+    val primeMaxFreq: String = "",
     val applyOnBoot: Boolean = false,
 )
 
@@ -58,6 +61,12 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
         val perfMax = prefs.getString(PREF_PERF_MAX, null)
             ?: KernelManagerUtils.getCurrentMaxFrequency(KernelManagerUtils.PERFORMANCE_CLUSTER)
 
+        val primeFreqs = KernelManagerUtils.getAvailableFrequencies(KernelManagerUtils.PRIME_CLUSTER) ?: emptyList()
+        val primeMin = prefs.getString(PREF_PRIME_MIN, null)
+            ?: KernelManagerUtils.getCurrentMinFrequency(KernelManagerUtils.PRIME_CLUSTER)
+        val primeMax = prefs.getString(PREF_PRIME_MAX, null)
+            ?: KernelManagerUtils.getCurrentMaxFrequency(KernelManagerUtils.PRIME_CLUSTER)
+
         _state.update {
             it.copy(
                 availableGovernors = govs,
@@ -68,6 +77,9 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
                 perfAvailableFreqs = perfFreqs,
                 perfMinFreq = perfMin,
                 perfMaxFreq = perfMax,
+                primeAvailableFreqs = primeFreqs,
+                primeMinFreq = primeMin,
+                primeMaxFreq = primeMax,
                 applyOnBoot = prefs.getBoolean(PREF_APPLY_ON_BOOT, false)
             )
         }
@@ -93,6 +105,14 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
         _state.update { it.copy(perfMaxFreq = freq) }
     }
 
+    fun updatePrimeMinFreq(freq: String) {
+        _state.update { it.copy(primeMinFreq = freq) }
+    }
+
+    fun updatePrimeMaxFreq(freq: String) {
+        _state.update { it.copy(primeMaxFreq = freq) }
+    }
+
     fun setApplyOnBoot(enabled: Boolean) {
         _state.update { it.copy(applyOnBoot = enabled) }
         prefs.edit().putBoolean(PREF_APPLY_ON_BOOT, enabled).apply()
@@ -103,12 +123,15 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
         KernelManagerUtils.setGovernor(s.currentGovernor)
         KernelManagerUtils.setFrequencyRange(KernelManagerUtils.EFFICIENCY_CLUSTER, s.effMinFreq, s.effMaxFreq)
         KernelManagerUtils.setFrequencyRange(KernelManagerUtils.PERFORMANCE_CLUSTER, s.perfMinFreq, s.perfMaxFreq)
+        KernelManagerUtils.setFrequencyRange(KernelManagerUtils.PRIME_CLUSTER, s.primeMinFreq, s.primeMaxFreq)
         prefs.edit()
             .putString(PREF_GOVERNOR, s.currentGovernor)
             .putString(PREF_EFF_MIN, s.effMinFreq)
             .putString(PREF_EFF_MAX, s.effMaxFreq)
             .putString(PREF_PERF_MIN, s.perfMinFreq)
             .putString(PREF_PERF_MAX, s.perfMaxFreq)
+            .putString(PREF_PRIME_MIN, s.primeMinFreq)
+            .putString(PREF_PRIME_MAX, s.primeMaxFreq)
             .apply()
     }
 
@@ -117,11 +140,9 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
         prefs.edit().clear().putBoolean(PREF_APPLY_ON_BOOT, keepApplyOnBoot).apply()
         KernelManagerUtils.resetToDefaults()
 
-        // Update state directly with known defaults instead of reading
-        // back from sysfs, because the walt governor may immediately
-        // override scaling_min_freq with its own floor value.
         val effFreqs = KernelManagerUtils.getAvailableFrequencies(KernelManagerUtils.EFFICIENCY_CLUSTER) ?: emptyList()
         val perfFreqs = KernelManagerUtils.getAvailableFrequencies(KernelManagerUtils.PERFORMANCE_CLUSTER) ?: emptyList()
+        val primeFreqs = KernelManagerUtils.getAvailableFrequencies(KernelManagerUtils.PRIME_CLUSTER) ?: emptyList()
         val defaultMinFreq = KernelManagerUtils.DEFAULT_MIN_FREQ
 
         _state.update {
@@ -134,6 +155,9 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
                 perfAvailableFreqs = perfFreqs,
                 perfMinFreq = defaultMinFreq,
                 perfMaxFreq = perfFreqs.lastOrNull() ?: "0",
+                primeAvailableFreqs = primeFreqs,
+                primeMinFreq = defaultMinFreq,
+                primeMaxFreq = primeFreqs.lastOrNull() ?: "0",
                 applyOnBoot = keepApplyOnBoot
             )
         }
@@ -146,6 +170,8 @@ class KernelManagerViewModel(application: Application) : AndroidViewModel(applic
         const val PREF_EFF_MAX = "efficiency_max_freq"
         const val PREF_PERF_MIN = "performance_min_freq"
         const val PREF_PERF_MAX = "performance_max_freq"
+        const val PREF_PRIME_MIN = "prime_min_freq"
+        const val PREF_PRIME_MAX = "prime_max_freq"
         const val PREF_APPLY_ON_BOOT = "apply_on_boot"
     }
 }
