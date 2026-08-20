@@ -27,6 +27,9 @@ genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint u:object_r:sysfs_wak
 genfscon sysfs /devices/platform/soc/soc:fingerprint_goodix u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:xiaomi_touch u:object_r:sysfs_wakeup:s0
 
+# Camera
+genfscon proc /mv u:object_r:proc_mv:s0
+
 # Touchfeature
 genfscon proc /tp_fw_version u:object_r:proc_tp_file:s0
 genfscon proc /tp_lockdown_info u:object_r:proc_tp_lockdown:s0

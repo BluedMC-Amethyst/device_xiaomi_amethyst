@@ -7,6 +7,8 @@ allow hal_camera system_server:binder { call transfer };
 allow hal_camera system_server:binder transfer;
 allow hal_camera system_server:fd *;
 allow hal_camera_default sysfs_wake_lock:file { open read write };
+allow hal_camera_default proc_mv:file r_file_perms;
+allow hal_camera_default vendor_miev_device:chr_file rw_file_perms;
 allow hal_camera_default self:process execmem;
 allow hal_camera_default self:capability ipc_lock;
 allow hal_camera_default proc_pressure_cpu:file { getattr open read write };
