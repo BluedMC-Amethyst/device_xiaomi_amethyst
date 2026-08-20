@@ -8,7 +8,10 @@ persist.vendor.camera. u:object_r:vendor_camera_prop:s0
 persist.vendor.cameraid. u:object_r:vendor_camera_prop:s0
 persist.vendor.EnableP3ColorSpace u:object_r:vendor_camera_p3enable_prop:s0
 persist.vendor.XDRVersion u:object_r:vendor_camera_xdrversion_prop:s0
+vendor.camera. u:object_r:vendor_camera_prop:s0
 vendor.camera.sensor. u:object_r:vendor_camera_sensor_prop:s0
+vendor.debug.camera. u:object_r:vendor_camera_prop:s0
+vendor.native_camera. u:object_r:vendor_camera_prop:s0
 
 # Display
 persist.vendor.dc_backlight.enable u:object_r:vendor_displayfeature_prop:s0

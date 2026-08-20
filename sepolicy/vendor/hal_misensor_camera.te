@@ -8,6 +8,7 @@ hal_server_domain(vendor_hal_misensor_camera_default, vendor_hal_misensor_camera
 init_daemon_domain(vendor_hal_misensor_camera_default)
 
 get_prop(vendor_hal_misensor_camera_default, camera_config_prop)
+get_prop(vendor_hal_misensor_camera_default, vendor_camera_prop)
 get_prop(vendor_hal_misensor_camera_default, vendor_display_prop)
 
 allow vendor_hal_misensor_camera_default fwk_camera_hwservice:hwservice_manager find;
