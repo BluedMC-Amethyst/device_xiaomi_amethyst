@@ -25,5 +25,4 @@ allow esimswitcher_app system_app_data_file:lnk_file create_file_perms;
 allow esimswitcher_app radio_data_file:dir create_dir_perms;
 allow esimswitcher_app radio_data_file:file create_file_perms;
 
-get_prop(esimswitcher_app, default_prop)
 hal_client_domain(esimswitcher_app, vendor_hal_qspmhal)
