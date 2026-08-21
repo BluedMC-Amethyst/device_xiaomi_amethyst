@@ -3235,3 +3235,16 @@ vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
 # Xiaomi MAC address
 vendor/bin/nv_mac
 vendor/lib64/libxiaomi_qmi.so
+
+# Camera NDK / AIDL prebuilt libraries
+vendor/lib64/android.frameworks.cameraservice.common-V1-ndk.so
+vendor/lib64/android.frameworks.cameraservice.device-V3-ndk.so
+vendor/lib64/android.frameworks.cameraservice.service-V3-ndk.so
+vendor/lib64/android.hardware.camera.common-V1-ndk.so
+vendor/lib64/android.hardware.camera.device-V2-ndk.so
+vendor/lib64/android.hardware.camera.metadata-V2-ndk.so
+vendor/lib64/android.hardware.camera.provider-V2-ndk.so
+vendor/lib64/libcamera2ndk_vendor.so
+vendor/lib64/libcamera_metadata.so
+vendor/lib64/vendor.qti.hardware.camera.offlinecamera-V1-ndk.so
+vendor/lib64/vendor.qti.hardware.camera.postproc@1.0.so
