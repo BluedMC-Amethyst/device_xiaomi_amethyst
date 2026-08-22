@@ -80,9 +80,6 @@ camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=1
 ro.camerax.extensions.enabled=true
 ro.hardware.camera=xiaomi
-persist.vendor.camera.privapp.list=com.android.camera,org.lineageos.aperture,com.google.android.GoogleCamera
-vendor.camera.aux.packagelist=com.android.camera,org.lineageos.aperture,com.google.android.GoogleCamera
-vendor.camera.support.mivi=true
 
 # Charging Speed
 persist.vendor.region.charger=UA
