@@ -138,7 +138,7 @@
         <activity
             android:name=".hypercharge.HyperChargeSettingsActivity"
             android:label="@string/hypercharge_title"
-            android:theme="@style/Theme.SubSettingsBase.Expressive"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
             android:exported="false" />
 
         <service

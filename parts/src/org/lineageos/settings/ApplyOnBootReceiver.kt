@@ -42,6 +42,13 @@ class ApplyOnBootReceiver : BroadcastReceiver() {
             KernelManagerUtils.setFrequencyRange(
                 KernelManagerUtils.PERFORMANCE_CLUSTER, perfMin, perfMax)
         }
+
+        val primeMin = prefs.getString(KernelManagerViewModel.PREF_PRIME_MIN, null)
+        val primeMax = prefs.getString(KernelManagerViewModel.PREF_PRIME_MAX, null)
+        if (primeMin != null && primeMax != null) {
+            KernelManagerUtils.setFrequencyRange(
+                KernelManagerUtils.PRIME_CLUSTER, primeMin, primeMax)
+        }
     }
 
     private fun applyGpuSettings(context: Context) {

@@ -1,5 +1,6 @@
 type vendor_displaylog_device, dev_type;
 type camlog_device, dev_type;
+type proc_mv, fs_type, proc_type;
 type proc_tp_lockdown, fs_type, proc_type;
 type vendor_bsp_data_log_file, data_file_type, file_type;
 type vendor_data_touchreport_file, data_file_type, file_type;

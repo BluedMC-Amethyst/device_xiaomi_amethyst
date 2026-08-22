@@ -16,8 +16,9 @@ import java.io.File
 object KernelManagerUtils {
     const val EFFICIENCY_CLUSTER = 0
     const val PERFORMANCE_CLUSTER = 4
+    const val PRIME_CLUSTER = 7
     
-    private val POLICIES = intArrayOf(EFFICIENCY_CLUSTER, PERFORMANCE_CLUSTER)
+    private val POLICIES = intArrayOf(EFFICIENCY_CLUSTER, PERFORMANCE_CLUSTER, PRIME_CLUSTER)
     internal const val DEFAULT_GOVERNOR = "walt"
     internal const val DEFAULT_MIN_FREQ = "691200"
     

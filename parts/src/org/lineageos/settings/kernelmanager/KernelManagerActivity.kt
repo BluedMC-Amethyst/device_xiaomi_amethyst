@@ -181,7 +181,7 @@ fun KernelManagerScreen(
             item {
                 AnimatedEntrance(visible = visible, index = 1) {
                     FrequencyClusterCard(
-                        title = "Efficiency Cluster",
+                        title = "Efficiency Cluster (4x Cores)",
                         availableFreqs = state.effAvailableFreqs,
                         minFreq = state.effMinFreq,
                         maxFreq = state.effMaxFreq,
@@ -194,12 +194,25 @@ fun KernelManagerScreen(
             item {
                 AnimatedEntrance(visible = visible, index = 2) {
                     FrequencyClusterCard(
-                        title = "Performance Cluster",
+                        title = "Performance Cluster (3x Cores)",
                         availableFreqs = state.perfAvailableFreqs,
                         minFreq = state.perfMinFreq,
                         maxFreq = state.perfMaxFreq,
                         onMinFreqSelected = viewModel::updatePerfMinFreq,
                         onMaxFreqSelected = viewModel::updatePerfMaxFreq
+                    )
+                }
+            }
+
+            item {
+                AnimatedEntrance(visible = visible, index = 3) {
+                    FrequencyClusterCard(
+                        title = "Prime Cluster (1x Core)",
+                        availableFreqs = state.primeAvailableFreqs,
+                        minFreq = state.primeMinFreq,
+                        maxFreq = state.primeMaxFreq,
+                        onMinFreqSelected = viewModel::updatePrimeMinFreq,
+                        onMaxFreqSelected = viewModel::updatePrimeMaxFreq
                     )
                 }
             }
