@@ -239,6 +239,8 @@ persist.vendor.radio.sib16_support=1
 persist.vendor.rcs.singlereg.feature=1
 ro.vendor.radio.build_profile=miui
 ro.vendor.radio.build_region=global
+ro.vendor.miui.use_google_lpa=true
+ro.vendor.se.type=HCE,UICC
 
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true

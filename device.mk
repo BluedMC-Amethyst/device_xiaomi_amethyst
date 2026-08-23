@@ -153,6 +153,9 @@ PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
 # Euicc
+# NOTE: EsimController is patched to never issue MiRilHook hook 83
+# (get/set esim status) - that QMI path hard-wedges the SM7635 modem.
+# It only drives UIM slot power, state is kept in Settings.Secure.
 PRODUCT_PACKAGES += \
     XiaomiEsimSwitcher \
     XiaomiEuicc
