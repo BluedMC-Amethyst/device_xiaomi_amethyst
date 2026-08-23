@@ -153,8 +153,10 @@ PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
 # Euicc
+# NOTE: Do not ship XiaomiEsimSwitcher - its MiRilHook onGetEsimStatus (hook 83)
+# hard-wedges the SM7635 modem (system halt). Stock uses the standard
+# EuiccCardController/UimLpaService path instead, which EuiccGoogle provides.
 PRODUCT_PACKAGES += \
-    XiaomiEsimSwitcher \
     XiaomiEuicc
 
 PRODUCT_COPY_FILES += \
