@@ -418,7 +418,8 @@ public class RefreshSettingsFragment extends SettingsBasePreferenceFragment
 
         @Override
         public boolean filterApp(ApplicationsState.AppEntry entry) {
-            boolean show = !mAllPackagesAdapter.mEntries.contains(entry.info.packageName);
+            boolean show = mAllPackagesAdapter.mEntries.stream()
+                    .noneMatch(e -> e.info.packageName.equals(entry.info.packageName));
             if (show) {
                 synchronized (mLauncherResolveInfoList) {
                     show = mLauncherResolveInfoList.contains(entry.info.packageName);
