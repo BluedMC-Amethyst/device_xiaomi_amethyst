@@ -134,6 +134,10 @@ on early-boot
     chmod 0664 /sys/bus/platform/devices/soc:xiaomi_fingerprint/fingerdown
 
 on boot
+    # Battery: aggressive swapping into zram, fewer low-memory wakeups
+    write /proc/sys/vm/swappiness 140
+    write /proc/sys/vm/watermark_scale_factor 125
+    write /proc/sys/vm/watermark_boost_factor 0
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
