@@ -1,6 +1,9 @@
 # Audio
 persist.vendor.audio.effectimplenter=dolby
+persist.vendor.audio.spatializer.enable=false
 persist.vendor.audio.spf_restart=true
+ro.vendor.audio.dolby.spatial.profile=dynamic
+ro.vendor.audio.spatializer.support.speaker=true
 ro.vendor.audio.aw.monitor=true
 ro.vendor.audio.camera.loopback.support=false
 ro.vendor.audio.elus.enable=true

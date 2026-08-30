@@ -79,8 +79,12 @@
         <!-- ViPER4AndroidFX -->
         <library name="v4a_re" path="libv4a_re.so"/>
 
-        <!-- Dolby Audio Processing -->
-        <library name="dolby_dap" path="libswdap.so"/>
+        <!-- Stock Dolby audio processing -->
+        <library name="dap" path="libhwdap.so"/>
+        <library name="dvl" path="libdlbvol.so"/>
+        <library name="spatializer" path="libswspatializer.so"/>
+        <library name="gamedap" path="libswgamedap.so"/>
+        <library name="vqe" path="libswvqe.so"/>
 
     </libraries>
     <effects>
@@ -133,12 +137,16 @@
         <!-- ViPER4AndroidFX -->
         <effect name="v4a_standard_re" library="v4a_re" uuid="90380da3-8536-4744-a6a3-5731970e640f"/>
 
-        <!-- Dolby Audio Processing -->
-        <effect name="dolby_dap" library="dolby_dap" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa"/>
+        <!-- Stock Dolby audio processing -->
+        <effect name="dap" library="dap" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa"/>
+        <effect name="dlb_music_listener" library="dvl" uuid="40f66c8b-5aa5-4345-8919-53ec431aaa98"/>
+        <effect name="spatializer" library="spatializer" uuid="ccd4cf09-a79d-46c2-9aae-06a1698d6c8f"/>
+        <effect name="gamedap" library="gamedap" uuid="3783c334-d3a0-4d13-874f-0032e5fb80e2"/>
+        <effect name="vqe" library="vqe" uuid="64a0f614-7fa4-48b8-b081-d59dc954616f"/>
     </effects>
     <postprocess>
         <stream type="music">
-            <apply effect="music_helper"/>
+            <apply effect="dlb_music_listener"/>
         </stream>
         <stream type="ring">
             <apply effect="ring_helper"/>
