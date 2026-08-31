@@ -2,6 +2,8 @@ type esimswitcher_app, domain;
 typeattribute esimswitcher_app mlstrustedsubject;
 
 app_domain(esimswitcher_app)
+binder_call(esimswitcher_app, vendor_qtelephony)
+allow vendor_qtelephony esimswitcher_app:binder call;
 
 allow esimswitcher_app {
     activity_service
