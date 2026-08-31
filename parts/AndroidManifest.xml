@@ -134,6 +134,17 @@
             </intent-filter>
         </service>
 
+        <!-- Charge Limit -->
+        <activity
+            android:name=".chargelimit.ChargeLimitActivity"
+            android:label="@string/charge_limit_title"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:exported="false" />
+
+        <service
+            android:name=".chargelimit.ChargeLimitService"
+            android:exported="false" />
+
         <!-- HyperCharge Settings, Service and Tile -->
         <activity
             android:name=".hypercharge.HyperChargeSettingsActivity"

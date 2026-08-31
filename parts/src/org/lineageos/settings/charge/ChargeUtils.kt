@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.preference.PreferenceManager
+import org.lineageos.settings.chargelimit.ChargeLimitUtils
 import org.lineageos.settings.utils.FileUtils
 
 class ChargeUtils(context: Context) {
@@ -28,8 +29,11 @@ class ChargeUtils(context: Context) {
 
     fun isBypassChargeEnabled(): Boolean {
         return try {
-            val value = FileUtils.readOneLine(BYPASS_CHARGE_NODE)
-            value != null && value == "1"
+            if (sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)) {
+                sharedPrefs.getBoolean(PREF_BYPASS_CHARGE, false)
+            } else {
+                FileUtils.readOneLine(BYPASS_CHARGE_NODE) == "1"
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read bypass charge status", e)
             false
@@ -38,8 +42,9 @@ class ChargeUtils(context: Context) {
 
     fun enableBypassCharge(enable: Boolean) {
         try {
-            FileUtils.writeLine(BYPASS_CHARGE_NODE, if (enable) "1" else "0")
             sharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply()
+            val limiterPaused = sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)
+            FileUtils.writeLine(BYPASS_CHARGE_NODE, if (enable || limiterPaused) "1" else "0")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to write bypass charge status", e)
         }
@@ -62,6 +67,6 @@ class ChargeUtils(context: Context) {
     companion object {
         private const val TAG = "ChargeUtils"
         const val BYPASS_CHARGE_NODE = "/sys/class/qcom-battery/charge_control_en"
-        private const val PREF_BYPASS_CHARGE = "bypass_charge"
+        const val PREF_BYPASS_CHARGE = "bypass_charge"
     }
 }
