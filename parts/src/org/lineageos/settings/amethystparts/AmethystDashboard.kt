@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.sp
 import org.lineageos.settings.R
 import org.lineageos.settings.corecontrol.CoreControlActivity
 import org.lineageos.settings.charge.ChargeActivity
+import org.lineageos.settings.chargelimit.ChargeLimitActivity
 import org.lineageos.settings.hypercharge.HyperChargeSettingsActivity
 import org.lineageos.settings.kernelmanager.KernelManagerActivity
 import org.lineageos.settings.kprofiles.KprofilesSettingsActivity
@@ -91,6 +92,7 @@ fun AmethystDashboard(onBackPressed: () -> Unit) {
         AmethystFeature("Clear Speaker", "High-frequency speaker cleaning", R.drawable.ic_clear_speaker, ClearSpeakerActivity::class.java),
         AmethystFeature("Smooth Display", "Per-app display refresh rates", R.drawable.ic_refresh_default, RefreshSettingsActivity::class.java),
         AmethystFeature("Bypass Charge", "Direct power delivery without battery heat", R.drawable.ic_charge, ChargeActivity::class.java),
+        AmethystFeature("Charge Limit", "Protect battery health with a charging cap", R.drawable.ic_charge, ChargeLimitActivity::class.java),
         AmethystFeature("HyperCharge", "Custom charging current & speed limit", R.drawable.ic_charge, HyperChargeSettingsActivity::class.java),
         AmethystFeature("KProfiles", "In-kernel automated performance profiles", R.drawable.ic_kprofiles, KprofilesSettingsActivity::class.java)
     )

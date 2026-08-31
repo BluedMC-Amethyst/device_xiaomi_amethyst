@@ -37,6 +37,8 @@ import org.lineageos.settings.Constants;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
 import org.lineageos.settings.hypercharge.HyperChargeService;
+import org.lineageos.settings.chargelimit.ChargeLimitService;
+import org.lineageos.settings.chargelimit.ChargeLimitUtils;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.IS_SUPPORTED;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.KPROFILES_AUTO_KEY;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.KPROFILES_AUTO_NODE;
@@ -61,6 +63,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
         try {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            if (prefs.getBoolean(ChargeLimitUtils.PREF_ENABLED, false)) {
+                context.startService(new Intent(context, ChargeLimitService.class));
+            }
             boolean isHyperChargeEnabled = prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, true);
 
             // Note: We use a try-catch here as well just in case boot happens before UI sanitization
