@@ -90,7 +90,7 @@
         <value>2304000</value>
         <value>2496000</value>
     </array>
-    <array name="cpu.core_speeds.cluster3">
+    <array name="cpu.core_power.cluster2">
         <value>47.16</value>
         <value>50.21</value>
         <value>59.46</value>
