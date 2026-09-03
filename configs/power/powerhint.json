@@ -41,7 +41,8 @@
             "Path": "/proc/sys/walt/sched_busy_hysteresis_enable_cpus",
             "Values": [
                 "0",
-                "240"
+                "15",
+                "255"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -51,8 +52,8 @@
             "Path": "/proc/sys/walt/sched_busy_hyst_ns",
             "Values": [
                 "0",
-                "19",
-                "39"
+                "3000000",
+                "99000000"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -102,6 +103,7 @@
             "Path": "/sys/kernel/msm_performance/parameters/cpu_max_freq",
             "Values": [
                 "0:9999999 1:9999999 2:9999999 3:9999999 4:9999999 5:9999999 6:9999999 7:9999999",
+                "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
                 "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
                 "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
                 "4:2016000 5:2016000 6:2016000",
@@ -355,9 +357,11 @@
             "Name": "devCpuDmaLatency",
             "Path": "/dev/cpu_dma_latency",
             "Values": [
-                "2000000000",
-                "1"
+                "1",
+                "44",
+                "2000000000"
             ],
+            "DefaultIndex": 2,
             "HoldFd": true
         },
         {
@@ -365,6 +369,7 @@
             "Path": "/sys/devices/system/cpu/bus_dcvs/DDR/boost_freq",
             "Values": [
                 "547000",
+                "1555000",
                 "2092000"
             ],
             "DefaultIndex": 0,
@@ -458,13 +463,13 @@
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHysteresisEnableCpus",
-            "Value": "240",
+            "Value": "255",
             "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHystNs",
-            "Value": "39",
+            "Value": "99000000",
             "Duration": 0
         },
         {
@@ -496,6 +501,12 @@
             "Node": "procSysWaltSchedBoost",
             "Value": "1",
             "Duration": 2000
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "devCpuDmaLatency",
+            "Value": "44",
+            "Duration": 1000
         },
         {
             "PowerHint": "LAUNCH",
@@ -628,6 +639,41 @@
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
             "Value": "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
             "Duration": 1000
+        },
+        {
+            "PowerHint": "INTERACTIVE",
+            "Node": "procSysWaltSchedBusyHysteresisEnableCpus",
+            "Value": "15",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "INTERACTIVE",
+            "Node": "procSysWaltSchedBusyHystNs",
+            "Value": "3000000",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+            "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
+            "Value": "1555000",
+            "Duration": 80
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "DISPLAY_INACTIVE",
+            "Type": "EndHint",
+            "Value": "DISPLAY_UPDATE_IMMINENT"
+        },
+        {
+            "PowerHint": "DEVICE_IDLE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
+            "Duration": 0
         }
     ]
 }
