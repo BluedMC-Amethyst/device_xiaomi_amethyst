@@ -103,7 +103,6 @@
             "Values": [
                 "0:9999999 1:9999999 2:9999999 3:9999999 4:9999999 5:9999999 6:9999999 7:9999999",
                 "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
-                "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
                 "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
                 "4:2016000 5:2016000 6:2016000",
                 "7:2016000"
@@ -433,178 +432,106 @@
     ],
     "Actions": [
         {
-            "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
-            "Value": "681000",
+            "PowerHint": "SUSTAINED_PERFORMANCE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
+            "Value": "0:768000 1:768000 2:768000 3:768000 4:1036800 5:1036800 6:1036800 7:1228800",
             "Duration": 0
         },
         {
-            "PowerHint": "AUDIO_LAUNCH",
-            "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
-            "Value": "2092000",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "AUDIO_LAUNCH",
-            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "INTERACTION",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
-            "Value": "547000",
-            "Duration": 150
+            "PowerHint": "SUSTAINED_PERFORMANCE",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:768000 1:768000 2:768000 3:768000 4:1036800 5:1036800 6:1036800 7:1228800",
-            "Duration": 150
+            "Value": "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBoost",
-            "Value": "1",
-            "Duration": 150
+            "Value": "2",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHysteresisEnableCpus",
             "Value": "240",
-            "Duration": 150
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHystNs",
-            "Value": "19",
-            "Duration": 150
+            "Value": "39",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
-            "Value": "2",
-            "Duration": 150
+            "Value": "3",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForColocation",
             "Value": "0",
-            "Duration": 150
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForBoost",
             "Value": "0",
-            "Duration": 150
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "sysClassKgslKgsl3d0MaxPwrlevel",
             "Value": "0",
-            "Duration": 150
+            "Duration": 0
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "procSysWaltSchedBoost",
             "Value": "1",
-            "Duration": 1200
+            "Duration": 2000
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Value": "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
+            "Duration": 2000
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
+            "Value": "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
+            "Duration": 2000
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
             "Value": "2092000",
-            "Duration": 1200
-        },
-        {
-            "PowerHint": "LAUNCH",
-            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
-            "Duration": 1200
+            "Duration": 2000
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveHighFreq",
             "Value": "1708800",
-            "Duration": 1200
+            "Duration": 2000
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy4WaltAdaptiveHighFreq",
             "Value": "1612800",
-            "Duration": 1200
+            "Duration": 2000
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "sysDevicesSystemCpuCpufreqPolicy7WaltAdaptiveHighFreq",
             "Value": "1766400",
-            "Duration": 1200
-        },
-        {
-            "PowerHint": "LAUNCH",
-            "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveLowFreq",
-            "Value": "1228800",
-            "Duration": 1200
-        },
-        {
-            "PowerHint": "LAUNCH",
-            "Node": "sysDevicesSystemCpuCpufreqPolicy4WaltAdaptiveLowFreq",
-            "Value": "1056000",
-            "Duration": 1200
-        },
-        {
-            "PowerHint": "LAUNCH",
-            "Node": "sysDevicesSystemCpuCpufreqPolicy7WaltAdaptiveLowFreq",
-            "Value": "1209600",
-            "Duration": 1200
-        },
-        {
-            "PowerHint": "EXPENSIVE_RENDERING",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
-            "Value": "1068000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "EXPENSIVE_RENDERING",
-            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "EXPENSIVE_RENDERING",
-            "Node": "sysClassKgslKgsl3d0MaxPwrlevel",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "EXPENSIVE_RENDERING",
-            "Node": "procSysWaltSchedBoost",
-            "Value": "1",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "SUSTAINED_PERFORMANCE",
-            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "7:2016000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "SUSTAINED_PERFORMANCE",
-            "Node": "sysDevicesSystemCpuCpu4CpufreqWaltHispeedFreq",
-            "Value": "1190400",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "SUSTAINED_PERFORMANCE",
-            "Node": "procSysWaltSchedUpmigrate",
-            "Value": "65 85",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "SUSTAINED_PERFORMANCE",
-            "Node": "procSysWaltSchedDownmigrate",
-            "Value": "50 75",
-            "Duration": 0
+            "Duration": 2000
         },
         {
             "PowerHint": "CAMERA_STREAMING_LOW",
@@ -626,18 +553,6 @@
         },
         {
             "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHistMemory",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHystTriggerCount",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
             "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
             "Value": "547000",
             "Duration": 0
@@ -646,24 +561,6 @@
             "PowerHint": "CAMERA_STREAMING_LOW",
             "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
             "Value": "4:2016000 5:2016000 6:2016000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu4CpufreqWaltPl",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltPl",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltHispeedLoad",
-            "Value": "99",
             "Duration": 0
         },
         {
@@ -680,32 +577,8 @@
         },
         {
             "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu4CpufreqWaltHispeedFreq",
-            "Value": "787",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
             "Node": "sysDevicesSystemCpuCpu0CoreCtlMinPartialCpus",
             "Value": "1",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlOfflineDelayMs",
-            "Value": "20",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu4CpufreqWaltRtgBoostFreq",
-            "Value": "556800",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_LOW",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltRtgBoostFreq",
-            "Value": "0",
             "Duration": 0
         },
         {
@@ -718,24 +591,6 @@
             "PowerHint": "CAMERA_STREAMING_MID",
             "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
             "Value": "547000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_MID",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlEnable",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_MID",
-            "Node": "sysDevicesSystemCpuCpu4CoreCtlEnable",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "CAMERA_STREAMING_MID",
-            "Node": "sysDevicesSystemCpuCpu7CoreCtlEnable",
-            "Value": "0",
             "Duration": 0
         },
         {
@@ -773,204 +628,6 @@
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
             "Value": "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
             "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "sysDevicesSystemCpuBusDcvsDdrBoostFreq",
-            "Value": "2092000",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "sysDevicesSystemCpuBusDcvsL3BoostFreq",
-            "Value": "2035200",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "devCpusetSystemBackgroundCpus",
-            "Value": "7",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "devCpusetTopAppCpus",
-            "Value": "248",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "devCpuctlTopAppCpuShares",
-            "Value": "4096",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "devCpuctlCameraDaemonCpuShares",
-            "Value": "4096",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "CAMERA_LAUNCH",
-            "Node": "devCpuctlBackgroundCpuShares",
-            "Value": "512",
-            "Duration": 1000
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "procSysWaltSchedBoost",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
-            "Value": "1",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltRtgBoostFreq",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
-            "Value": "547000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlOfflineDelayMs",
-            "Value": "20",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrSampleMs",
-            "Value": "33",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrIoPercent",
-            "Value": "100",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHistMemory",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltHispeedLoad",
-            "Value": "99",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "devCpuctlBackgroundCpuShares",
-            "Value": "512",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DISPLAY_INACTIVE",
-            "Node": "devCpuctlTopAppCpuShares",
-            "Value": "4096",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "procSysWaltSchedBoost",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
-            "Value": "1",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltRtgBoostFreq",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrMinFreq",
-            "Value": "547000",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlOfflineDelayMs",
-            "Value": "20",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrSampleMs",
-            "Value": "33",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrIoPercent",
-            "Value": "100",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuBusDcvsDdr24091000QcomBwmonDdrHistMemory",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "sysDevicesSystemCpuCpu0CpufreqWaltHispeedLoad",
-            "Value": "99",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "devCpuctlBackgroundCpuShares",
-            "Value": "512",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "DEVICE_IDLE",
-            "Node": "devCpuctlTopAppCpuShares",
-            "Value": "4096",
-            "Duration": 0
         }
     ]
 }
