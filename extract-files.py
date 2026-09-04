@@ -44,6 +44,7 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.hardware.qccsyshal@1.0',
         'vendor.qti.hardware.qccsyshal@1.1',
         'vendor.qti.hardware.qccsyshal@1.2',
+        'vendor.qti.hardware.camera.postproc@1.0',
         'vendor.qti.hardware.wifidisplaysession_aidl-V1-ndk',
         'vendor.qti.ImsRtpService-V1-ndk',
         'vendor.qti.imsrtpservice@3.0',
