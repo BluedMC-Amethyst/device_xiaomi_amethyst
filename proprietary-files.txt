@@ -1000,6 +1000,7 @@ vendor/lib64/libcom.xiaomi.debug.so
 vendor/lib64/libcom.xiaomi.ecoenginemonitor.so
 vendor/lib64/libcom.xiaomi.eventcallback.so
 vendor/lib64/libcom.xiaomi.grallocutils.so
+vendor/lib64/libcom.xiaomi.ionutils.so
 vendor/lib64/libcom.xiaomi.mawutils.so
 vendor/lib64/libcom.xiaomi.mawutilsold.so
 vendor/lib64/libcom.xiaomi.metadatautils.so|faceb6ca30719524f97dbbbf0cb4377c7f672302
