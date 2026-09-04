@@ -1,4 +1,4 @@
-# All unpinned blobs below are extracted from amethyst OS3.0.4.0.WOPMIXM
+# All unpinned blobs below are extracted from amethyst OS3.0.306.0.WOPMIXM
 
 # ACDB
 odm/etc/acdbdata/Mise/MISE_HD_model.eai
@@ -410,11 +410,6 @@ odm/etc/camera/resources/render/BuildIn/Material/1166466556_252005700
 odm/etc/camera/resources/render/BuildIn/Material/1166466556_2571257293
 odm/etc/camera/resources/render/BuildIn/Material/1166466556_4025145477
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BASE.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BLEND_COLOR_LAYER_WITH_MASK_Define_NORMAL_MASK_CHANNEL_TYPE_R_FRAMEBUFFER_FETCH_ADRENO.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BLEND_IMAGE_LAYER_Define_MULTIPLY_FRAMEBUFFER_FETCH_ADRENO.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BLEND_IMAGE_LAYER_Define_SOFT_LIGHT_FRAMEBUFFER_FETCH_ADRENO.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BLEND_IMAGE_LAYER_WITH_MASK_Define_MULTIPLY_MASK_CHANNEL_TYPE_R_FRAMEBUFFER_FETCH_ADRENO.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BLEND_IMAGE_LAYER_WITH_MASK_Define_SOFT_LIGHT_MASK_CHANNEL_TYPE_R_FRAMEBUFFER_FETCH_ADRENO.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BRIGHT_EYE_PROCESS.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_BRIGHT_EYE_PROCESS_V2_WITH_PUPIL.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_FACIAL_REFINE_FUSE_OFFSET.bin
@@ -442,7 +437,6 @@ odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_LUMA_TO_ALPHA.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_MEAN_BLUR.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_MEAN_BOX_2x2.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_MEDIAN_BLUR.bin
-odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_NORMAL_LUT_512_512_Define_FRAMEBUFFER_FETCH_ADRENO.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_RETOUCH_FOGGY_MEANBLUR_1D.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_RETOUCH_FOGGY_MEANBLUR_1D_Define_USE_ALPHA_WEIGHT.bin
 odm/etc/camera/resources/render/BuildIn/binShaders64/OGL_RETOUCH_FOGGY_MERGE_MASK.bin
@@ -1183,6 +1177,10 @@ vendor/lib64/camera/components/com.xiaomi.node.misv2.so
 vendor/lib64/camera/components/com.xiaomi.node.misv3.so
 vendor/lib64/camera/components/libdepthmapwrapper_itof.so
 vendor/lib64/camera/components/libdepthmapwrapper_secure.so
+
+# Camera NDK
+vendor/lib64/libcamera2ndk_vendor.so
+vendor/lib64/vendor.qti.hardware.camera.postproc@1.0.so
 
 # Camera firmware
 odm/firmware/CAMERA_ICP.b00
@@ -3176,10 +3174,10 @@ system_ext/lib64/libwfdconfigutils.so|4d8200cc4c455f54fcbce927f5cabeb7b591f5d0
 system_ext/lib64/libwfddisplayconfig.so|27f5d6e284edf05cc7776e5be010912973000ab9
 system_ext/lib64/libwfdmminterface.so|8d3d493fef797aef2feaab4e09e50250ddf5dc9a
 system_ext/lib64/libwfdmmsink.so|4569ce9941eb5d06db599146ed80b8a32d7cd97f
-system_ext/lib64/libwfdmmsrc_system.so|2849f4f54d9de886e1c0fa000147fd12356351e3
+system_ext/lib64/libwfdmmsrc_system.so|d1af136b5fb74b8f299a056bcfe1cdce0036228f
 system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|bdbb8e61bac2378870795657dbbcda930c20974b
 system_ext/lib64/libwfdrtsp.so|1ab4fc5b75d25f551df3593d5856e6f7893a4176
-system_ext/lib64/libwfdservice.so|af0e31f17ed997a5d8bad64cdad486be28cb9f07
+system_ext/lib64/libwfdservice.so|344f0f7fbd2dd52c1427ab318d8f87226fafcb97
 system_ext/lib64/libwfdsinksm.so|cc899b719fa11d844c65908d7fdc18600451324d
 system_ext/lib64/libwfduibcinterface.so|432d54b072d8f1c80409b6e11f4f833ca9576937
 system_ext/lib64/libwfduibcsink.so|d12b05bbcefdff6addc2c31567a656b7540d7489
@@ -3236,16 +3234,3 @@ vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
 # Xiaomi MAC address
 vendor/bin/nv_mac
 vendor/lib64/libxiaomi_qmi.so
-
-# Camera NDK / AIDL prebuilt libraries (commented out to avoid system/vendor partition conflict with AOSP AIDL sources)
-# vendor/lib64/android.frameworks.cameraservice.common-V1-ndk.so
-# vendor/lib64/android.frameworks.cameraservice.device-V3-ndk.so
-# vendor/lib64/android.frameworks.cameraservice.service-V3-ndk.so
-# vendor/lib64/android.hardware.camera.common-V1-ndk.so
-# vendor/lib64/android.hardware.camera.device-V2-ndk.so
-# vendor/lib64/android.hardware.camera.metadata-V2-ndk.so
-# vendor/lib64/android.hardware.camera.provider-V2-ndk.so
-vendor/lib64/libcamera2ndk_vendor.so
-# vendor/lib64/libcamera_metadata.so
-# vendor/lib64/vendor.qti.hardware.camera.offlinecamera-V1-ndk.so
-vendor/lib64/vendor.qti.hardware.camera.postproc@1.0.so
