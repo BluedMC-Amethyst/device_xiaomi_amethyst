@@ -1181,7 +1181,6 @@ vendor/lib64/camera/components/libdepthmapwrapper_secure.so
 
 # Camera NDK
 vendor/lib64/libcamera2ndk_vendor.so
-vendor/lib64/vendor.qti.hardware.camera.postproc@1.0.so
 
 # Camera firmware
 odm/firmware/CAMERA_ICP.b00
