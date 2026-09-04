@@ -23,8 +23,8 @@ PRODUCT_SYSTEM_NAME := amethyst_global
 PRODUCT_SYSTEM_DEVICE := amethyst
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="amethyst_global-user 16 BP2A.250605.031.A3 OS3.0.4.0.WOPMIXM release-keys" \
-    BuildFingerprint=Redmi/amethyst_global/amethyst:16/BP2A.250605.031.A3/OS3.0.4.0.WOPMIXM:user/release-keys \
+    BuildDesc="amethyst_global-user 16 BP2A.250605.031.A3 16OS3.1.260824.102142654.QCPEGL.S release-keys" \
+    BuildFingerprint=Redmi/amethyst_global/amethyst:16/BP2A.250605.031.A3/16OS3.1.260824.102142654.QCPEGL.S:user/release-keys \
     DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
 
