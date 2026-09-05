@@ -921,7 +921,7 @@ vendor/lib64/com.qti.feature2.offlinestatsregeneration.so
 vendor/lib64/com.qti.feature2.qcfa.so
 vendor/lib64/com.qti.feature2.rawhdr.so
 vendor/lib64/com.qti.feature2.realtimeserializer.so
-vendor/lib64/com.qti.feature2.rt.so
+vendor/lib64/com.qti.feature2.rt.so|7d905a0d1163e4662937a15efc5d802439b21b04
 vendor/lib64/com.qti.feature2.rtmcx.so
 vendor/lib64/com.qti.feature2.serializer.so
 vendor/lib64/com.qti.feature2.statsregeneration.so
@@ -949,9 +949,9 @@ vendor/lib64/com.xiaomi.immunesystem.hook.chi.so
 vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so
 vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so
 vendor/lib64/hw/camera.qcom.milos.so
-vendor/lib64/hw/camera.qcom.so
+vendor/lib64/hw/camera.qcom.so|15047c89b4134666ff09fe687ad97c4806edd07a
 vendor/lib64/hw/com.qti.chi.offline.so
-vendor/lib64/hw/com.qti.chi.override.so
+vendor/lib64/hw/com.qti.chi.override.so|98e27644e8c2f73da0c92753c9649ec85d4474e9
 vendor/lib64/immunesystem.db.sqlite3.so
 vendor/lib64/libAF.so
 vendor/lib64/libITT.so
@@ -1003,7 +1003,7 @@ vendor/lib64/libcom.xiaomi.grallocutils.so
 vendor/lib64/libcom.xiaomi.ionutils.so
 vendor/lib64/libcom.xiaomi.mawutils.so
 vendor/lib64/libcom.xiaomi.mawutilsold.so
-vendor/lib64/libcom.xiaomi.metadatautils.so
+vendor/lib64/libcom.xiaomi.metadatautils.so|faceb6ca30719524f97dbbbf0cb4377c7f672302
 vendor/lib64/libcom.xiaomi.offlinefeatureintf.so
 vendor/lib64/libcom.xiaomi.pluginutils.so
 vendor/lib64/libcom.xiaomi.qimagebuffer.so
