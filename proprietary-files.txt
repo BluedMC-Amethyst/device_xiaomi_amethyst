@@ -142,6 +142,7 @@ vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
 vendor/lib64/android.hardware.audio.common@7.1-util.so;MAKE_COPY_RULE_ONLY
+vendor/lib64/hw/android.hardware.soundtrigger@2.3-impl.so|25c7ab9969ab906f92b70f57c13ef75206a0d2bb
 vendor/lib64/hw/audio.primary.volcano.so
 vendor/lib64/hw/gyro_fusion_interface.so
 vendor/lib64/libVoiceSdk.so
