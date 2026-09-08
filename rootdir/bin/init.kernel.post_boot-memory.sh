@@ -47,9 +47,13 @@ function configure_zram_parameters()
 		let zRamSizeMB=6144
 	fi
 
-	# And enable lz4 zram compression for Go targets.
-	if [ "$low_ram" == "true" ]; then
-		echo lz4 > /sys/block/zram0/comp_algorithm
+	# Prefer zstd or lz4 compression for zram
+	if [ -f /sys/block/zram0/comp_algorithm ]; then
+		if grep -q "zstd" /sys/block/zram0/comp_algorithm; then
+			echo zstd > /sys/block/zram0/comp_algorithm
+		elif grep -q "lz4" /sys/block/zram0/comp_algorithm; then
+			echo lz4 > /sys/block/zram0/comp_algorithm
+		fi
 	fi
 
 	if [ -f /sys/block/zram0/disksize ]; then
@@ -140,8 +144,8 @@ function configure_memory_parameters() {
 	configure_read_ahead_kb_values
 
 	# MIUI ADD: Performance_MemoryEnhance
-	ProductName=`getprop ro.product.name`
-	if [ "$ProductName" == "amethyst" ] || [ "$ProductName" == "flourite" ]; then
+	DeviceName=`getprop ro.product.device`
+	if [ "$DeviceName" == "amethyst" ] || [ "$DeviceName" == "flourite" ]; then
 		echo 160 > /proc/sys/vm/swappiness
 	else
 		echo 100 > /proc/sys/vm/swappiness
