@@ -437,7 +437,9 @@ on boot
 
     #MIUI ADD:Thermal_NodeReq
     chown system system /sys/class/thermal/thermal_message/sconfig
+    chmod 0664 /sys/class/thermal/thermal_message/sconfig
     chown system system /sys/class/thermal/thermal_message/balance_mode
+    chmod 0664 /sys/class/thermal/thermal_message/balance_mode
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/torch_real_level
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/flash_state
     chown system system /sys/class/thermal/thermal_message/charger_temp
@@ -622,7 +624,7 @@ on property:sys.boot_completed=1
     #start ufs_ffu_service
 
     # Set thermal mode to mgame
-    write /sys/devices/virtual/thermal/thermal_message/sconfig 19
+    write /sys/devices/virtual/thermal/thermal_message/sconfig 20
 
     # Lower UFS read-ahead after boot to minimize random read latency
     write /sys/block/sda/queue/read_ahead_kb 128
