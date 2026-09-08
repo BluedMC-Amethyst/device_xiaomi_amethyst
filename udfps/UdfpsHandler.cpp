@@ -80,7 +80,7 @@ static bool readBool(int fd) {
 }
 
 static disp_event_resp *parseDispEvent(int fd) {
-  static char buf[1024];
+  alignas(disp_event_resp) static char buf[1024];
   memset(buf, 0, sizeof(buf));
   ssize_t n = read(fd, buf, sizeof(buf));
   if (n < static_cast<ssize_t>(sizeof(disp_event)))
@@ -188,7 +188,7 @@ public:
     mAuthSuccess = true;
     onFingerUp();
     std::thread([this]() {
-      std::this_thread::sleep_for(std::chrono::milliseconds(500));
+      std::this_thread::sleep_for(std::chrono::milliseconds(250));
       mAuthSuccess = false;
     }).detach();
   }

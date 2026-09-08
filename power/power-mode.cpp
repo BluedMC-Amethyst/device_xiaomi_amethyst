@@ -52,6 +52,10 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
     switch (type) {
         case Mode::DOUBLE_TAP_TO_WAKE: {
             int fd = open(TOUCH_DEV_PATH, O_RDWR);
+            if (fd < 0) {
+                LOG(ERROR) << "Failed to open " << TOUCH_DEV_PATH;
+                return false;
+            }
             ioctl(fd, TOUCH_IOC_SELECT_TOUCH_ID, TOUCH_ID);
             touch_data data = {};
             data.touch_id = TOUCH_ID;
