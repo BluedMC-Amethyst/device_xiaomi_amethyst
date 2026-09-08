@@ -883,6 +883,7 @@ service qvop-daemon /vendor/bin/qvop-daemon
     class late_start
     user system
     group system drmrpc
+    disabled
 
 service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
@@ -1064,6 +1065,7 @@ service chre /vendor/bin/chre
     group system
     socket chre seqpacket 0660 root system
     shutdown critical
+    disabled
 
 on property:vendor.chre.enabled=0
    stop chre
