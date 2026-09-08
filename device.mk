@@ -10,16 +10,16 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-8192-dalvik-heap.mk)
 
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
 
 # ViPER4AndroidFX
-$(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
+$(call inherit-product-if-exists, packages/apps/ViPER4AndroidFX/config.mk)
 
 # Dolby Audio Processing
-$(call inherit-product, packages/apps/LunarisDolby/dolby.mk)
+$(call inherit-product-if-exists, packages/apps/LunarisDolby/dolby.mk)
 
 # Qualcomm
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
