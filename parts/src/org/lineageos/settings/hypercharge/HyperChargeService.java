@@ -65,7 +65,9 @@ public class HyperChargeService extends Service {
         registerReceiver(powerReceiver, filter);
 
         if (isDevicePluggedIn()) {
-            startMonitoring();
+            Log.i(TAG, "Device plugged in at boot — waiting " + HANDSHAKE_DELAY_MS + "ms for handshake.");
+            mPendingStartRunnable = this::startMonitoring;
+            mHandler.postDelayed(mPendingStartRunnable, HANDSHAKE_DELAY_MS);
         }
     }
 
@@ -123,6 +125,17 @@ public class HyperChargeService extends Service {
             mHandler.removeCallbacks(mMonitoringRunnable);
             mMonitoringRunnable = null;
             Log.d(TAG, "Monitoring loop stopped.");
+        }
+
+        restoreDefaultChargeLimit();
+    }
+
+    private void restoreDefaultChargeLimit() {
+        try {
+            FileUtils.writeLine(Constants.NODE_CONSTANT_CHARGE_CURRENT, Constants.CHARGE_LIMIT_120W);
+            Log.i(TAG, "Restored charge current limit to default (120W)");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to restore charge current limit", e);
         }
     }
 

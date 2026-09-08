@@ -41,8 +41,15 @@ public class CoreControlFragment extends SettingsBasePreferenceFragment implemen
             String key = "core_" + i;
             mCorePrefs[i] = (TwoStatePreference) findPreference(key);
             if (mCorePrefs[i] != null) {
-                mCorePrefs[i].setOnPreferenceChangeListener(this);
-                mCorePrefs[i].setChecked(isCoreOnline(i));
+                if (i == 0) {
+                    // CPU 0 is the primary boot core on ARM64 and cannot be offlined
+                    mCorePrefs[i].setChecked(true);
+                    mCorePrefs[i].setEnabled(false);
+                    mCorePrefs[i].setSummary("Primary boot core (always online)");
+                } else {
+                    mCorePrefs[i].setOnPreferenceChangeListener(this);
+                    mCorePrefs[i].setChecked(isCoreOnline(i));
+                }
             }
         }
     }
@@ -65,18 +72,26 @@ public class CoreControlFragment extends SettingsBasePreferenceFragment implemen
     }
 
     private boolean isCoreOnline(int core) {
+        if (core == 0) {
+            return true;
+        }
         return new File("/sys/devices/system/cpu/cpu" + core + "/online").exists() &&
                readFile("/sys/devices/system/cpu/cpu" + core + "/online").equals("1");
     }
 
     private void setCoreState(int core, boolean online) {
+        if (core == 0) return;
         writeFile("/sys/devices/system/cpu/cpu" + core + "/online", online ? "1" : "0");
     }
 
     private boolean canOffline(int core) {
-        if (core >= 0 && core <= 5) {
+        if (core == 0) {
+            return false;
+        }
+        // SM7635 (volcano) topology: Cores 0..3 Silver (Little), Cores 4..6 Gold (Big), Core 7 Prime
+        if (core >= 1 && core <= 3) {
             int onlineCount = 0;
-            for (int i = 0; i <= 5; i++) {
+            for (int i = 0; i <= 3; i++) {
                 if (i != core && isCoreOnline(i)) onlineCount++;
             }
             return onlineCount >= 2;

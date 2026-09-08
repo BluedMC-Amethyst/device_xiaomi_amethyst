@@ -19,6 +19,7 @@ import org.lineageos.settings.R
 import org.lineageos.settings.utils.Logging
 import org.lineageos.settings.utils.FileUtils
 import com.android.settingslib.applications.AppUtils.isBrowserApp
+import java.util.concurrent.ConcurrentHashMap
 
 /** Helper utility class for thermal profiles. */
 class ThermalUtils
@@ -27,6 +28,7 @@ private constructor(
 ) {
     private val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
     private val serviceIntent = Intent(context, ThermalService::class.java)
+    private val packageStateCache = ConcurrentHashMap<String, ThermalState>()
 
     var enabled: Boolean = sharedPrefs.getBoolean(THERMAL_ENABLED, false)
         set(value) {
@@ -45,6 +47,7 @@ private constructor(
         set(value) {
             if (field == value) return
             field = value
+            packageStateCache.clear()
             writeValue(value)
         }
 
@@ -69,6 +72,7 @@ private constructor(
 
     fun writePackage(packageName: String, mode: Int) {
         Logging.d(TAG, "writePackage: $packageName -> $mode")
+        packageStateCache.remove(packageName)
         var newValue = value.replace("$packageName,", "")
         val modes = newValue.split(":").toMutableList()
         if (mode < modes.size) {
@@ -78,14 +82,17 @@ private constructor(
     }
 
     fun getStateForPackage(packageName: String): ThermalState {
-        val modes = value.split(":")
-        return ThermalState.values().find { state -> 
-            state.id < modes.size && modes[state.id].contains("$packageName,") 
-        } ?: getDefaultStateForPackage(packageName)
+        return packageStateCache.getOrPut(packageName) {
+            val modes = value.split(":")
+            ThermalState.values().find { state -> 
+                state.id < modes.size && modes[state.id].contains("$packageName,") 
+            } ?: getDefaultStateForPackage(packageName)
+        }
     }
 
     fun resetProfiles() {
         Logging.d(TAG, "resetProfiles")
+        packageStateCache.clear()
         value = DEFAULT_VALUE
     }
 
