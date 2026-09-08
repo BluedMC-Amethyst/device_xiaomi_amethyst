@@ -61,16 +61,6 @@ class ThermalService : Service() {
         Logging.d(TAG, "Creating service")
         thermalUtils = ThermalUtils.getInstance(this)
         super.onCreate()
-    }
-
-    override fun onDestroy() {
-        Logging.d(TAG, "Destroying service")
-        unregisterReceiver(intentReceiver)
-        runCatching { ActivityTaskManager.getService().unregisterTaskStackListener(taskListener) }
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Logging.d(TAG, "Starting service")
         runCatching { ActivityTaskManager.getService().registerTaskStackListener(taskListener) }
         registerReceiver(
             intentReceiver,
@@ -79,6 +69,17 @@ class ThermalService : Service() {
                 addAction(Intent.ACTION_SCREEN_ON)
             },
         )
+    }
+
+    override fun onDestroy() {
+        Logging.d(TAG, "Destroying service")
+        unregisterReceiver(intentReceiver)
+        runCatching { ActivityTaskManager.getService().unregisterTaskStackListener(taskListener) }
+        super.onDestroy()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Logging.d(TAG, "Starting service")
         return START_STICKY
     }
 

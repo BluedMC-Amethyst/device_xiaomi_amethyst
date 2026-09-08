@@ -256,6 +256,7 @@ ro.vendor.se.type=HCE,UICC
 
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
+ro.vendor.sensors.xiaomi.double_tap=true
 ro.vendor.sensors.xiaomi.udfps=true
 
 # SSR
@@ -281,8 +282,8 @@ ro.vendor.mm.vibrator.sys_path=/sys/class/qcom-haptics
 
 # Volume
 ro.config.alarm_vol_steps=15
-ro.config.media_vol_default=10
-ro.config.media_vol_steps=15
+ro.config.media_vol_default=15
+ro.config.media_vol_steps=25
 ro.config.system_vol_steps=15
 ro.config.vc_call_vol_steps=11
 

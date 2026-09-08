@@ -241,6 +241,10 @@ private:
   void startDispEventThread() {
     std::thread([this]() {
       android::base::unique_fd fd(open(DISP_FEATURE_PATH, O_RDWR));
+      if (fd.get() < 0) {
+        LOG(ERROR) << "Failed to open " DISP_FEATURE_PATH;
+        return;
+      }
 
       disp_event_req fodEvt = {.base = kDisplayPrimary,
                                .type = MI_DISP_EVENT_FOD};
