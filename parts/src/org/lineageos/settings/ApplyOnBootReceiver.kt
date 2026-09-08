@@ -10,12 +10,19 @@ import org.lineageos.settings.kernelmanager.KernelManagerViewModel
 
 class ApplyOnBootReceiver : BroadcastReceiver() {
 
+    companion object {
+        private var hasApplied = false
+    }
+
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
-                applyKernelSettings(context)
-                applyGpuSettings(context)
+                if (!hasApplied) {
+                    hasApplied = true
+                    applyKernelSettings(context)
+                    applyGpuSettings(context)
+                }
             }
         }
     }
