@@ -31,7 +31,7 @@ vendor.audio.ultrasound.usync=100
 # Camera
 debug.config.video.p3.encode.support=true
 debug.config.video.p3.decode.support=true
-ro.camerax.extensions.enabled=false
+ro.camerax.extensions.enabled=true
 ro.camera.disableJpegR=true
 ro.camera.disableHeicUltraHDR=true
 
@@ -56,16 +56,16 @@ vendor.wv.oemcrypto.debug.enable_prov40=true
 ro.vendor.qti.va_odm.support=1
 
 # Graphics
-debug.sf.set_idle_timer_ms=1100
+debug.sf.set_idle_timer_ms=500
 ro.surface_flinger.enable_frame_rate_override=false
 vendor.display.boost_cpu_layer_number_threshold=10
 vendor.display.disable_3d_adaptive_tm=1
 vendor.display.disable_cwb_idle_fallback=1
 vendor.display.disable_idle_scaling_layers=1
 vendor.display.disable_llcc_during_aod=1
-vendor.display.disable_sdr_dimming=0
+vendor.display.disable_sdr_dimming=1
 vendor.display.disable_stc_dimming=1
-vendor.display.enable_hdr10_gpu_target=0
+vendor.display.enable_hdr10_gpu_target=1
 vendor.display.idle_time=0
 vendor.display.support_function_timer=0
 vendor.display.support_video_mode_30hz_aod=0
