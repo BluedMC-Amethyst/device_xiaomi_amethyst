@@ -109,11 +109,18 @@ BOARD_BOOTCONFIG := \
     androidboot.hypervisor.protected_vm.supported=true \
     androidboot.vendor.qspa=true
 
-# Kernel (prebuilt)
+# Kernel
 PREBUILT_PATH := $(DEVICE_PATH)-kernel
+ifeq ($(TARGET_BUILD_KERNEL_FROM_SOURCE),true)
+TARGET_KERNEL_SOURCE := kernel/xiaomi/amethyst
+TARGET_KERNEL_CONFIG := amethyst_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image
+else
+# Kernel (prebuilt)
 TARGET_PREBUILT_KERNEL := $(PREBUILT_PATH)/images/kernel
 TARGET_NO_KERNEL_OVERRIDE := true
 TARGET_KERNEL_SOURCE := $(PREBUILT_PATH)/kernel-headers
+endif
 BOARD_PREBUILT_DTBIMAGE_DIR := $(PREBUILT_PATH)/images/dtbs/
 BOARD_PREBUILT_DTBOIMAGE := $(PREBUILT_PATH)/images/dtbo.img
 
