@@ -54,11 +54,28 @@ import org.lineageos.settings.utils.FileUtils;
 public class BootCompletedReceiver extends BroadcastReceiver {
     private static final boolean DEBUG = false;
     private static final String TAG = "XiaomiParts";
+    private static boolean sInitialized = false;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.i(TAG, "Received intent: " + intent.getAction());
-        
+
+        if (!sInitialized) {
+            sInitialized = true;
+            initServicesAndSettings(context);
+        }
+
+        switch (intent.getAction()) {
+            case Intent.ACTION_LOCKED_BOOT_COMPLETED:
+                handleLockedBootCompleted(context);
+                break;
+            case Intent.ACTION_BOOT_COMPLETED:
+                handleBootCompleted(context);
+                break;
+        }
+    }
+
+    private void initServicesAndSettings(Context context) {
         PreferenceManager.setDefaultValues(context, R.xml.hypercharge_settings, false);
 
         try {
@@ -83,17 +100,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             Log.e(TAG, "Failed to start HyperChargeService on boot", e);
         }
 
-        switch (intent.getAction()) {
-            case Intent.ACTION_LOCKED_BOOT_COMPLETED:
-                handleLockedBootCompleted(context);
-                break;
-            case Intent.ACTION_BOOT_COMPLETED:
-                handleBootCompleted(context);
-                break;
-        }
-        
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        
+
         if (FileUtils.fileExists(KPROFILES_AUTO_NODE)) {
             boolean kProfilesAutoEnabled = sharedPrefs.getBoolean(KPROFILES_AUTO_KEY, false);
             FileUtils.writeLine(KPROFILES_AUTO_NODE, kProfilesAutoEnabled ? ON : OFF);
