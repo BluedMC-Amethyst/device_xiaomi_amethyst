@@ -198,6 +198,14 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
+# Kernel (prebuilt) & system DLKM
+PREBUILT_KERNEL_PATH := device/xiaomi/amethyst-kernel
+GKI_VERSION := 6.1.138-android14-11-g0c3d559bcd85-ab14529422
+
+PRODUCT_COPY_FILES += \
+    $(PREBUILT_KERNEL_PATH)/images/kernel:kernel \
+    $(call find-copy-subdir-files,*,$(PREBUILT_KERNEL_PATH)/modules/system_dlkm/$(GKI_VERSION)/,$(TARGET_COPY_OUT_SYSTEM_DLKM)/lib/modules/$(GKI_VERSION)/)
+
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
