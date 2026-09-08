@@ -17,7 +17,7 @@
             "Path": "/sys/kernel/msm_performance/parameters/cpu_min_freq",
             "Values": [
                 "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0",
-                "0:768000 1:768000 2:768000 3:768000 4:1036800 5:1036800 6:1036800 7:1228800",
+                "0:787200 1:787200 2:787200 3:787200 4:1056000 5:1056000 6:1056000 7:1209600",
                 "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
                 "0:1344000 1:1344000 2:1344000 3:1344000 4:1190400 5:1190400 6:1190400 7:1459200",
                 "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000"
@@ -59,17 +59,6 @@
             "ResetOnInit": true
         },
         {
-            "Name": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
-            "Path": "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus",
-            "Values": [
-                "1",
-                "2",
-                "3"
-            ],
-            "DefaultIndex": 0,
-            "ResetOnInit": true
-        },
-        {
             "Name": "procSysWaltSchedMinTaskUtilForColocation",
             "Path": "/proc/sys/walt/sched_min_task_util_for_colocation",
             "Values": [
@@ -90,21 +79,12 @@
             "ResetOnInit": true
         },
         {
-            "Name": "sysClassKgslKgsl3d0MaxPwrlevel",
-            "Path": "/sys/class/kgsl/kgsl-3d0/max_pwrlevel",
-            "Values": [
-                "0"
-            ],
-            "DefaultIndex": 0,
-            "ResetOnInit": true
-        },
-        {
             "Name": "sysKernelMsmPerformanceParametersCpuMaxFreq",
             "Path": "/sys/kernel/msm_performance/parameters/cpu_max_freq",
             "Values": [
                 "0:9999999 1:9999999 2:9999999 3:9999999 4:9999999 5:9999999 6:9999999 7:9999999",
-                "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
-                "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+                "0:1017600 1:1017600 2:1017600 3:1017600 4:1190400 5:1190400 6:1190400 7:1459200",
+                "0:1497600 1:1497600 2:1497600 3:1497600 4:2016000 5:2016000 6:2016000 7:2208000",
                 "0:1804800 1:1804800 2:1804800 3:1804800 4:2400000 5:2400000 6:2400000 7:2496000",
                 "4:2016000 5:2016000 6:2016000",
                 "7:2016000"
@@ -279,7 +259,7 @@
             "Path": "/sys/devices/system/cpu/cpu4/cpufreq/walt/hispeed_freq",
             "Values": [
                 "1190400",
-                "787"
+                "787200"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -309,7 +289,7 @@
             "Path": "/sys/devices/system/cpu/cpu4/cpufreq/walt/rtg_boost_freq",
             "Values": [
                 "0",
-                "556800"
+                "633600"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -439,13 +419,13 @@
         {
             "PowerHint": "SUSTAINED_PERFORMANCE",
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
-            "Value": "0:768000 1:768000 2:768000 3:768000 4:1036800 5:1036800 6:1036800 7:1228800",
+            "Value": "0:787200 1:787200 2:787200 3:787200 4:1056000 5:1056000 6:1056000 7:1209600",
             "Duration": 0
         },
         {
             "PowerHint": "SUSTAINED_PERFORMANCE",
             "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Value": "0:1497600 1:1497600 2:1497600 3:1497600 4:2016000 5:2016000 6:2016000 7:2208000",
             "Duration": 0
         },
         {
@@ -474,12 +454,6 @@
         },
         {
             "PowerHint": "INTERACTION",
-            "Node": "sysDevicesSystemCpuCpu0CoreCtlMinCpus",
-            "Value": "2",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForColocation",
             "Value": "0",
             "Duration": 0
@@ -487,12 +461,6 @@
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForBoost",
-            "Value": "0",
-            "Duration": 0
-        },
-        {
-            "PowerHint": "INTERACTION",
-            "Node": "sysClassKgslKgsl3d0MaxPwrlevel",
             "Value": "0",
             "Duration": 0
         },
@@ -661,7 +629,7 @@
         {
             "PowerHint": "DISPLAY_INACTIVE",
             "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1516800 1:1516800 2:1516800 3:1516800 4:2016000 5:2016000 6:2016000 7:2188800",
+            "Value": "0:1497600 1:1497600 2:1497600 3:1497600 4:2016000 5:2016000 6:2016000 7:2208000",
             "Duration": 0
         },
         {
@@ -672,7 +640,7 @@
         {
             "PowerHint": "DEVICE_IDLE",
             "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
-            "Value": "0:1036800 1:1036800 2:1036800 3:1036800 4:1190400 5:1190400 6:1190400 7:1459200",
+            "Value": "0:1017600 1:1017600 2:1017600 3:1017600 4:1190400 5:1190400 6:1190400 7:1459200",
             "Duration": 0
         }
     ]
