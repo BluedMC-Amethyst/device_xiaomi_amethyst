@@ -35,20 +35,6 @@ get_num_logical_cores_in_physical_cluster()
 	echo $cpu_topology
 }
 
-#Implementing this mechanism to jump to powersave governor if the script is not running
-#as it would be an indication for devs for debug purposes.
-fallback_setting()
-{
-	governor="powersave"
-	for i in `ls -d /sys/devices/system/cpu/cpufreq/policy[0-9]*`
-	do
-		if [ -f $i/scaling_governor ] ; then
-			echo $governor > $i/scaling_governor
-		fi
-	done
-	exit
-}
-
 variant=$(get_num_logical_cores_in_physical_cluster "$1")
 echo "CPU topology: ${variant}"
 case "$variant" in
@@ -62,8 +48,8 @@ case "$variant" in
 	/vendor/bin/sh /vendor/bin/init.kernel.post_boot-volcano_4_3_0.sh
 	;;
 	*)
-	echo "***WARNING***: Postboot script not present for the variant ${variant}"
-	fallback_setting
+	echo "***WARNING***: Defaulting to 4_3_1 variant"
+	/vendor/bin/sh /vendor/bin/init.kernel.post_boot-volcano_default_4_3_1.sh
 	;;
 esac
 
