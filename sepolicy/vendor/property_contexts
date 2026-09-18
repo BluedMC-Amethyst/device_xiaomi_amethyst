@@ -205,6 +205,7 @@ ro.vendor.miui.singlesim u:object_r:vendor_miui_singlesim_prop:s0
 
 # Thermal
 vendor.sys.thermal.data.path u:object_r:vendor_thermal_normal_prop:s0
+vendor.sys.thermal.bcl.boot_completed u:object_r:vendor_thermal_normal_prop:s0
 
 # Sensor
 persist.vendor.sensor.mischeck u:object_r:vendor_mischeck_prop:s0
