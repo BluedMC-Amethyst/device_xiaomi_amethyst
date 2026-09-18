@@ -31,3 +31,5 @@ vendor.xiaomi.hw.touchfeature.ITouchFeature/default u:object_r:hal_touchfeature_
 # Vibrator
 android.hardware.vibrator.IVibrator/vibratorfeature                          u:object_r:hal_vibrator_service:s0
 
+# BT/Wi-Fi Coex
+vendor.google.bluetooth_ext.IBTChannelAvoidance/default    u:object_r:hal_bluetooth_coex_service:s0
