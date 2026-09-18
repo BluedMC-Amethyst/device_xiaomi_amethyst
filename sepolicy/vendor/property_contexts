@@ -201,6 +201,8 @@ ro.vendor.oem.boot_completed u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.imei u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.meid u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.serialno u:object_r:vendor_deviceid_prop:s0
+ro.vendor.oem.sno u:object_r:vendor_sno_prop:s0
+ro.vendor.oem.psno u:object_r:vendor_sno_prop:s0
 ro.vendor.miui.singlesim u:object_r:vendor_miui_singlesim_prop:s0
 
 # Thermal
