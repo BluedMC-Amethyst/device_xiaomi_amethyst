@@ -156,6 +156,7 @@
 /odm/bin/hw/vibratorfeature-wrapper u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/vendor\.xiaomi\.hardware\.vibratorfeature\.service u:object_r:hal_vibrator_default_exec:s0
 /dev/qcom_haptic u:object_r:aac_richtap_dev_device:s0
+/mnt/vendor/persist/haptics(/.*)?    u:object_r:vendor_persist_haptics_file:s0
 
 # Reserved pool
 /sys/kernel/reserve_pool(/.*)?    u:object_r:vendor_sysfs_reserve_pool:s0
