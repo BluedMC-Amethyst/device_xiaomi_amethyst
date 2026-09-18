@@ -1,1 +1,7 @@
+# Remove redundant log during selinux setup
+dontaudit kernel sepolicy_file:file getattr;
+dontaudit kernel system_bootstrap_lib_file:file getattr;
+dontaudit kernel system_bootstrap_lib_file:dir getattr;
+dontaudit kernel system_dlkm_file:dir getattr;
+
 allow kernel kernel:capability { net_bind_service };
