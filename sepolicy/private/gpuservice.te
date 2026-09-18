@@ -1,0 +1,2 @@
+allow gpuservice fs_bpf:dir search;
+allow gpuservice fs_bpf:file { getattr read };
