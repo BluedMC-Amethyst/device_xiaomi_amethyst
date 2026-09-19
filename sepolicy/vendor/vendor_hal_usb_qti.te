@@ -1,3 +1,1 @@
-allow vendor_hal_usb_qti sysfs_udc:dir read;
-
-allow vendor_hal_usb_qti sysfs_udc:dir { open };
+allow vendor_hal_usb_qti sysfs_udc:dir r_dir_perms;
