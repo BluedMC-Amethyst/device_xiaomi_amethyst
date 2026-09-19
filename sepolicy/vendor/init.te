@@ -4,6 +4,7 @@ allow init debugfs_tracing_debug:dir mounton;
 allow init vendor_sysfs_usb_supply:file setattr;
 allow init vendor_sysfs_battery_supply:file setattr;
 allow init vendor_sysfs_qcom_battery:file setattr;
+allow init vendor_sysfs_reserve_pool:file w_file_perms;
 allow vendor_init block_device:lnk_file { relabelfrom relabelto setattr };
 allow vendor_init block_device:file { mounton relabelfrom relabelto setattr };
 allow vendor_init debugfs_tracing_debug:file w_file_perms;
@@ -15,7 +16,8 @@ set_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_nfc_mi_prop)
 set_prop(vendor_init, vendor_fp_prop)
 set_prop(vendor_init, vendor_fp_info_prop)
-
+set_prop(vendor_init, vendor_cgroup_follow_prop)
+set_prop(vendor_init, vendor_bluetooth_prop)
 
 allow init vendor_sysfs_power_supply:file { setattr };
 r_dir_file(init, sysfs_batteryinfo)

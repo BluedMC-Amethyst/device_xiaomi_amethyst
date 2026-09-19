@@ -3,6 +3,10 @@ persist.vendor.audio.cloud u:object_r:vendor_audio_cloud_ctrl_mi_prop:s0
 persist.vendor.audio.usb_cctoggle u:object_r:vendor_audio_cloud_ctrl_mi_prop:s0
 vendor.mm. u:object_r:vendor_audio_cloud_ctrl_mi_prop:s0
 
+# Bluetooth
+persist.vendor.btstack.enable.twsplus u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.enable.twsplussho u:object_r:vendor_bluetooth_prop:s0
+
 # Camera
 persist.vendor.cameraid. u:object_r:vendor_camera_prop:s0
 persist.vendor.EnableP3ColorSpace u:object_r:vendor_camera_p3enable_prop:s0
@@ -197,10 +201,13 @@ ro.vendor.oem.boot_completed u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.imei u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.meid u:object_r:vendor_deviceid_prop:s0
 ro.vendor.oem.serialno u:object_r:vendor_deviceid_prop:s0
+ro.vendor.oem.sno u:object_r:vendor_sno_prop:s0
+ro.vendor.oem.psno u:object_r:vendor_sno_prop:s0
 ro.vendor.miui.singlesim u:object_r:vendor_miui_singlesim_prop:s0
 
 # Thermal
 vendor.sys.thermal.data.path u:object_r:vendor_thermal_normal_prop:s0
+vendor.sys.thermal.bcl.boot_completed u:object_r:vendor_thermal_normal_prop:s0
 
 # Sensor
 persist.vendor.sensor.mischeck u:object_r:vendor_mischeck_prop:s0

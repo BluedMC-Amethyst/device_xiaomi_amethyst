@@ -1,0 +1,6 @@
+allow priv_app {
+    fwk_vibrator_control_service
+    hal_power_stats_service
+    hal_timestamp_service
+    hal_bluetooth_coex_service
+}:service_manager find;

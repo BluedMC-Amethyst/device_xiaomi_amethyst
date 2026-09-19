@@ -15,6 +15,7 @@ get_prop(vendor_hal_citsensorservice_xiaomi_default, vendor_displayfeature_prop)
 get_prop(vendor_hal_citsensorservice_xiaomi_default, vendor_sensors_prop)
 set_prop(vendor_hal_citsensorservice_xiaomi_default, vendor_mischeck_prop)
 set_prop(vendor_hal_citsensorservice_xiaomi_default, vendor_usedframebuffer_prop)
+get_prop(vendor_hal_citsensorservice_xiaomi_default, vendor_qc_aon_prop)
 
 r_dir_file(vendor_hal_citsensorservice_xiaomi_default, mnt_vendor_file)
 

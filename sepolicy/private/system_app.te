@@ -1,1 +1,7 @@
 allow system_app self:netlink_kobject_uevent_socket { create bind read setopt getopt };
+
+# Allow system apps to check supported filesystems
+allow system_app proc_filesystems:file r_file_perms;
+
+# Allow system apps to read Incremental FS properties
+get_prop(system_app, incremental_prop)
