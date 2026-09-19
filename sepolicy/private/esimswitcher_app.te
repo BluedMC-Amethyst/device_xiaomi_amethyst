@@ -12,11 +12,13 @@ allow esimswitcher_app {
     autofill_service
     content_capture_service
     device_policy_service
+    hint_service
     gpu_service
     netstats_service
     network_management_service
     radio_service
     registry_service
+    sensitive_content_protection_service
     uimode_service
     voiceinteraction_service
 }:service_manager find;

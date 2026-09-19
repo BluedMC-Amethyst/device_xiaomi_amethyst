@@ -20,7 +20,6 @@ allow mi_thermald mi_thermald:capability { chown fowner };
 allow mi_thermald mi_thermald:capability2 { block_suspend wake_alarm };
 allow mi_thermald vendor_data_file:dir { add_name read remove_name watch write };
 allow mi_thermald vendor_data_file:file { create getattr open read rename setattr unlink write };
-allow mi_thermald sys_thermal_wifi_limit:file { open read write };
 allow mi_thermald sys_thermal_wifi_limit:file rw_file_perms;
 allow mi_thermald vendor_sysfs_displayfeature:dir search;
 allow mi_thermald vendor_sysfs_displayfeature:file { getattr open read };
