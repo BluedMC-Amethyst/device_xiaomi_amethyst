@@ -154,7 +154,7 @@ PRODUCT_PACKAGES += \
 
 # Euicc
 PRODUCT_PACKAGES += \
-    XiaomiEsimSwitcher \
+    AmethystEsimSwitcher \
     XiaomiEuicc
 
 PRODUCT_COPY_FILES += \
