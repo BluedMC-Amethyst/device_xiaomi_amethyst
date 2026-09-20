@@ -3,8 +3,9 @@ dontaudit kernel sepolicy_file:file getattr;
 dontaudit kernel system_bootstrap_lib_file:file getattr;
 dontaudit kernel system_bootstrap_lib_file:dir getattr;
 dontaudit kernel system_dlkm_file:dir getattr;
+dontaudit kernel mnt_vendor_file:dir search;
 
 allow kernel kernel:capability { net_bind_service };
 allow kernel device:dir rw_dir_perms;
-allow kernel { mnt_vendor_file vendor_firmware_file }:dir search;
+allow kernel vendor_firmware_file:dir search;
 allow kernel vendor_firmware_file:file r_file_perms;
