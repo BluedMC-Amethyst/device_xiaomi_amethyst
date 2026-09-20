@@ -99,3 +99,5 @@ genfscon sysfs /devices/platform/goodix_ts.0/wakeup u:object_r:sysfs_wakeup:s0
 # Walt
 genfscon proc /sys/walt u:object_r:proc_walt:s0
 
+# Mempool
+genfscon sysfs /kernel/mi_mempool u:object_r:vendor_sysfs_reserve_pool:s0
