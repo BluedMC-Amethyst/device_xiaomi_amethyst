@@ -21,6 +21,9 @@ genfscon sysfs /devices/platform/soc/soc:xiaomi_fingerprint/actpower u:object_r:
 # Extcon sysfs
 genfscon sysfs /devices/platform/soc/soc:spf_core_platform/soc:spf_core_platform:lpass-cdc/wcd9378-codec/extcon                 u:object_r:sysfs_extcon:s0
 
+# Vibrator
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-005a u:object_r:vendor_sysfs_vibrator:s0
+
 # Fingerprint
 genfscon sysfs /devices/virtual/touch/touch_dev/fod_press_status u:object_r:vendor_sysfs_touch:s0
 genfscon sysfs /devices/virtual/touch/touch_dev/gesture_single_tap_state u:object_r:sysfs_tp_fodstatus:s0
