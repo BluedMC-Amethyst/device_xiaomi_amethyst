@@ -3,6 +3,8 @@ genfscon sysfs /devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qco
 
 # Charger
 genfscon sysfs /class/qcom-battery/fastchg_mode u:object_r:vendor_sysfs_power_supply:s0
+genfscon sysfs /class/qcom-battery/charge_control_en u:object_r:vendor_sysfs_power_supply:s0
+genfscon sysfs /class/qcom-battery/input_suspend u:object_r:vendor_sysfs_power_supply:s0
 genfscon sysfs /class/power_supply/battery/constant_charge_current u:object_r:vendor_sysfs_power_supply:s0
 
 # Core Control
