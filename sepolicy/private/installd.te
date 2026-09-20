@@ -1,4 +1,0 @@
-allow installd media_userdir_file:dir rw_dir_perms;
-allow installd media_userdir_file:dir rmdir;
-allow installd media_userdir_file:file rw_file_perms;
-allow installd media_userdir_file:file unlink;
