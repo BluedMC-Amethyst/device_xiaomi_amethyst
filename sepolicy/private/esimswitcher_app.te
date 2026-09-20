@@ -19,6 +19,7 @@ allow esimswitcher_app {
     radio_service
     registry_service
     sensitive_content_protection_service
+    protolog_configuration_service
     uimode_service
     voiceinteraction_service
 }:service_manager find;
