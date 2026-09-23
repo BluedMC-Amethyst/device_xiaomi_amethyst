@@ -55,8 +55,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio@7.1-impl \
-    android.hardware.soundtrigger@2.3-impl
+    android.hardware.audio@7.1-impl
 
 PRODUCT_PACKAGES += \
     audioadsprpcd \
@@ -459,6 +458,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml
+
+# WiFi Display
+PRODUCT_BOOT_JARS += \
+    WfdCommon
+
+PRODUCT_PACKAGES += \
+    libwfdnative
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/amethyst/amethyst-vendor.mk)
