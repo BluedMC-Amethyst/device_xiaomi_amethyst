@@ -39,3 +39,9 @@ type sysfs_kprofiles, fs_type, sysfs_type;
 
 # Walt
 type proc_walt, fs_type, proc_type;
+
+# MIGT scheduler
+type vendor_sysfs_migt, fs_type, sysfs_type;
+
+# Metis scheduler
+type vendor_sysfs_metis, fs_type, sysfs_type;

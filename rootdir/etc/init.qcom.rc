@@ -345,7 +345,7 @@ on post-fs-data
     mkdir /data/vendor/qtee 0770 system system
 
     #Create folder of camera
-    mkdir /data/vendor/camera 0777 camera camera
+    mkdir /data/vendor/camera 0770 camera camera
     mkdir /data/vendor/camera/offlinelog 0777 cameraserver audio
     mkdir /data/vendor/camera/aftersalelog 0777 cameraserver audio
 
@@ -392,7 +392,7 @@ on post-fs-data
     mkdir /data/vendor/audio/audio_collector 0770 audio audio
 
     # Create directory used by video subsystem
-    mkdir /data/vendor/video 0777 audio audio
+    mkdir /data/vendor/video 0770 audio audio
     write /data/vendor/video/videohalPid 0
     chown audio audio /data/vendor/video/videohalPid
     chmod 0777 /data/vendor/video/videohalPid

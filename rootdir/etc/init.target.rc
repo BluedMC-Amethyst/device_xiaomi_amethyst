@@ -124,21 +124,21 @@ on late-fs
 on post-fs-data
     chmod 0666 /dev/migt
     restorecon /dev/migt
-    chmod 0777 /sys/module/migt/parameters/migt_freq
+    chmod 0644 /sys/module/migt/parameters/migt_freq
     restorecon /sys/module/migt/parameters/migt_freq
-    chmod 0777 /sys/module/migt/parameters/migt_ms
+    chmod 0644 /sys/module/migt/parameters/migt_ms
     restorecon /sys/module/migt/parameters/migt_ms
-    chmod 0777 /sys/module/migt/parameters/migt_thresh
+    chmod 0644 /sys/module/migt/parameters/migt_thresh
     restorecon /sys/module/migt/parameters/migt_thresh
-    chmod 0777 /sys/module/migt/parameters/boost_policy
+    chmod 0644 /sys/module/migt/parameters/boost_policy
     restorecon /sys/module/migt/parameters/boost_policy
-    chmod 0777 /sys/module/migt/parameters/fps_variance_ratio
+    chmod 0644 /sys/module/migt/parameters/fps_variance_ratio
     restorecon /sys/module/migt/parameters/fps_variance_ratio
-    chmod 0777 /sys/module/migt/parameters/super_task_max_num
+    chmod 0644 /sys/module/migt/parameters/super_task_max_num
     restorecon /sys/module/migt/parameters/super_task_max_num
-    chmod 0777 /sys/module/migt/parameters/migt_ceiling_freq
+    chmod 0644 /sys/module/migt/parameters/migt_ceiling_freq
     restorecon /sys/module/migt/parameters/migt_ceiling_freq
-    chmod 0777 /sys/module/migt/parameters/stask_candidate_num
+    chmod 0644 /sys/module/migt/parameters/stask_candidate_num
     restorecon /sys/module/migt/parameters/stask_candidate_num
     chmod 0666 /sys/module/migt/parameters/glk_disable
     restorecon /sys/module/migt/parameters/glk_disable
@@ -263,6 +263,7 @@ on post-fs-data
 
     mkdir /data/vendor/thermal 0771 root system
     mkdir /data/vendor/thermal/config 0771 root system
+    restorecon_recursive /data/vendor/thermal
 
     # add torch node for cit && mmi
     chown system system /sys/class/leds/led:torch_0/brightness
@@ -665,17 +666,6 @@ on property:persist.vendor.tcpdump.enable=true
 
 on property:persist.vendor.tcpdump.enable=false
     stop vendor.tcpdump
-service fan_control_turn_on /vendor/bin/fan_service 1
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service fan_control_turn_off /vendor/bin/fan_service 0
-    class late_start
-    user root
-    disabled
-    oneshot
 
 #for cts-on-gsi test
 on boot && property:ro.product.system.manufacturer=Android
