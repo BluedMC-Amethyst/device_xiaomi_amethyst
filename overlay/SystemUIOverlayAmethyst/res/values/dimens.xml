@@ -7,4 +7,8 @@
     <!-- Microns/ums (1000 um = 1mm) per pixel for the given device. If unspecified, UI that
          relies on this value will not be sized correctly. -->
     <item name="pixel_pitch" format="float" type="dimen">60.6</item>
+
+    <!-- AOD/Doze burn-in protection offsets -->
+    <dimen name="doze_burn_in_offset_x">4dp</dimen>
+    <dimen name="doze_burn_in_offset_y">4dp</dimen>
 </resources>

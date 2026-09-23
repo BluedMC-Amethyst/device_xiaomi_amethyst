@@ -27,7 +27,7 @@
     <integer name="config_keyguardMaxRefreshRate">60</integer>
 
     <!-- Bottom margin size when fingerprint in display is active -->
-    <dimen name="keyguard_indication_margin_bottom">6dp</dimen>
+    <dimen name="keyguard_indication_margin_bottom">15dp</dimen>
 
     <!-- Should we vibrate on an icon animation of the shelf. This should only be active if the
           vibrator is capable of subtle vibrations -->
