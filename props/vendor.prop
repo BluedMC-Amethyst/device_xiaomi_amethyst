@@ -86,6 +86,8 @@ camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=1
 ro.camerax.extensions.enabled=true
 ro.hardware.camera=xiaomi
+persist.vendor.camera.logLevel=0
+persist.vendor.camera.sensor=0
 
 # Charging Speed
 persist.vendor.region.charger=UA
@@ -140,10 +142,11 @@ persist.backup.ntpServer=0.pool.ntp.org
 # Graphics
 debug.angle.feature_overrides_enabled=preferLinearFilterForYUV:mapUnspecifiedColorSpaceToPassThrough
 debug.egl.hw=1
-debug.sf.latch_unsignaled=1
+debug.sf.latch_unsignaled=0
 debug.sf.auto_latch_unsignaled=0
 debug.sf.disable_client_composition_cache=0
 debug.sf.enable_gl_backpressure=0
+debug.sf.layer_caching_active_layer_timeout_ms=1000
 debug.sf.hw=1
 debug.sf.enable_hwc_vds=1
 debug.sf.early.app.duration=13666666
@@ -172,7 +175,6 @@ ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.game_default_frame_rate_override=120
 ro.surface_flinger.has_HDR_display=true
 ro.surface_flinger.has_wide_color_display=true
-ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 ro.surface_flinger.max_virtual_display_dimension=4096
 ro.surface_flinger.protected_contents=true
 ro.surface_flinger.set_idle_timer_ms=1000
@@ -235,6 +237,7 @@ vendor.netflix.bsp_rev=Q7635-39449-1
 ro.vendor.extension_library=libqti-perfd-client.so
 ro.vendor.perf-hal.ver=3.0
 ro.vendor.perf.scroll_opt=1
+vendor.perf.framepacing.enable=1
 
 # QCOM
 ro.soc.manufacturer=QTI
