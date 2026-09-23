@@ -303,3 +303,9 @@ persist.sys.wfd.virtual=0
 
 # Low RAM
 ro.config.low_ram=false
+
+# LMKD
+ro.lmk.kill_timeout_ms=50
+ro.lmk.stall_limit_critical=40
+ro.lmk.filecache_min_kb=153600
+ro.zram_backing_device_min_free_mb=1536
