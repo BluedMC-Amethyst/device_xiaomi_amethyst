@@ -108,7 +108,8 @@ BOARD_BOOTCONFIG := \
     androidboot.usbcontroller=a600000.dwc3 \
     androidboot.load_modules_parallel=true \
     androidboot.hypervisor.protected_vm.supported=true \
-    androidboot.vendor.qspa=true
+    androidboot.vendor.qspa=true \
+    androidboot.init_fatal_reboot_target=recovery
 
 # Kernel
 PREBUILT_PATH := $(DEVICE_PATH)-kernel
