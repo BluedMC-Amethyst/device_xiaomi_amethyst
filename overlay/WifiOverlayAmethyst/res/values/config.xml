@@ -152,7 +152,7 @@
          HAL as a blocking call. In such a case the country code will be applied
          immediately after the country code is sent to the driver (if the method returns a
          success). -->
-    <bool name="config_wifiDriverSupportedNl80211RegChangedEvent" translatable="false">true</bool>
+    <bool name="config_wifiDriverSupportedNl80211RegChangedEvent" translatable="false">false</bool>
 
     <!-- Wifi driver supports Opportunistic Wireless Encryption (OWE) Transition
          aka Enhanced Open for Soft-AP -->
