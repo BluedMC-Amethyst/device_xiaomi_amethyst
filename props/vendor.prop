@@ -101,7 +101,7 @@ vendor.display.enable_async_vds_creation=1
 vendor.display.enable_dpps_dynamic_fps=0
 vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=0
-vendor.display.vds_allow_hwc=0
+vendor.display.vds_allow_hwc=1
 
 # DPM
 persist.vendor.dpm.vndr.feature=1
@@ -217,7 +217,7 @@ vendor.gatekeeper.is_security_level_spu=0
 # Media
 debug.stagefright.c2inputsurface=-1
 vendor.media.omx=0
-debug.sdm.support_writeback=0
+debug.sdm.support_writeback=1
 
 # Media configs
 ro.media.xml_variant.profiles=_volcano_amethyst_v0
@@ -289,6 +289,11 @@ ro.config.vc_call_vol_steps=11
 
 # WLAN
 wifi.aware.interface=wifi-aware0
+wifi.direct.interface=p2p0
+
+# WiFi Display
+persist.debug.wfd.enable=1
+persist.sys.wfd.virtual=0
 
 # Low RAM
 ro.config.low_ram=false

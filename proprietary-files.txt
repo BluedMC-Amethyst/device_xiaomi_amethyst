@@ -163,7 +163,7 @@ vendor/lib64/libcapiv2udk7vendor.so
 vendor/lib64/libcapiv2uvvendor.so
 vendor/lib64/libcustomva_intf.so
 vendor/lib64/libdapparamstorage.so
-vendor/lib64/libhotword_intf.so
+#vendor/lib64/libhotword_intf.so
 vendor/lib64/libkaraokepal.so
 vendor/lib64/liblx-ar_util.so
 vendor/lib64/liblx-osal.so
@@ -1979,12 +1979,14 @@ vendor/lib64/libhdcp2p2prov.so
 vendor/lib64/libhdcpsrm.so
 vendor/lib64/libmm-hdcpmgr.so
 
-# Hotword enrollment
-product/etc/permissions/privapp-permissions-google-audio-system.xml:product/etc/permissions/privapp-permissions-hotword.xml
-product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk
-product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk
-system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
-system_ext/framework/com.android.hotwordenrollment.common.util.jar
+# Hotword enrollment - DISABLED: causes audio to break without sound_trigger XML configs
+# To re-enable, extract sound_trigger_mixer_paths.xml and sound_trigger_platform_info.xml
+# from stock firmware, place in configs/audio/, and re-enable BOARD_SUPPORTS_SOUND_TRIGGER
+#product/etc/permissions/privapp-permissions-google-audio-system.xml:product/etc/permissions/privapp-permissions-hotword.xml
+#product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk
+#product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk
+#system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
+#system_ext/framework/com.android.hotwordenrollment.common.util.jar
 
 # IR
 odm/lib64/hw/consumerir.qcom.so
@@ -2027,15 +2029,15 @@ vendor/lib64/libcppbor_external.so:vendor/lib64/libcppbor_amethyst.so;FIX_SONAME
 vendor/lib64/libqtikeymint.so
 vendor/lib64/libspcom.so
 
-# Listen
-vendor/lib64/hw/sound_trigger.primary.volcano.so
-vendor/lib64/libeai_fixed.so
-vendor/lib64/libeai_float.so
-vendor/lib64/liblistensoundmodel2vendor.so
-vendor/lib64/libmispowerop.so
-vendor/lib64/libxlog.so
-vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so
-vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so
+# Listen - DISABLED: sound trigger HAL crashes audio without XML configs from stock firmware
+#vendor/lib64/hw/sound_trigger.primary.volcano.so
+#vendor/lib64/libeai_fixed.so
+#vendor/lib64/libeai_float.so
+#vendor/lib64/liblistensoundmodel2vendor.so
+#vendor/lib64/libmispowerop.so
+#vendor/lib64/libxlog.so
+#vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so
+#vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so
 
 # Media
 vendor/bin/hw/vendor.qti.media.c2@1.0-service
