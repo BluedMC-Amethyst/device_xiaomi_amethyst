@@ -32,10 +32,10 @@
             <timeMinSecs>0</timeMinSecs>
         </timing>
         <!--Refresh rate limitation when the device is in HBM -->
-        <!-- <refreshRate>
-            <minimum>0</minimum>
-            <maximum>0</maximum>
-        </refreshRate> -->
+        <refreshRate>
+            <minimum>60</minimum>
+            <maximum>120</maximum>
+        </refreshRate>
         <!-- Thermal limitation for HBM -->
         <thermalStatusLimit>critical</thermalStatusLimit>
         <!-- Low power mode limitation for HBM -->

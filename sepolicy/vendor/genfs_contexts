@@ -104,3 +104,9 @@ genfscon proc /sys/walt u:object_r:proc_walt:s0
 
 # Mempool
 genfscon sysfs /kernel/mi_mempool u:object_r:vendor_sysfs_reserve_pool:s0
+
+# MIGT scheduler
+genfscon sysfs /module/migt/parameters u:object_r:vendor_sysfs_migt:s0
+
+# Metis scheduler
+genfscon sysfs /module/metis/parameters u:object_r:vendor_sysfs_metis:s0

@@ -432,37 +432,37 @@
             "PowerHint": "INTERACTION",
             "Node": "sysKernelMsmPerformanceParametersCpuMinFreq",
             "Value": "0:1344000 1:1344000 2:1344000 3:1344000 4:1190400 5:1190400 6:1190400 7:1459200",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBoost",
             "Value": "2",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHysteresisEnableCpus",
             "Value": "240",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedBusyHystNs",
             "Value": "39000000",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForColocation",
             "Value": "0",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "procSysWaltSchedMinTaskUtilForBoost",
             "Value": "0",
-            "Duration": 0
+            "Duration": 80
         },
         {
             "PowerHint": "LAUNCH",

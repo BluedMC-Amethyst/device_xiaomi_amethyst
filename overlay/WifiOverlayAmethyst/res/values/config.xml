@@ -172,4 +172,7 @@
 
     <!-- Indicates whether the network-centric QoS policy feature is enabled. -->
     <bool name="config_wifiNetworkCentricQosPolicyFeatureEnabled" translatable="false">true</bool>
+
+    <!-- Whether WiFi display is supported during STA+AP concurrency -->
+    <bool name="config_wifiDisplayOverlaysAreSupportedForStaApConcurrency" translatable="false">true</bool>
 </resources>
