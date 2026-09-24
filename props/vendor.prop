@@ -214,7 +214,10 @@ ro.lmk.swap_util_max=90
 ro.lmk.thrashing_limit=30
 ro.lmk.thrashing_limit_decay=25
 ro.lmk.kill_heaviest_task=true
-ro.lmk.kill_timeout_ms=100
+ro.lmk.kill_timeout_ms=50
+ro.lmk.stall_limit_critical=40
+ro.lmk.filecache_min_kb=153600
+ro.zram_backing_device_min_free_mb=1536
 
 # Keymaster
 ro.crypto.metadata_init_delete_all_keys.enabled=true
@@ -306,9 +309,3 @@ persist.sys.wfd.virtual=0
 
 # Low RAM
 ro.config.low_ram=false
-
-# LMKD
-ro.lmk.kill_timeout_ms=50
-ro.lmk.stall_limit_critical=40
-ro.lmk.filecache_min_kb=153600
-ro.zram_backing_device_min_free_mb=1536
