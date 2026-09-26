@@ -53,6 +53,16 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+
+    'system/framework/WfdCommon.jar': blob_fixup()
+        .apktool_patch('blob-patches/WfdCommon.patch'),
+        
+    'system_ext/lib64/libwfdservice.so': blob_fixup()
+        .replace_needed(
+            'android.media.audio.common.types-V4-cpp.so',
+            'android.media.audio.common.types-V5-cpp.so',
+        ),
+
     'system_ext/etc/init/qspa_system.rc': blob_fixup()
         .regex_replace(r'\$\{ro\.boot\.vendor\.qspa:-default\}', 'default'),
 
