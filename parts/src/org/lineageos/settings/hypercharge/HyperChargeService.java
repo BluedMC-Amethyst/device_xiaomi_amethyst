@@ -74,15 +74,6 @@ public class HyperChargeService extends Service {
     private void startMonitoring() {
         if (mMonitoringRunnable != null) return;
 
-        // One-time log after the handshake delay to confirm charger type
-        String initialCheck = FileUtils.readOneLine(Constants.NODE_FASTCHG_MODE);
-        if ("1".equals(initialCheck)) {
-            Log.i(TAG, "Detection Result: Xiaomi HyperCharge detected. Monitoring active.");
-        } else {
-            Log.i(TAG, "Detection Result: Standard charger detected. Service will bypass loop.");
-            return; // Don't start the loop if it's a standard charger
-        }
-
         Log.d(TAG, "Monitoring loop started (interval=" + POLLING_INTERVAL_MS + "ms).");
         mMonitoringRunnable = new Runnable() {
             @Override
@@ -99,8 +90,9 @@ public class HyperChargeService extends Service {
                     }
                     mHandler.postDelayed(this, POLLING_INTERVAL_MS); // Continue loop
                 } else {
-                    Log.i(TAG, "HyperCharge mode lost. Stopping monitoring loop.");
-                    mMonitoringRunnable = null; // Stop the loop if mode changes
+                    // The charger may briefly leave fast-charge mode while renegotiating.
+                    // Keep monitoring so the limit is reapplied when it returns.
+                    mHandler.postDelayed(this, POLLING_INTERVAL_MS);
                 }
             }
         };
