@@ -27,7 +27,7 @@ public class HyperChargeService extends Service {
     private static final String TAG = "HyperChargeService";
     
     private static final int POLLING_INTERVAL_MS = 5000;
-    private static final int HANDSHAKE_DELAY_MS = 2000;
+    private static final int HANDSHAKE_DELAY_MS = 5000;
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable mMonitoringRunnable;
