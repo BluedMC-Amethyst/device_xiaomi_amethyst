@@ -15,7 +15,8 @@ class HyperChargeSettingsFragment : PreferenceFragment(), Preference.OnPreferenc
     private lateinit var limitPreference: ListPreference
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val fragmentContext = context ?: return
+        val prefs = PreferenceManager.getDefaultSharedPreferences(fragmentContext)
         runCatching { prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, false) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_STATUS).commit() }
         runCatching { prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_LIMIT).commit() }
         addPreferencesFromResource(R.xml.hypercharge_settings)
@@ -30,8 +31,9 @@ class HyperChargeSettingsFragment : PreferenceFragment(), Preference.OnPreferenc
         val enabled = if (preference == mainSwitch) newValue as Boolean else mainSwitch.isChecked
         val limit = if (preference == limitPreference) newValue as String else limitPreference.value
         if (preference == mainSwitch) limitPreference.isEnabled = enabled
-        val intent = Intent(requireContext(), HyperChargeService::class.java)
-        if (!enabled || limit == Constants.CHARGE_LIMIT_120W) requireContext().stopService(intent) else requireContext().startService(intent)
+        val fragmentContext = context ?: return false
+        val intent = Intent(fragmentContext, HyperChargeService::class.java)
+        if (!enabled || limit == Constants.CHARGE_LIMIT_120W) fragmentContext.stopService(intent) else fragmentContext.startService(intent)
         return true
     }
 }
