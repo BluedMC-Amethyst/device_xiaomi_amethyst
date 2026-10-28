@@ -481,7 +481,7 @@ else
 
     #add judge for modem decoupling or not
     modem_decouple="/vendor/modem_firmware"
-    if [ -d "$modem_decouple" ] && [-n "$(ls -A "$modem_decouple")"]; then
+    if [ -d "$modem_decouple" ] && [ -n "$(ls -A "$modem_decouple")" ]; then
         cur_version_info=`cat /vendor/modem_firmware/verinfo/ver_info.txt`
         if [ ! -f /vendor/modem_firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
            # add W for group recursively before delete
