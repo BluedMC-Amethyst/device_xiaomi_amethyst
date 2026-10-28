@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="refresh_modes">
+        <item>@string/refresh_default</item>
+        <item>@string/refresh_60</item>
+        <item>@string/refresh_90</item>
+        <item>@string/refresh_120</item>
+        <item>@string/refresh_60_land</item>
+        <item>@string/refresh_90_land</item>
+        <item>@string/refresh_120_land</item>
+    </string-array>
     <string-array name="kernel_governor_fallback_entries">
         <item>walt</item>
     </string-array>
