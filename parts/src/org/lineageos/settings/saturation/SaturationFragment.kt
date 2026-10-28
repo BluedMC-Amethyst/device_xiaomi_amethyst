@@ -80,7 +80,7 @@ class SaturationFragment : SettingsBasePreferenceFragment(), Preference.OnPrefer
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.add_tile) {
             TileUtils.requestAddTileService(
-                context,
+                requireContext(),
                 SaturationTileService::class.java,
                 R.string.saturation_title,
                 R.drawable.ic_saturation_tile
