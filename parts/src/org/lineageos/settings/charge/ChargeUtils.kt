@@ -32,11 +32,7 @@ class ChargeUtils(context: Context) {
 
     fun isBypassChargeEnabled(): Boolean {
         return try {
-            if (sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)) {
-                sharedPrefs.getBoolean(PREF_BYPASS_CHARGE, false)
-            } else {
-                FileUtils.readOneLine(BYPASS_CHARGE_NODE) == "1"
-            }
+            sharedPrefs.getBoolean(PREF_BYPASS_CHARGE, false)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read bypass charge status", e)
             false
@@ -49,8 +45,10 @@ class ChargeUtils(context: Context) {
             val intent = Intent(context, BypassChargeService::class.java)
             if (enable) context.startService(intent) else {
                 context.stopService(intent)
-                FileUtils.writeLine(INPUT_SUSPEND_NODE, "0")
-                FileUtils.writeLine(BYPASS_CHARGE_NODE, "0")
+                if (!sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)) {
+                    FileUtils.writeLine(INPUT_SUSPEND_NODE, "0")
+                    FileUtils.writeLine(BYPASS_CHARGE_NODE, "0")
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to write bypass charge status", e)

@@ -38,7 +38,7 @@ class BootCompletedReceiver : BroadcastReceiver() {
         if (prefs.getBoolean(ChargeUtils.PREF_BYPASS_CHARGE, false)) context.startService(Intent(context, BypassChargeService::class.java))
         val enabled = runCatching { prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, true) }.getOrDefault(true)
         val limit = runCatching { prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W) }.getOrNull()
-        if (!enabled || limit != Constants.CHARGE_LIMIT_120W) context.startService(Intent(context, HyperChargeService::class.java))
+        if (enabled && limit != Constants.CHARGE_LIMIT_120W) context.startService(Intent(context, HyperChargeService::class.java))
         if (FileUtils.fileExists(KprofilesSettingsFragment.KPROFILES_AUTO_NODE)) FileUtils.writeLine(KprofilesSettingsFragment.KPROFILES_AUTO_NODE, if (prefs.getBoolean(KprofilesSettingsFragment.KPROFILES_AUTO_KEY, false)) KprofilesSettingsFragment.ON else KprofilesSettingsFragment.OFF)
         if (KprofilesSettingsFragment.IS_SUPPORTED) FileUtils.writeLine(KprofilesSettingsFragment.KPROFILES_MODES_NODE, prefs.getString(KprofilesSettingsFragment.KPROFILES_MODES_KEY, FileUtils.readOneLine(KprofilesSettingsFragment.KPROFILES_MODES_NODE)) ?: "0")
     }
