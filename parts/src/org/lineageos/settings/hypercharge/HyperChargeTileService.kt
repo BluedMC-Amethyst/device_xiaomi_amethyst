@@ -19,7 +19,7 @@ class HyperChargeTileService : TileService() {
         prefs.edit().putBoolean(Constants.KEY_HYPERCHARGE_STATUS, enabled).apply()
         val limit = prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W)
         val intent = android.content.Intent(this, HyperChargeService::class.java)
-        if (enabled && limit == Constants.CHARGE_LIMIT_120W) stopService(intent) else startService(intent)
+        if (!enabled || limit == Constants.CHARGE_LIMIT_120W) stopService(intent) else startService(intent)
     }
 
     private fun updateTile() {

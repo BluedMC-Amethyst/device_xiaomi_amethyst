@@ -31,7 +31,7 @@ class HyperChargeSettingsFragment : PreferenceFragment(), Preference.OnPreferenc
         val limit = if (preference == limitPreference) newValue as String else limitPreference.value
         if (preference == mainSwitch) limitPreference.isEnabled = enabled
         val intent = Intent(requireContext(), HyperChargeService::class.java)
-        if (enabled && limit == Constants.CHARGE_LIMIT_120W) requireContext().stopService(intent) else requireContext().startService(intent)
+        if (!enabled || limit == Constants.CHARGE_LIMIT_120W) requireContext().stopService(intent) else requireContext().startService(intent)
         return true
     }
 }

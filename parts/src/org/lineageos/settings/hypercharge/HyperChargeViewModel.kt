@@ -92,7 +92,7 @@ class HyperChargeViewModel(application: Application) : AndroidViewModel(applicat
 
     private fun syncService(enabled: Boolean, limit: String) {
         val intent = Intent(context, HyperChargeService::class.java)
-        if (enabled && Constants.CHARGE_LIMIT_120W == limit) {
+        if (!enabled || Constants.CHARGE_LIMIT_120W == limit) {
             context.stopService(intent)
         } else {
             context.startService(intent)

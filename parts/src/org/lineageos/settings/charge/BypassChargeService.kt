@@ -32,8 +32,6 @@ class BypassChargeService : Service() {
 
     override fun onDestroy() {
         unregisterReceiver(screenReceiver)
-        FileUtils.writeLine(ChargeUtils.INPUT_SUSPEND_NODE, "0")
-        FileUtils.writeLine(ChargeUtils.BYPASS_CHARGE_NODE, "0")
         super.onDestroy()
     }
 
