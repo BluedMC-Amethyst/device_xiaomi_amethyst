@@ -134,6 +134,10 @@
         </service>
 
         <!-- Charge Limit -->
+        <service
+            android:name=".charge.BypassChargeService"
+            android:exported="false" />
+
         <activity
             android:name=".chargelimit.ChargeLimitActivity"
             android:label="@string/charge_limit_title"

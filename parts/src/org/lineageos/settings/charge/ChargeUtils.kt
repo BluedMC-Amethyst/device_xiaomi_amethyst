@@ -19,12 +19,14 @@ package org.lineageos.settings.charge
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.content.Intent
 import androidx.preference.PreferenceManager
 import org.lineageos.settings.chargelimit.ChargeLimitUtils
 import org.lineageos.settings.utils.FileUtils
 
 class ChargeUtils(context: Context) {
 
+    private val context = context.applicationContext
     private val sharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     fun isBypassChargeEnabled(): Boolean {
@@ -43,8 +45,12 @@ class ChargeUtils(context: Context) {
     fun enableBypassCharge(enable: Boolean) {
         try {
             sharedPrefs.edit().putBoolean(PREF_BYPASS_CHARGE, enable).apply()
-            val limiterPaused = sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)
-            FileUtils.writeLine(BYPASS_CHARGE_NODE, if (enable || limiterPaused) "1" else "0")
+            val intent = Intent(context, BypassChargeService::class.java)
+            if (enable) context.startService(intent) else {
+                context.stopService(intent)
+                FileUtils.writeLine(INPUT_SUSPEND_NODE, "0")
+                FileUtils.writeLine(BYPASS_CHARGE_NODE, "0")
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to write bypass charge status", e)
         }
@@ -67,6 +73,7 @@ class ChargeUtils(context: Context) {
     companion object {
         private const val TAG = "ChargeUtils"
         const val BYPASS_CHARGE_NODE = "/sys/class/qcom-battery/charge_control_en"
+        const val INPUT_SUSPEND_NODE = "/sys/class/qcom-battery/input_suspend"
         const val PREF_BYPASS_CHARGE = "bypass_charge"
     }
 }
