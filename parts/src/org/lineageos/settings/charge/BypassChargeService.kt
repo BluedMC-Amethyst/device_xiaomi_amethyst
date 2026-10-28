@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import android.os.PowerManager
 import org.lineageos.settings.utils.FileUtils
 
 class BypassChargeService : Service() {
@@ -21,7 +22,8 @@ class BypassChargeService : Service() {
             addAction(Intent.ACTION_SCREEN_ON)
             addAction(Intent.ACTION_SCREEN_OFF)
         })
-        apply(true)
+        val power = getSystemService(PowerManager::class.java)
+        apply(power?.isInteractive == true)
     }
 
     private fun apply(screenOn: Boolean) {

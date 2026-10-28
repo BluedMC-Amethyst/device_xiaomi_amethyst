@@ -37,6 +37,7 @@ import org.lineageos.settings.Constants;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
 import org.lineageos.settings.hypercharge.HyperChargeService;
+import org.lineageos.settings.charge.BypassChargeService;
 import org.lineageos.settings.chargelimit.ChargeLimitService;
 import org.lineageos.settings.chargelimit.ChargeLimitUtils;
 import static org.lineageos.settings.kprofiles.KprofilesSettingsFragment.IS_SUPPORTED;
@@ -82,6 +83,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             if (prefs.getBoolean(ChargeLimitUtils.PREF_ENABLED, false)) {
                 context.startService(new Intent(context, ChargeLimitService.class));
+            }
+            if (prefs.getBoolean("bypass_charge", false)) {
+                context.startService(new Intent(context, BypassChargeService.class));
             }
             boolean isHyperChargeEnabled = prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, true);
 
