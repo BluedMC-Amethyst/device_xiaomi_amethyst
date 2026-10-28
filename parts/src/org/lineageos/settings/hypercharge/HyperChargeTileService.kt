@@ -29,7 +29,15 @@ class HyperChargeTileService : TileService() {
             tile.label = getString(R.string.hypercharge_tile_label)
             tile.state = if (enabled) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
             tile.icon = Icon.createWithResource(this, if (enabled) R.drawable.ic_qs_hypercharge_on else R.drawable.ic_qs_hypercharge_off)
-            tile.subtitle = if (enabled) limit else getString(R.string.tile_off)
+            tile.subtitle = if (enabled) getString(when (limit) {
+                Constants.CHARGE_LIMIT_120W -> R.string.hypercharge_speed_120w
+                Constants.CHARGE_LIMIT_90W -> R.string.hypercharge_speed_90w
+                Constants.CHARGE_LIMIT_67W -> R.string.hypercharge_speed_67w
+                Constants.CHARGE_LIMIT_50W -> R.string.hypercharge_speed_50w
+                Constants.CHARGE_LIMIT_33W -> R.string.hypercharge_speed_33w
+                Constants.CHARGE_LIMIT_18W -> R.string.hypercharge_speed_18w
+                else -> R.string.hypercharge_speed_10w
+            }) else getString(R.string.tile_off)
             tile.updateTile()
         }
     }

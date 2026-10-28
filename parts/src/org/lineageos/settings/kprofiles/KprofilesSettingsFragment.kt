@@ -19,13 +19,14 @@ class KprofilesSettingsFragment : SettingsBasePreferenceFragment(), Preference.O
     private lateinit var mode: ListPreference
     private lateinit var info: Preference
     private var selfChange = false
+    private var registered = false
     private val receiver = object : BroadcastReceiver() { override fun onReceive(context: Context, intent: Intent) { if (intent.action == INTENT_ACTION && !selfChange) updateValues() else selfChange = false } }
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.kprofiles_settings, rootKey)
         auto = findPreference(KPROFILES_AUTO_KEY)!!; mode = findPreference(KPROFILES_MODES_KEY)!!; info = findPreference(KPROFILES_MODES_INFO)!!
         auto.isEnabled = FileUtils.fileExists(KPROFILES_AUTO_NODE); mode.isEnabled = IS_SUPPORTED; info.isEnabled = IS_SUPPORTED
         auto.onPreferenceChangeListener = this; mode.onPreferenceChangeListener = this
-        updateValues(); requireContext().registerReceiver(receiver, IntentFilter(INTENT_ACTION), Context.RECEIVER_NOT_EXPORTED)
+        updateValues(); requireContext().registerReceiver(receiver, IntentFilter(INTENT_ACTION), Context.RECEIVER_NOT_EXPORTED); registered = true
     }
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (preference.key == KPROFILES_AUTO_KEY) FileUtils.writeLine(KPROFILES_AUTO_NODE, if (newValue as Boolean) ON else OFF)
@@ -33,7 +34,7 @@ class KprofilesSettingsFragment : SettingsBasePreferenceFragment(), Preference.O
         return true
     }
     override fun onResume() { super.onResume(); if (::auto.isInitialized) updateValues() }
-    override fun onDestroy() { requireContext().unregisterReceiver(receiver); super.onDestroy() }
+    override fun onDestroy() { if (registered) { requireContext().unregisterReceiver(receiver); registered = false }; super.onDestroy() }
     private fun updateValues() { auto.isChecked = FileUtils.readOneLine(KPROFILES_AUTO_NODE) == ON; mode.value = FileUtils.readOneLine(KPROFILES_MODES_NODE) ?: "0"; updateTitle(mode.value) }
     private fun updateTitle(value: String?) { Handler.getMain().post { info.title = getString(R.string.kprofiles_modes_description, description(value)) } }
     private fun description(value: String?) = getString(when (value) { "1" -> R.string.kprofiles_modes_battery_description; "2" -> R.string.kprofiles_modes_balanced_description; "3" -> R.string.kprofiles_modes_performance_description; else -> R.string.kprofiles_modes_none_description })

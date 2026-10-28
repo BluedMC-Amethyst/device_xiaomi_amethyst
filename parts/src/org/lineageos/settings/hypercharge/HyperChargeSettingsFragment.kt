@@ -16,8 +16,8 @@ class HyperChargeSettingsFragment : PreferenceFragment(), Preference.OnPreferenc
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        runCatching { prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, false) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_STATUS).apply() }
-        runCatching { prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_LIMIT).apply() }
+        runCatching { prefs.getBoolean(Constants.KEY_HYPERCHARGE_STATUS, false) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_STATUS).commit() }
+        runCatching { prefs.getString(Constants.KEY_HYPERCHARGE_LIMIT, Constants.CHARGE_LIMIT_120W) }.onFailure { prefs.edit().remove(Constants.KEY_HYPERCHARGE_LIMIT).commit() }
         addPreferencesFromResource(R.xml.hypercharge_settings)
         mainSwitch = findPreference(Constants.KEY_HYPERCHARGE_STATUS)!!
         limitPreference = findPreference(Constants.KEY_HYPERCHARGE_LIMIT)!!

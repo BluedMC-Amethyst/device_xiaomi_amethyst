@@ -55,11 +55,8 @@ object ChargeLimitUtils {
 
     fun resumeCharging(context: Context) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val bypassEnabled = prefs.getBoolean(ChargeUtils.PREF_BYPASS_CHARGE, false)
-
-        // Restore the bypass owner's value before allowing USB input again.
-        FileUtils.writeLine(CHARGE_CONTROL_NODE, if (bypassEnabled) "1" else "0")
         FileUtils.writeLine(INPUT_SUSPEND_NODE, "0")
         prefs.edit().putBoolean(PREF_PAUSED, false).apply()
+        ChargeUtils(context).applyBypassState()
     }
 }

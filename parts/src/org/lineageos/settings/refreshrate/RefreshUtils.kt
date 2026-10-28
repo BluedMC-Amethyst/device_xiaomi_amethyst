@@ -13,6 +13,7 @@ class RefreshUtils(private val context: Context) {
     private var defaultMax = 120f
     private var defaultMin = 120f
     private var listener: OrientationEventListener? = null
+    private var landscape: Boolean? = null
 
     fun getOldRate() { defaultMax = rate("peak_refresh_rate"); defaultMin = rate("min_refresh_rate") }
     fun getStateForPackage(pkg: String): Int = modes().indexOfFirst { it.contains("$pkg,") }.let { if (it < 0) STATE_DEFAULT else it + 1 }
@@ -24,7 +25,7 @@ class RefreshUtils(private val context: Context) {
     fun setRefreshRate(pkg: String) {
         val state = getStateForPackage(pkg); isAppInList = state != STATE_DEFAULT
         if (state in STATE_60_LAND..STATE_120_LAND) { listen(pkg); checkOrientationAndSetRate(pkg); return }
-        listener?.disable(); listener = null
+        closeListener()
         val value = when (state) { STATE_60 -> 60f; STATE_90 -> 90f; STATE_120 -> 120f; else -> null }
         apply(value ?: defaultMin, value ?: defaultMax)
     }
@@ -35,15 +36,27 @@ class RefreshUtils(private val context: Context) {
         if (landscape && value != null) apply(value, value) else apply(defaultMin, defaultMax)
     }
     private fun listen(pkg: String) {
-        listener?.disable()
-        listener = object : OrientationEventListener(context) { override fun onOrientationChanged(orientation: Int) { if (orientation != ORIENTATION_UNKNOWN) checkOrientationAndSetRate(pkg) } }.also { if (it.canDetectOrientation()) it.enable() }
+        closeListener()
+        landscape = context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        listener = object : OrientationEventListener(context) { override fun onOrientationChanged(orientation: Int) {
+            if (orientation == ORIENTATION_UNKNOWN) return
+            val current = context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            if (current != landscape) { landscape = current; checkOrientationAndSetRate(pkg) }
+        } }.also { if (it.canDetectOrientation()) it.enable() }
     }
     private fun rate(key: String) = Settings.System.getFloat(context.contentResolver, key, 120f)
-    private fun apply(min: Float, max: Float) { Settings.System.putFloat(context.contentResolver, "min_refresh_rate", min); Settings.System.putFloat(context.contentResolver, "peak_refresh_rate", max) }
+    private fun apply(min: Float, max: Float) {
+        if (rate("min_refresh_rate") != min) Settings.System.putFloat(context.contentResolver, "min_refresh_rate", min)
+        if (rate("peak_refresh_rate") != max) Settings.System.putFloat(context.contentResolver, "peak_refresh_rate", max)
+    }
+    fun close() = closeListener()
+    private fun closeListener() { listener?.disable(); listener = null; landscape = null }
     private fun modes(): List<String> {
         val defaults = listOf("refresh.60=", "refresh.90=", "refresh.120=", "refresh.60land=", "refresh.90land=", "refresh.120land=")
         val current = prefs.getString(KEY, null)?.split(":") ?: emptyList()
-        return defaults.mapIndexed { i, value -> current.getOrNull(i) ?: value }.also { prefs.edit().putString(KEY, it.joinToString(":")).apply() }
+        val result = defaults.mapIndexed { i, value -> current.getOrNull(i) ?: value }
+        if (current.size != defaults.size) prefs.edit().putString(KEY, result.joinToString(":")).apply()
+        return result
     }
     companion object {
         const val STATE_DEFAULT = 0; const val STATE_60 = 1; const val STATE_90 = 2; const val STATE_120 = 3
