@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.hardware.display.DisplayManager
 import android.view.Display
+import android.view.Display.HdrCapabilities
+import android.util.Log
 import androidx.preference.PreferenceManager
 import org.lineageos.settings.charge.BypassChargeService
 import org.lineageos.settings.charge.ChargeUtils
@@ -18,10 +20,15 @@ import org.lineageos.settings.utils.FileUtils
 
 class BootCompletedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (!initialized) { initialized = true; initialize(context) }
+        if (!initialized) runCatching { initialize(context) }
+            .onSuccess { initialized = true }
+            .onFailure { Log.e("XiaomiParts", "Boot initialization failed", it) }
         if (intent.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
             ThermalUtils.getInstance(context).startService(); RefreshUtils.startService(context)
-            context.getSystemService(DisplayManager::class.java)?.overrideHdrTypes(Display.DEFAULT_DISPLAY, intArrayOf(1, 2, 3, 4))
+            context.getSystemService(DisplayManager::class.java)?.overrideHdrTypes(Display.DEFAULT_DISPLAY, intArrayOf(
+                HdrCapabilities.HDR_TYPE_DOLBY_VISION, HdrCapabilities.HDR_TYPE_HDR10,
+                HdrCapabilities.HDR_TYPE_HLG, HdrCapabilities.HDR_TYPE_HDR10_PLUS
+            ))
         }
     }
     private fun initialize(context: Context) {

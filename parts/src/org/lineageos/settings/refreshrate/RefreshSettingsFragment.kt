@@ -33,7 +33,7 @@ class RefreshSettingsFragment : SettingsBasePreferenceFragment(), ApplicationsSt
     override fun onRebuildComplete(entries: ArrayList<ApplicationsState.AppEntry>?) { adapter.entries = entries.orEmpty(); adapter.notifyDataSetChanged() }
     override fun onPackageListChanged() = rebuild(); override fun onLoadEntriesCompleted() = rebuild()
     override fun onAllSizesComputed() = Unit; override fun onLauncherInfoChanged() = Unit; override fun onPackageIconChanged() = Unit
-    override fun onPackageSizeChanged(packageName: String?) = Unit; override fun onRunningStateChanged(running: Boolean) = Unit
+    override fun onPackageSizeChanged(packageName: String) = Unit; override fun onRunningStateChanged(running: Boolean) = Unit
     private inner class Holder(view: View) : RecyclerView.ViewHolder(view) { val title: TextView = view.findViewById(R.id.app_name); val mode: Spinner = view.findViewById(R.id.app_mode); val icon: ImageView = view.findViewById(R.id.app_icon); val stateIcon: ImageView = view.findViewById(R.id.state) }
     private inner class AppsAdapter : RecyclerView.Adapter<Holder>() {
         var entries: List<ApplicationsState.AppEntry> = emptyList()
@@ -49,7 +49,8 @@ class RefreshSettingsFragment : SettingsBasePreferenceFragment(), ApplicationsSt
     }
     private class AppFilter(pm: PackageManager) : ApplicationsState.AppFilter {
         private val packages = pm.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0).map { it.activityInfo.packageName }.toSet()
-        override fun init() = Unit
-        override fun filterApp(entry: ApplicationsState.AppEntry) = entry.info.packageName in packages
+        private val seen = mutableSetOf<String>()
+        override fun init() { seen.clear() }
+        override fun filterApp(entry: ApplicationsState.AppEntry) = entry.info.packageName in packages && seen.add(entry.info.packageName)
     }
 }

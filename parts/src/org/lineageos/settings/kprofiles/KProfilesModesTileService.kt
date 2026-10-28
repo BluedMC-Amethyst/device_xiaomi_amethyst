@@ -7,13 +7,22 @@ import android.service.quicksettings.TileService
 import androidx.preference.PreferenceManager
 import org.lineageos.settings.R
 import org.lineageos.settings.utils.FileUtils
+import org.lineageos.settings.kprofiles.KprofilesSettingsFragment.Companion.INTENT_ACTION
+import org.lineageos.settings.kprofiles.KprofilesSettingsFragment.Companion.IS_SUPPORTED
+import org.lineageos.settings.kprofiles.KprofilesSettingsFragment.Companion.KPROFILES_MODES_KEY
+import org.lineageos.settings.kprofiles.KprofilesSettingsFragment.Companion.KPROFILES_MODES_NODE
 
 class KProfilesModesTileService : TileService() {
+    private var registered = false
+    private val receiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context, intent: Intent) = updateTile()
+    }
     override fun onCreate() {
         super.onCreate()
         if (!IS_SUPPORTED) getQsTile()?.apply { state = Tile.STATE_UNAVAILABLE; updateTile() }
     }
-    override fun onStartListening() { if (IS_SUPPORTED) { super.onStartListening(); updateTile() } }
+    override fun onStartListening() { if (IS_SUPPORTED) { super.onStartListening(); registerReceiver(receiver, android.content.IntentFilter(INTENT_ACTION), RECEIVER_NOT_EXPORTED); registered = true; updateTile() } }
+    override fun onStopListening() { if (registered) { unregisterReceiver(receiver); registered = false }; super.onStopListening() }
     override fun onClick() {
         if (!IS_SUPPORTED) return
         val mode = when (getMode()) { "0" -> "1"; "1" -> "2"; "2" -> "3"; else -> "0" }

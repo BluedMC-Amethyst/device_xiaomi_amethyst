@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.content.Intent
+import android.os.PowerManager
 import androidx.preference.PreferenceManager
 import org.lineageos.settings.chargelimit.ChargeLimitUtils
 import org.lineageos.settings.utils.FileUtils
@@ -54,6 +55,13 @@ class ChargeUtils(context: Context) {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to write bypass charge status", e)
         }
+    }
+
+    fun applyBypassState(screenOn: Boolean = context.getSystemService(PowerManager::class.java)?.isInteractive == true) {
+        if (sharedPrefs.getBoolean(ChargeLimitUtils.PREF_PAUSED, false)) return
+        val enabled = sharedPrefs.getBoolean(PREF_BYPASS_CHARGE, false)
+        FileUtils.writeLine(INPUT_SUSPEND_NODE, if (enabled && !screenOn) "1" else "0")
+        FileUtils.writeLine(BYPASS_CHARGE_NODE, if (enabled && screenOn) "1" else "0")
     }
 
     private fun isNodeAccessible(node: String): Boolean {

@@ -24,6 +24,6 @@ object FileUtils {
     fun fileExists(fileName: String) = File(fileName).exists()
     fun isFileReadable(fileName: String) = File(fileName).let { it.exists() && it.canRead() }
     fun isFileWritable(fileName: String) = File(fileName).let { it.exists() && it.canWrite() }
-    fun delete(fileName: String) = runCatching { File(fileName).delete() }.getOrDefault(false)
-    fun rename(srcPath: String, dstPath: String) = runCatching { File(srcPath).renameTo(File(dstPath)) }.getOrDefault(false)
+    fun delete(fileName: String) = runCatching { File(fileName).delete() }.onFailure { Log.w(TAG, "Could not delete $fileName", it) }.getOrDefault(false)
+    fun rename(srcPath: String, dstPath: String) = runCatching { File(srcPath).renameTo(File(dstPath)) }.onFailure { Log.w(TAG, "Could not rename $srcPath to $dstPath", it) }.getOrDefault(false)
 }

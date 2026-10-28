@@ -27,13 +27,7 @@ class BypassChargeService : Service() {
     }
 
     private fun apply(screenOn: Boolean) {
-        if (screenOn) {
-            FileUtils.writeLine(ChargeUtils.INPUT_SUSPEND_NODE, "0")
-            FileUtils.writeLine(ChargeUtils.BYPASS_CHARGE_NODE, "1")
-        } else {
-            FileUtils.writeLine(ChargeUtils.BYPASS_CHARGE_NODE, "0")
-            FileUtils.writeLine(ChargeUtils.INPUT_SUSPEND_NODE, "1")
-        }
+        ChargeUtils(this).applyBypassState(screenOn)
     }
 
     override fun onDestroy() {

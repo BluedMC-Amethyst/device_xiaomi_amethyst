@@ -22,5 +22,6 @@ class RefreshService : Service() {
     }
     override fun onCreate() { super.onCreate(); utils = RefreshUtils(this); runCatching { tasks.registerTaskStackListener(listener) } }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int) = START_STICKY
+    override fun onDestroy() { runCatching { tasks.unregisterTaskStackListener(listener) }; utils.close(); super.onDestroy() }
     override fun onBind(intent: Intent?): IBinder? = null
 }
