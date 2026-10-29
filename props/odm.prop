@@ -66,7 +66,7 @@ vendor.display.disable_llcc_during_aod=1
 vendor.display.disable_sdr_dimming=1
 vendor.display.disable_stc_dimming=1
 vendor.display.enable_hdr10_gpu_target=1
-vendor.display.idle_time=1000
+vendor.display.idle_time=80
 vendor.display.support_function_timer=0
 vendor.display.support_video_mode_30hz_aod=0
 

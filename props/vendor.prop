@@ -88,6 +88,8 @@ persist.bluetooth.leaudio_offload.disabled=true
 ro.bluetooth.leaudio_offload.supported=false
 # Keep LE ISO transports on the software path, matching the config above.
 bluetooth.core.le.dsa_transport_preference=iso-sw,le-acl
+bluetooth.device.class_of_device=90,2,12
+bluetooth.hfp.codec_aptx_voice.enabled=true
 
 # Camera
 camera.disable_zsl_mode=true
@@ -156,14 +158,18 @@ debug.sf.disable_client_composition_cache=0
 debug.sf.enable_gl_backpressure=0
 debug.sf.layer_caching_active_layer_timeout_ms=1000
 debug.sf.hw=1
-debug.sf.enable_hwc_vds=1
+# HyperOS ships this disabled. With it enabled, HWC-backed virtual displays
+# advertise an NV12-ish writeback path that the prebuilt msm_drm.ko does not
+# implement, which breaks screen recording. Casting is kept working by
+# ro.surface_flinger.force_hwc_copy_for_virtual_displays below.
+debug.sf.enable_hwc_vds=0
 debug.sf.early.app.duration=13666666
 debug.sf.early.sf.duration=12333333
 debug.sf.earlyGl.app.duration=13666666
 debug.sf.earlyGl.sf.duration=12333333
 debug.sf.late.app.duration=13666666
 debug.sf.late.sf.duration=12333333
-debug.sf.set_idle_timer_ms=500
+debug.sf.set_idle_timer_ms=1100
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.treat_170m_as_sRGB=1
 debug.sf.use_phase_offsets_as_durations=1
