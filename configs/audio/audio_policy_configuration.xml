@@ -301,6 +301,23 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </devicePort>
+                <!-- LE Audio. These ports were missing entirely, so the audio policy had
+                     no sink for the LE Audio software LC3 datapath to route to. -->
+                <devicePort tagName="BLE Headset Out" type="AUDIO_DEVICE_OUT_BLE_HEADSET" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LC3">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="16000 24000 32000 44100 48000" channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BLE Speaker Out" type="AUDIO_DEVICE_OUT_BLE_SPEAKER" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LC3">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="16000 24000 32000 44100 48000" channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
+                <devicePort tagName="BLE Broadcast Out" type="AUDIO_DEVICE_OUT_BLE_BROADCAST" role="sink"
+                            encodedFormats="AUDIO_FORMAT_LC3">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="16000 24000 32000 44100 48000" channelMasks="AUDIO_CHANNEL_OUT_MONO AUDIO_CHANNEL_OUT_STEREO"/>
+                </devicePort>
                 <devicePort tagName="USB Device Out" type="AUDIO_DEVICE_OUT_USB_DEVICE" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="44100 48000 64000 88200 96000 128000 176400 192000"/>
@@ -394,6 +411,12 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                        sources="primary output,deep_buffer,direct_pcm,compressed_offload,voip_rx"/>
                 <route type="mix" sink="BT A2DP Speaker"
                        sources="primary output,deep_buffer,direct_pcm,compressed_offload,voip_rx"/>
+                <route type="mix" sink="BLE Headset Out"
+                       sources="primary output,deep_buffer,direct_pcm,voip_rx"/>
+                <route type="mix" sink="BLE Speaker Out"
+                       sources="primary output,deep_buffer,direct_pcm,voip_rx"/>
+                <route type="mix" sink="BLE Broadcast Out"
+                       sources="primary output,deep_buffer,direct_pcm"/>
                 <route type="mix" sink="hifi_input" sources="USB Device In,USB Headset In" />
             </routes>
 
