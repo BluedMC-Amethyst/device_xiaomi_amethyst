@@ -257,9 +257,6 @@ vendor.perf.framepacing.enable=1
 # QCOM
 ro.soc.manufacturer=QTI
 
-# QCOMsysD
-persist.vendor.qcomsysd.enabled=1
-
 # Radio
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
