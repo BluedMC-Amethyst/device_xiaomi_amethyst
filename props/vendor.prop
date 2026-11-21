@@ -154,8 +154,8 @@ debug.sf.latch_unsignaled=0
 debug.sf.auto_latch_unsignaled=0
 debug.sf.disable_client_composition_cache=0
 debug.sf.enable_gl_backpressure=0
+debug.sf.enable_transaction_tracing=false
 debug.sf.layer_caching_active_layer_timeout_ms=1000
-debug.sf.hw=1
 # HyperOS ships this disabled. With it enabled, HWC-backed virtual displays
 # advertise an NV12-ish writeback path that the prebuilt msm_drm.ko does not
 # implement, which breaks screen recording. Casting is kept working by
