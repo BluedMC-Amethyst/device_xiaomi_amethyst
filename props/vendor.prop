@@ -117,7 +117,10 @@ vendor.display.enable_async_vds_creation=1
 vendor.display.enable_dpps_dynamic_fps=0
 vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=0
-vendor.display.vds_allow_hwc=1
+# Make the composer back virtual displays with its GPU path instead of DPU
+# writeback. The writeback block rejects the UBWC NV12 buffers that the screen
+# recorder and WFD encoders request ("invalid output format:3231564e").
+vendor.display.vds_allow_hwc=0
 
 # DPM
 persist.vendor.dpm.vndr.feature=1
@@ -156,11 +159,11 @@ debug.sf.disable_client_composition_cache=0
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_transaction_tracing=false
 debug.sf.layer_caching_active_layer_timeout_ms=1000
-# HyperOS ships this disabled. With it enabled, HWC-backed virtual displays
-# advertise an NV12-ish writeback path that the prebuilt msm_drm.ko does not
-# implement, which breaks screen recording. Casting is kept working by
-# ro.surface_flinger.force_hwc_copy_for_virtual_displays below.
-debug.sf.enable_hwc_vds=0
+# Keep virtual displays on HWC so WFD gets the buffer format it expects;
+# without this SurfaceFlinger composes them itself and wfdservice crashes with
+# "SMS Pixel Format Mismatch". vendor.display.vds_allow_hwc=0 above keeps the
+# composer off DPU writeback, so screen recording keeps working.
+debug.sf.enable_hwc_vds=1
 debug.sf.early.app.duration=13666666
 debug.sf.early.sf.duration=12333333
 debug.sf.earlyGl.app.duration=13666666
