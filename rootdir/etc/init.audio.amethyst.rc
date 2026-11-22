@@ -1,0 +1,20 @@
+# Ultrasound proximity (Elliptic Labs): the sensor HAL talks to the audio HAL
+# through these sockets to start/stop the ultrasound usecase, as on stock.
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
+    override
+    class hal
+    user audioserver
+    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct wakelock context_hub system
+    capabilities BLOCK_SUSPEND SYS_NICE
+    # setting RLIMIT_RTPRIO allows binder RT priority inheritance
+    rlimit rtprio 10 10
+    ioprio rt 4
+    task_profiles ProcessCapacityHigh HighPerformance
+    socket audio_holder_socket_0 seqpacket 0666 system system
+    socket audio_us_socket_0 seqpacket 0666 system system
+    onrestart restart audioserver
+
+on fs
+    mkdir /data/elliptic 0777 system system
+    mkdir /mnt/vendor/persist/audio/us_cal_v2 0777 system system

@@ -26,7 +26,7 @@ vendor.audio.mic.status=off
 vendor.audio.rt.mode.onlyfast=false
 vendor.audio.rt.mode=19
 vendor.audio.ultrasound.stoplatency=60
-vendor.audio.ultrasound.usync=100
+vendor.audio.ultrasound.usync=1000
 
 # Camera
 debug.config.video.p3.encode.support=true
