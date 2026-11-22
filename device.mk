@@ -222,6 +222,7 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc
 
 PRODUCT_PACKAGES += \
+    init.audio.amethyst.rc \
     init.qcom.factory.rc \
     init.qcom.rc \
     init.recovery.qcom.rc \
