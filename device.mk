@@ -60,6 +60,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     audioadsprpcd \
+    audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default
 
@@ -84,12 +85,9 @@ PRODUCT_PACKAGES += \
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal/
 
-# Stock HyperOS loads the policy from sku_volcano_qssi; install to both so the
-# policy is found whichever SKU directory is resolved.
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano_qssi/audio_policy_configuration.xml
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
@@ -111,6 +109,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
 
 # Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth.audio-impl
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
