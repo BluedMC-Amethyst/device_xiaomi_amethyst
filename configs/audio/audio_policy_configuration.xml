@@ -287,15 +287,12 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                              samplingRates="8000 11025 16000 22050 32000 44100 48000 64000 88200 96000 128000 176400 192000"/>
                 </devicePort>
                 <!-- Ports present in the stock HyperOS policy but missing here.
-                     Multiroute/IP are used by the vendor multi-route and audio
-                     playback capture features. FM is deliberately not declared:
-                     amethyst has no FM radio (stock ships no FM app and leaves
+                     IP is used by the audio playback capture feature. Multiroute is
+                     not declared: AUDIO_DEVICE_OUT_MULTIROUTE is a QTI-only type that
+                     AOSP's policy serializer rejects, which fails the whole file and
+                     leaves APM on its speaker-only default config. FM is not declared
+                     either: amethyst has no FM radio (stock ships no FM app and leaves
                      vendor.hw.fm.init at 0), so the ports could never connect. -->
-                <devicePort tagName="Multiroute" type="AUDIO_DEVICE_OUT_MULTIROUTE" role="sink">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000 11025 16000 22050 32000 44100 48000 64000 88200 96000 128000 176400 192000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-                </devicePort>
                 <devicePort tagName="IP out" type="AUDIO_DEVICE_OUT_IP" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000 11025 16000 22050 32000 44100 48000 64000 88200 96000 128000 176400 192000"
