@@ -9,11 +9,16 @@ allow devicesettings_app sysfs_batteryinfo:file { read write open getattr };
 # CPU Core Control and Kernel Manager
 allow devicesettings_app sysfs_devices_system_cpu:file rw_file_perms;
 allow devicesettings_app sysfs_devices_system_cpu:dir r_dir_perms;
+allow devicesettings_app vendor_sysfs_corecontrol:file rw_file_perms;
+allow devicesettings_app vendor_sysfs_corecontrol:dir r_dir_perms;
 
 # GPU Manager
 allow devicesettings_app sysfs_kgsl:file rw_file_perms;
 allow devicesettings_app sysfs_kgsl:dir r_dir_perms;
 allow devicesettings_app sysfs_kgsl:lnk_file r_file_perms;
+allow devicesettings_app vendor_sysfs_kgsl:file rw_file_perms;
+allow devicesettings_app vendor_sysfs_kgsl:dir r_dir_perms;
+allow devicesettings_app vendor_sysfs_kgsl:lnk_file r_file_perms;
 allow devicesettings_app vendor_sysfs_kgsl_gpuclk:file rw_file_perms;
 allow devicesettings_app vendor_sysfs_kgsl_gpuclk:dir r_dir_perms;
 
