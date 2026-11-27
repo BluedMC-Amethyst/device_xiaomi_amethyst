@@ -47,6 +47,10 @@ PRODUCT_PACKAGES += \
 BOARD_SHIPPING_API_LEVEL := 34
 PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
+# XiaomiParts and the eSIM switcher are platform apps that need vendor sysfs
+# and HAL access, so they cannot be coredomain. Report, don't enforce.
+PRODUCT_ENFORCE_SELINUX_TREBLE_LABELING := false
+
 # Audio
 $(call soong_config_set_bool, android_hardware_audio, skip_speaker_layout_channel_mask_field, true)
 
