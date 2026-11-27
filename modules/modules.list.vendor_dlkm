@@ -255,6 +255,7 @@ bt_fm_slim.ko
 radio-i2c-rtc6226-qca.ko
 xiaomi_touch.ko
 goodix_core.ko
+focaltech_touch.ko
 camera.ko
 cameralog.ko
 cameramsger.ko
