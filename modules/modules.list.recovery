@@ -89,6 +89,7 @@ ufs_qcom.ko
 ufshcd-crypto-qti.ko
 qcom_scmi_vendor.ko
 qcom-scm.ko
+miev.ko
 qcom-ipcc.ko
 msm_qmp.ko
 qcom_hwspinlock.ko
@@ -242,6 +243,7 @@ max31760_fan.ko
 msm_lmh_dcvs.ko
 thermal_config.ko
 gpu_dump_skip_cdev.ko
+mi_thermal_interface.ko
 qcom_edac.ko
 qcom-cpufreq-hw-debug.ko
 qcom_lpm.ko
@@ -311,3 +313,4 @@ msm_ext_display.ko
 sync_fence.ko
 msm_hw_fence.ko
 msm-mmrm.ko
+swinfo.ko
