@@ -143,6 +143,10 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(first_stage_modules)
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(recovery_modules)
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(vendor_dlkm_modules)
 
+# The load lists hold only what init loads; ship each list's dependencies
+# alongside it, as stock vendor_boot does (e.g. hdcp_qseecom_dlkm for msm_drm).
+TARGET_AUTO_COLLECT_KERNEL_MODULE_DEPS := true
+
 SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
 BOOT_KERNEL_MODULES := $(sort $(first_stage_modules) $(recovery_modules))
 
