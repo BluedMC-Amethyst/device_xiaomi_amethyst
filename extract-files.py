@@ -54,6 +54,15 @@ lib_fixups: lib_fixups_user_type = {
 
 blob_fixups: blob_fixups_user_type = {
 
+    # Android 17 grew utils::ComponentStore to 288 bytes; these services
+    # allocate it themselves with the old 264 (0x108). See LineageOS
+    # android_device_xiaomi_sm8550-common f9a8fe8.
+    (
+        'vendor/bin/hw/vendor.qti.media.c2@1.0-service',
+        'vendor/bin/hw/vendor.qti.media.c2audio@1.0-service',
+    ): blob_fixup()
+        .sig_replace('00 21 80 52', '00 24 80 52'),
+
     'system/framework/WfdCommon.jar': blob_fixup()
         .apktool_patch('blob-patches/WfdCommon.patch'),
         
@@ -362,12 +371,28 @@ blob_fixups: blob_fixups_user_type = {
             'libprotobuf-cpp-full-21.7.so'
     ),
 
+    # From Daxandere/android_device_xiaomi_amethyst 369d26f (Alexander de
+    # Leon): stock HWC3 answers PresentOrValidate with Result(2) on AOSP,
+    # which makes overlays such as "Show taps" lag.
+    'vendor/bin/hw/vendor.qti.hardware.display.composer-service': blob_fixup()
+        .replace_needed(
+            'libtinyxml2.so',
+            'libtinyxml2-v34.so'
+        )
+        .sig_replace(
+            'e0 03 16 aa e1 03 14 aa 42 00 80 52 77 04 00 94',
+            'e0 03 16 aa e1 03 14 aa 22 00 80 52 77 04 00 94',
+        )
+        .sig_replace(
+            'f5 03 00 aa 08 20 42 39 28 02 30 37 48 02 00 b0',
+            'f5 03 00 aa 08 20 42 39 28 02 30 37 fb ff ff 17',
+        ),
+
     (
         'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl',
         'odm/lib64/camera/plugins/com.xiaomi.plugin.anchor.so',
         'odm/lib64/hw/displayfeature.default.so',
         'vendor/bin/hw/vendor.qti.camera.provider-service_64',
-        'vendor/bin/hw/vendor.qti.hardware.display.composer-service',
         'vendor/bin/poweropt-service',
         'vendor/lib64/libaodoptfeature.so',
         'vendor/lib64/libapengine.so',
