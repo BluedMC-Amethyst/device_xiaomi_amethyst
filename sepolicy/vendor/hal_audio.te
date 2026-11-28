@@ -25,3 +25,6 @@ unix_socket_connect(hal_audio_default, property, hal_sensors_default)
 get_prop(hal_audio_default, vendor_audio_cloud_ctrl_mi_prop)
 get_prop(hal_audio_default, boot_status_prop)
 get_prop(hal_audio, vendor_audio_prop)
+
+# libmisight in the audio HAL reports PA and codec exceptions to /dev/miev
+allow hal_audio_default vendor_miev_device:chr_file rw_file_perms;
