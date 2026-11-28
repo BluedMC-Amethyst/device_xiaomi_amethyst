@@ -110,9 +110,17 @@ BOARD_BOOTCONFIG := \
     androidboot.vendor.qspa=true \
     androidboot.init_fatal_reboot_target=recovery
 
-# Kernel (built from source, with every vendor module that has source)
-PREBUILT_PATH := $(DEVICE_PATH)-kernel
-TARGET_KERNEL_SOURCE := kernel/xiaomi/amethyst
+# Kernel: built from source or stock prebuilt, picked in amethyst-kernel.mk
+include $(DEVICE_PATH)/amethyst-kernel.mk
+PREBUILT_PATH := $(AMETHYST_KERNEL_PREBUILT_DIR)
+
+# Both kernels boot with the stock DTB and DTBO. The OSS device trees lack
+# amethyst's amp, haptics and USB nodes.
+BOARD_PREBUILT_DTBIMAGE_DIR := $(PREBUILT_PATH)/images/dtbs/
+BOARD_PREBUILT_DTBOIMAGE := $(PREBUILT_PATH)/images/dtbo.img
+
+ifeq ($(AMETHYST_KERNEL),source)
+TARGET_KERNEL_SOURCE := $(AMETHYST_KERNEL_SOURCE_DIR)
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/pineapple_GKI.config \
@@ -123,13 +131,16 @@ TARGET_KERNEL_CONFIG := \
 # scripts/amethyst-los-setup.sh.
 TARGET_KERNEL_CLANG_PATH := $(abspath prebuilts/clang/kernel/linux-x86/clang-r487747c)
 
-# The OSS device trees lack amethyst's amp, haptics and USB nodes: keep the
-# stock DTB and DTBO.
-BOARD_PREBUILT_DTBIMAGE_DIR := $(PREBUILT_PATH)/images/dtbs/
-BOARD_PREBUILT_DTBOIMAGE := $(PREBUILT_PATH)/images/dtbo.img
+# Every vendor module project that is synced; see amethyst-kernel.mk.
+TARGET_KERNEL_EXT_MODULE_ROOT := $(AMETHYST_KERNEL_EXT_MODULE_ROOT)
+TARGET_KERNEL_EXT_MODULES := $(AMETHYST_KERNEL_EXT_MODULES)
+ifneq ($(AMETHYST_KERNEL_EXT_MODULES_MISSING),)
+$(warning amethyst: not building missing module projects: $(AMETHYST_KERNEL_EXT_MODULES_MISSING))
+BOARD_KERNEL_MODULES_LOAD_ALLOW_MISSING := true
+endif
 
-# Kernel modules. Lists are the stock load order minus modules with no
-# source (Xiaomi mi_*/millet/migt/... and absent parts).
+# Load lists: the stock load order minus modules with no source (Xiaomi
+# mi_*/millet/migt/... and absent parts).
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules/modules.blocklist
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
 
@@ -149,12 +160,25 @@ TARGET_AUTO_COLLECT_KERNEL_MODULE_DEPS := true
 
 SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
 BOOT_KERNEL_MODULES := $(sort $(first_stage_modules) $(recovery_modules))
+else
+# Stock prebuilt kernel; system_dlkm is copied in device.mk.
+TARGET_NEEDS_DTBOIMAGE := true
+TARGET_PREBUILT_KERNEL := $(PREBUILT_PATH)/images/kernel
+TARGET_NO_KERNEL_OVERRIDE := true
+TARGET_KERNEL_SOURCE := $(PREBUILT_PATH)/kernel-headers
 
-TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm7635-modules
-# Keep in sync with kernel/xiaomi/amethyst/scripts/amethyst-ext-modules.txt.
-# Modules which provide symbols for other modules must come first.
-TARGET_KERNEL_EXT_MODULES := $(strip $(shell grep -Ev '^[[:space:]]*(\#|$$)' \
-    $(TARGET_KERNEL_SOURCE)/scripts/amethyst-ext-modules.txt))
+DLKM_MODULES_PATH := $(PREBUILT_PATH)/modules/vendor_dlkm
+RAMDISK_MODULES_PATH := $(PREBUILT_PATH)/modules/vendor_boot
+
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DLKM_MODULES_PATH)/*.ko)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DLKM_MODULES_PATH)/%,$(shell cat $(DLKM_MODULES_PATH)/modules.load))
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DLKM_MODULES_PATH)/modules.blocklist
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(RAMDISK_MODULES_PATH)/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load.recovery))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(RAMDISK_MODULES_PATH)/modules.blocklist
+endif
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296

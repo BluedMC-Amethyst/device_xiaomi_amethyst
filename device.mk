@@ -207,6 +207,16 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
+# Kernel: source or stock prebuilt, picked in amethyst-kernel.mk. A source
+# kernel produces its own kernel and system_dlkm; the prebuilt one ships
+# the stock ones.
+include device/xiaomi/amethyst/amethyst-kernel.mk
+ifeq ($(AMETHYST_KERNEL),prebuilt)
+PRODUCT_COPY_FILES += \
+    $(AMETHYST_KERNEL_PREBUILT_DIR)/images/kernel:kernel \
+    $(call find-copy-subdir-files,*,$(AMETHYST_KERNEL_PREBUILT_DIR)/modules/system_dlkm/$(AMETHYST_GKI_VERSION)/,$(TARGET_COPY_OUT_SYSTEM_DLKM)/lib/modules/$(AMETHYST_GKI_VERSION)/)
+endif
+
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
