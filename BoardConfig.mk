@@ -111,7 +111,7 @@ BOARD_BOOTCONFIG := \
     androidboot.init_fatal_reboot_target=recovery
 
 # Kernel: built from source or stock prebuilt, picked in amethyst-kernel.mk
-include $(DEVICE_PATH)/amethyst-kernel.mk
+include $(DEVICE_PATH)/configs/kernel/amethyst-kernel.mk
 PREBUILT_PATH := $(AMETHYST_KERNEL_PREBUILT_DIR)
 
 # Both kernels boot with the stock DTB and DTBO. The OSS device trees lack

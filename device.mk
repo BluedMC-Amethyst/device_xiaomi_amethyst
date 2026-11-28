@@ -12,7 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 # Dalvik vm configs
 # Dalvik heap for the 8 GB+ amethyst SKUs (from AxionOS via EvolutionX;
 # LineageOS has no 8192 profile in frameworks/native).
-$(call inherit-product, device/xiaomi/amethyst/phone-xhdpi-8192-dalvik-heap.mk)
+$(call inherit-product, device/xiaomi/amethyst/configs/dalvik/phone-xhdpi-8192-dalvik-heap.mk)
 
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
@@ -210,7 +210,7 @@ PRODUCT_PACKAGES += \
 # Kernel: source or stock prebuilt, picked in amethyst-kernel.mk. A source
 # kernel produces its own kernel and system_dlkm; the prebuilt one ships
 # the stock ones.
-include device/xiaomi/amethyst/amethyst-kernel.mk
+include device/xiaomi/amethyst/configs/kernel/amethyst-kernel.mk
 ifeq ($(AMETHYST_KERNEL),prebuilt)
 PRODUCT_COPY_FILES += \
     $(AMETHYST_KERNEL_PREBUILT_DIR)/images/kernel:kernel \
