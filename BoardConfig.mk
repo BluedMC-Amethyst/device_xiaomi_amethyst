@@ -116,7 +116,7 @@ PREBUILT_PATH := $(AMETHYST_KERNEL_PREBUILT_DIR)
 
 # DTB and DTBO, picked in amethyst-kernel.mk (AMETHYST_DT).
 ifeq ($(AMETHYST_DT),source)
-# Built by the kernel's amethyst-dt.mk through kernel.mk's custom hooks.
+# Built by sm7635-devicetrees' amethyst-dt.mk through kernel.mk's custom hooks.
 # dtb.img goes into vendor_boot and dtbo.img into dtbo, as with stock;
 # BOARD_PREBUILT_DTBOIMAGE keeps the BoardConfigKernel.mk default, which is
 # the dtbo.img that amethyst-dt.mk produces.
@@ -136,10 +136,7 @@ TARGET_KERNEL_CONFIG := \
     vendor/pineapple_GKI.config \
     vendor/amethyst_GKI.config \
     vendor/amethyst_standalone.config
-# 6.1.68 and Xiaomi's modules need the clang they were written for; newer
-# clangs reject mm/shmem.c and WALT. Installed by the kernel's
-# scripts/amethyst-los-setup.sh.
-TARGET_KERNEL_CLANG_PATH := $(abspath prebuilts/clang/kernel/linux-x86/clang-r487747c)
+TARGET_KERNEL_CLANG_PATH := $(abspath $(AMETHYST_KERNEL_CLANG_PATH))
 
 # Every vendor module project that is synced; see amethyst-kernel.mk.
 TARGET_KERNEL_EXT_MODULE_ROOT := $(AMETHYST_KERNEL_EXT_MODULE_ROOT)
