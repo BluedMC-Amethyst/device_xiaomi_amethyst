@@ -19,10 +19,23 @@ AMETHYST_KERNEL_PREBUILT_DIR := device/xiaomi/amethyst-kernel
 AMETHYST_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm7635-modules
 AMETHYST_DT_DIR := kernel/xiaomi/sm7635-devicetrees
 
-# 6.1.68 and Xiaomi's modules need the clang they were written for (newer
-# clangs reject mm/shmem.c and WALT). It is not part of LineageOS, so the
-# source kernel is only picked automatically when it is installed.
-AMETHYST_KERNEL_CLANG_PATH := prebuilts/clang/kernel/linux-x86/clang-r487747c
+# The kernel names its compiler in scripts/amethyst-clang-version, e.g.
+# r547379 for LineageOS's clang 20. Without that file it is the 6.1.68
+# kernel, which needs clang r487747c (newer clangs reject mm/shmem.c and
+# WALT). r487747c is not part of LineageOS, so the source kernel is only
+# picked automatically when its compiler is installed. Set
+# AMETHYST_KERNEL_CLANG_PATH to use another clang.
+AMETHYST_KERNEL_CLANG_VERSION := $(strip $(shell cat \
+    $(AMETHYST_KERNEL_SOURCE_DIR)/scripts/amethyst-clang-version 2>/dev/null))
+ifeq ($(AMETHYST_KERNEL_CLANG_VERSION),)
+  AMETHYST_KERNEL_CLANG_VERSION := r487747c
+endif
+ifeq ($(AMETHYST_KERNEL_CLANG_PATH),)
+  AMETHYST_KERNEL_CLANG_PATH := $(patsubst %/bin/clang,%,$(firstword $(wildcard \
+      prebuilts/clang/host/linux-x86/clang-$(AMETHYST_KERNEL_CLANG_VERSION)/bin/clang \
+      prebuilts/clang/kernel/linux-x86/clang-$(AMETHYST_KERNEL_CLANG_VERSION)/bin/clang)))
+endif
+AMETHYST_KERNEL_CLANG_FOUND := $(if $(AMETHYST_KERNEL_CLANG_PATH),$(wildcard $(AMETHYST_KERNEL_CLANG_PATH)/bin/clang))
 
 ifeq ($(AMETHYST_KERNEL),)
   ifeq ($(TARGET_BUILD_KERNEL_FROM_SOURCE),true)
@@ -30,7 +43,7 @@ ifeq ($(AMETHYST_KERNEL),)
   else ifeq ($(TARGET_BUILD_KERNEL_FROM_SOURCE),false)
     AMETHYST_KERNEL := prebuilt
   else ifneq ($(and $(wildcard $(AMETHYST_KERNEL_SOURCE_DIR)/scripts/amethyst-ext-modules.txt), \
-                    $(wildcard $(AMETHYST_KERNEL_CLANG_PATH)/bin/clang-17)),)
+                    $(AMETHYST_KERNEL_CLANG_FOUND)),)
     AMETHYST_KERNEL := source
   else
     AMETHYST_KERNEL := prebuilt
@@ -41,8 +54,8 @@ ifeq ($(AMETHYST_KERNEL),source)
   ifeq ($(wildcard $(AMETHYST_KERNEL_SOURCE_DIR)/scripts/amethyst-ext-modules.txt),)
     $(error AMETHYST_KERNEL=source, but $(AMETHYST_KERNEL_SOURCE_DIR) is not synced)
   endif
-  ifeq ($(wildcard $(AMETHYST_KERNEL_CLANG_PATH)/bin/clang-17),)
-    $(error AMETHYST_KERNEL=source, but clang r487747c is not installed in $(AMETHYST_KERNEL_CLANG_PATH))
+  ifeq ($(AMETHYST_KERNEL_CLANG_FOUND),)
+    $(error AMETHYST_KERNEL=source, but clang-$(AMETHYST_KERNEL_CLANG_VERSION) is not in prebuilts/clang/host/linux-x86 or prebuilts/clang/kernel/linux-x86)
   endif
 
   # External module projects: the kernel's list, minus projects that are not
