@@ -114,10 +114,20 @@ BOARD_BOOTCONFIG := \
 include $(DEVICE_PATH)/configs/kernel/amethyst-kernel.mk
 PREBUILT_PATH := $(AMETHYST_KERNEL_PREBUILT_DIR)
 
-# Both kernels boot with the stock DTB and DTBO. The OSS device trees lack
-# amethyst's amp, haptics and USB nodes.
+# DTB and DTBO, picked in amethyst-kernel.mk (AMETHYST_DT).
+ifeq ($(AMETHYST_DT),source)
+# Built by the kernel's amethyst-dt.mk through kernel.mk's custom hooks.
+# dtb.img goes into vendor_boot and dtbo.img into dtbo, as with stock;
+# BOARD_PREBUILT_DTBOIMAGE keeps the BoardConfigKernel.mk default, which is
+# the dtbo.img that amethyst-dt.mk produces.
+TARGET_NEEDS_DTBOIMAGE := true
+BOARD_CUSTOM_DTBIMG_MK := $(AMETHYST_DT_MK)
+BOARD_CUSTOM_DTBOIMG_MK := $(AMETHYST_DT_MK)
+else
+# Stock DTB and DTBO.
 BOARD_PREBUILT_DTBIMAGE_DIR := $(PREBUILT_PATH)/images/dtbs/
 BOARD_PREBUILT_DTBOIMAGE := $(PREBUILT_PATH)/images/dtbo.img
+endif
 
 ifeq ($(AMETHYST_KERNEL),source)
 TARGET_KERNEL_SOURCE := $(AMETHYST_KERNEL_SOURCE_DIR)

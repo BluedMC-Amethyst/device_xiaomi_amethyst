@@ -54,3 +54,29 @@ else ifeq ($(AMETHYST_KERNEL),prebuilt)
 else
   $(error AMETHYST_KERNEL must be "source" or "prebuilt", not "$(AMETHYST_KERNEL)")
 endif
+
+# AMETHYST_DT picks the base DTBs (vendor_boot) and dtbo.img:
+#   source   - built from the kernel's arch/arm64/boot/dts/amethyst with its
+#              amethyst-dt.mk (content identical to stock, see the kernel's
+#              docs/amethyst-drivers/devicetree.md);
+#   prebuilt - the stock images in device/xiaomi/amethyst-kernel/images.
+# By default it is "source" when the source kernel ships amethyst-dt.mk, and
+# "prebuilt" otherwise. The prebuilt kernel always uses the stock images.
+AMETHYST_DT_MK := $(AMETHYST_KERNEL_SOURCE_DIR)/arch/arm64/boot/dts/amethyst/amethyst-dt.mk
+ifeq ($(AMETHYST_DT),)
+  ifeq ($(AMETHYST_KERNEL)$(if $(wildcard $(AMETHYST_DT_MK)),y),sourcey)
+    AMETHYST_DT := source
+  else
+    AMETHYST_DT := prebuilt
+  endif
+endif
+ifeq ($(AMETHYST_DT),source)
+  ifneq ($(AMETHYST_KERNEL),source)
+    $(error AMETHYST_DT=source needs AMETHYST_KERNEL=source)
+  endif
+  ifeq ($(wildcard $(AMETHYST_DT_MK)),)
+    $(error AMETHYST_DT=source, but $(AMETHYST_DT_MK) is missing; update the kernel and rerun its setup)
+  endif
+else ifneq ($(AMETHYST_DT),prebuilt)
+  $(error AMETHYST_DT must be "source" or "prebuilt", not "$(AMETHYST_DT)")
+endif
