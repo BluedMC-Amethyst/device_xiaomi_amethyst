@@ -10,7 +10,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+# Dalvik heap for the 8 GB+ amethyst SKUs (from AxionOS via EvolutionX;
+# LineageOS has no 8192 profile in frameworks/native).
+$(call inherit-product, device/xiaomi/amethyst/phone-xhdpi-8192-dalvik-heap.mk)
 
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
